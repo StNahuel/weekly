@@ -1,0 +1,1956 @@
+{
+  "schemaVersion": 1,
+  "locale": "es-UY",
+  "metadata": {
+    "nutritionValuesAreEstimates": true,
+    "macroUnits": "Per 100g edible as described on each ingredient (raw / dry / cooked / ready). Protein, carb and fat grams. Calories kcal.",
+    "source": "Curated from user-approved typical ingredients; rough nutrient estimates, NOT product label data or individual medical prescription.",
+    "weightWarning": "Weights explicitly labeled in ingredient.weightBasis; do not convert raw/cooked 1:1. Seafood and meats refer to raw grams unless canned drained. Eggs exclude shell.",
+    "missingNutrients": "For ingredients with unknown macros (e.g., exact FONDO, curry paste, protein bar), show estimate incomplete with explanation; NEVER pretend totals are exact.",
+    "sodium": "Broth concentrates, miso, fish and soy sauce may be high sodium; taste before additional salt."
+  },
+  "ingredients": [
+    {
+      "id": "chicken_breast",
+      "name": "Pechuga de pollo",
+      "category": "Carnicería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 110,
+        "protein": 23,
+        "carbs": 0,
+        "fat": 2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "lean_beef",
+      "name": "Carne vacuna magra",
+      "category": "Carnicería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 145,
+        "protein": 21,
+        "carbs": 0,
+        "fat": 6
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "salmon",
+      "name": "Salmón",
+      "category": "Pescadería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 208,
+        "protein": 20,
+        "carbs": 0,
+        "fat": 13
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "hake",
+      "name": "Merluza",
+      "category": "Pescadería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 82,
+        "protein": 18,
+        "carbs": 0,
+        "fat": 0.8
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "corvina",
+      "name": "Corvina",
+      "category": "Pescadería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 100,
+        "protein": 20,
+        "carbs": 0,
+        "fat": 2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "tuna_canned_drained",
+      "name": "Atún al natural escurrido",
+      "category": "Almacén",
+      "weightBasis": "drained_ready",
+      "macrosPer100g": {
+        "kcal": 112,
+        "protein": 25,
+        "carbs": 0,
+        "fat": 1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "pork_shoulder",
+      "name": "Bondiola de cerdo",
+      "category": "Carnicería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 235,
+        "protein": 18,
+        "carbs": 0,
+        "fat": 18
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Más grasa; opción ocasional.",
+      "allergens": []
+    },
+    {
+      "id": "shrimp",
+      "name": "Camarones",
+      "category": "Pescadería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 85,
+        "protein": 19,
+        "carbs": 0,
+        "fat": 1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "whole_egg",
+      "name": "Huevo entero sin cáscara",
+      "category": "Lácteos y huevos",
+      "weightBasis": "edible_raw",
+      "macrosPer100g": {
+        "kcal": 143,
+        "protein": 12.6,
+        "carbs": 0.7,
+        "fat": 9.5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "egg_whites",
+      "name": "Claras de huevo",
+      "category": "Lácteos y huevos",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 52,
+        "protein": 11,
+        "carbs": 0.7,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "firm_tofu",
+      "name": "Tofu firme",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 140,
+        "protein": 15,
+        "carbs": 3,
+        "fat": 8
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Según marca, revisar etiqueta.",
+      "allergens": [
+        "soy"
+      ]
+    },
+    {
+      "id": "yogurt_high_protein",
+      "name": "Yogur natural alto en proteínas",
+      "category": "Lácteos y huevos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 62,
+        "protein": 10,
+        "carbs": 4.5,
+        "fat": 0.5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Valores varían mucho por marca, revisar etiqueta.",
+      "allergens": [
+        "milk"
+      ]
+    },
+    {
+      "id": "whey_powder",
+      "name": "Proteína whey",
+      "category": "Suplementos",
+      "weightBasis": "powder",
+      "macrosPer100g": {
+        "kcal": 385,
+        "protein": 78,
+        "carbs": 8,
+        "fat": 6
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "30 g suelen aportar aproximadamente 22–25 g de proteína; revisar envase.",
+      "allergens": [
+        "milk"
+      ]
+    },
+    {
+      "id": "oats_dry",
+      "name": "Avena",
+      "category": "Almacén",
+      "weightBasis": "dry",
+      "macrosPer100g": {
+        "kcal": 380,
+        "protein": 13,
+        "carbs": 66,
+        "fat": 7
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "rice_dry",
+      "name": "Arroz",
+      "category": "Almacén",
+      "weightBasis": "dry",
+      "macrosPer100g": {
+        "kcal": 360,
+        "protein": 7,
+        "carbs": 79,
+        "fat": 0.8
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "quinoa_dry",
+      "name": "Quinoa",
+      "category": "Almacén",
+      "weightBasis": "dry",
+      "macrosPer100g": {
+        "kcal": 368,
+        "protein": 14,
+        "carbs": 64,
+        "fat": 6
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "whole_wheat_bread",
+      "name": "Pan integral",
+      "category": "Panadería",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 245,
+        "protein": 10,
+        "carbs": 43,
+        "fat": 4
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "almond_drink_unsweetened",
+      "name": "Bebida vegetal sin azúcar",
+      "category": "Bebidas",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 15,
+        "protein": 0.5,
+        "carbs": 0.4,
+        "fat": 1.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Valor genérico de bebida tipo almendras; revisar envase; 1 g ≈ 1 ml.",
+      "allergens": [
+        "nuts"
+      ]
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "category": "Verdulería",
+      "weightBasis": "edible",
+      "macrosPer100g": {
+        "kcal": 89,
+        "protein": 1.1,
+        "carbs": 23,
+        "fat": 0.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "apple",
+      "name": "Manzana",
+      "category": "Verdulería",
+      "weightBasis": "edible",
+      "macrosPer100g": {
+        "kcal": 52,
+        "protein": 0.3,
+        "carbs": 14,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "orange",
+      "name": "Naranja",
+      "category": "Verdulería",
+      "weightBasis": "edible",
+      "macrosPer100g": {
+        "kcal": 47,
+        "protein": 0.9,
+        "carbs": 12,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "berries",
+      "name": "Frutos rojos",
+      "category": "Verdulería",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 50,
+        "protein": 1,
+        "carbs": 12,
+        "fat": 0.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "walnuts",
+      "name": "Nueces",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 654,
+        "protein": 15,
+        "carbs": 14,
+        "fat": 65
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "chia",
+      "name": "Chía",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 486,
+        "protein": 17,
+        "carbs": 42,
+        "fat": 31
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "avocado",
+      "name": "Palta",
+      "category": "Verdulería",
+      "weightBasis": "edible",
+      "macrosPer100g": {
+        "kcal": 160,
+        "protein": 2,
+        "carbs": 9,
+        "fat": 15
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "olive_oil",
+      "name": "Aceite de oliva",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 884,
+        "protein": 0,
+        "carbs": 0,
+        "fat": 100
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "sesame_oil",
+      "name": "Aceite de sésamo",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 884,
+        "protein": 0,
+        "carbs": 0,
+        "fat": 100
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": [
+        "sesame"
+      ]
+    },
+    {
+      "id": "sesame_seeds",
+      "name": "Semillas de sésamo",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 573,
+        "protein": 18,
+        "carbs": 23,
+        "fat": 50
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": [
+        "sesame"
+      ]
+    },
+    {
+      "id": "potato",
+      "name": "Papa pelada",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 77,
+        "protein": 2,
+        "carbs": 17,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "sweet_potato",
+      "name": "Boniato",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 86,
+        "protein": 1.6,
+        "carbs": 20,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "pumpkin",
+      "name": "Calabaza",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 35,
+        "protein": 1,
+        "carbs": 8,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "broccoli",
+      "name": "Brócoli",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 34,
+        "protein": 2.8,
+        "carbs": 7,
+        "fat": 0.4
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "zucchini",
+      "name": "Zucchini",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 17,
+        "protein": 1.2,
+        "carbs": 3.1,
+        "fat": 0.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "carrot",
+      "name": "Zanahoria",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 41,
+        "protein": 0.9,
+        "carbs": 10,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "red_pepper",
+      "name": "Morrón rojo",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 31,
+        "protein": 1,
+        "carbs": 6,
+        "fat": 0.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "tomato",
+      "name": "Tomate",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 18,
+        "protein": 0.9,
+        "carbs": 3.9,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "cucumber",
+      "name": "Pepino",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 15,
+        "protein": 0.7,
+        "carbs": 3.6,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "lettuce",
+      "name": "Lechuga",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 15,
+        "protein": 1.4,
+        "carbs": 2.9,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "spinach",
+      "name": "Espinaca",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 23,
+        "protein": 2.9,
+        "carbs": 3.6,
+        "fat": 0.4
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "shiitake",
+      "name": "Shiitake",
+      "category": "Verdulería",
+      "weightBasis": "raw_or_frozen",
+      "macrosPer100g": {
+        "kcal": 34,
+        "protein": 2.2,
+        "carbs": 6.8,
+        "fat": 0.5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "onion",
+      "name": "Cebolla",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 40,
+        "protein": 1.1,
+        "carbs": 9.3,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "spring_onion",
+      "name": "Verdeo",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 32,
+        "protein": 1.8,
+        "carbs": 7.3,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "leek",
+      "name": "Puerro",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 61,
+        "protein": 1.5,
+        "carbs": 14,
+        "fat": 0.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "garlic",
+      "name": "Ajo",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 149,
+        "protein": 6.4,
+        "carbs": 33,
+        "fat": 0.5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "ginger",
+      "name": "Jengibre",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 80,
+        "protein": 1.8,
+        "carbs": 18,
+        "fat": 0.8
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "chickpeas_cooked",
+      "name": "Garbanzos cocidos, escurridos",
+      "category": "Almacén",
+      "weightBasis": "cooked",
+      "macrosPer100g": {
+        "kcal": 164,
+        "protein": 8.9,
+        "carbs": 27.4,
+        "fat": 2.6
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "lentils_cooked",
+      "name": "Lentejas cocidas, escurridas",
+      "category": "Almacén",
+      "weightBasis": "cooked",
+      "macrosPer100g": {
+        "kcal": 116,
+        "protein": 9,
+        "carbs": 20,
+        "fat": 0.4
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "red_lentils_dry",
+      "name": "Lentejas rojas secas",
+      "category": "Almacén",
+      "weightBasis": "dry",
+      "macrosPer100g": {
+        "kcal": 352,
+        "protein": 25,
+        "carbs": 60,
+        "fat": 1.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "peas",
+      "name": "Arvejas",
+      "category": "Congelados",
+      "weightBasis": "raw_or_frozen",
+      "macrosPer100g": {
+        "kcal": 81,
+        "protein": 5.4,
+        "carbs": 14,
+        "fat": 0.4
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "edamame_cooked",
+      "name": "Edamame cocido",
+      "category": "Congelados",
+      "weightBasis": "cooked",
+      "macrosPer100g": {
+        "kcal": 121,
+        "protein": 12,
+        "carbs": 9,
+        "fat": 5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Si se compra congelado crudo, cocinar siguiendo envase.",
+      "allergens": [
+        "soy"
+      ]
+    },
+    {
+      "id": "miso_soy",
+      "name": "Miso de soja",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 198,
+        "protein": 12,
+        "carbs": 26,
+        "fat": 6
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Puede contener bastante sodio.",
+      "allergens": [
+        "soy"
+      ]
+    },
+    {
+      "id": "fish_sauce",
+      "name": "Salsa de pescado",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 35,
+        "protein": 5,
+        "carbs": 3.6,
+        "fat": 0
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Alto contenido de sodio.",
+      "allergens": [
+        "fish"
+      ]
+    },
+    {
+      "id": "soy_sauce",
+      "name": "Salsa de soja",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 53,
+        "protein": 8,
+        "carbs": 5,
+        "fat": 0
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Alto contenido de sodio.",
+      "allergens": [
+        "soy",
+        "wheat"
+      ]
+    },
+    {
+      "id": "lime_juice",
+      "name": "Jugo de lima",
+      "category": "Verdulería",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 25,
+        "protein": 0.4,
+        "carbs": 8,
+        "fat": 0.1
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "lemon_juice",
+      "name": "Jugo de limón",
+      "category": "Verdulería",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 22,
+        "protein": 0.4,
+        "carbs": 7,
+        "fat": 0.2
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "coconut_milk_culinary",
+      "name": "Leche de coco culinaria",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 180,
+        "protein": 2,
+        "carbs": 3,
+        "fat": 18
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "Cantidad fija en solo tres sopas, variar según producto.",
+      "allergens": [
+        "coconut"
+      ]
+    },
+    {
+      "id": "curry_paste",
+      "name": "Pasta de curry verde o amarillo",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": null,
+      "estimateQuality": "requires_label",
+      "notes": "Revisar etiqueta e ingredientes, algunos curries amarillos incluyen cúrcuma.",
+      "allergens": []
+    },
+    {
+      "id": "cumin",
+      "name": "Comino",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 375,
+        "protein": 18,
+        "carbs": 44,
+        "fat": 22
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "smoked_paprika",
+      "name": "Pimentón",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 282,
+        "protein": 14,
+        "carbs": 54,
+        "fat": 13
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "black_pepper",
+      "name": "Pimienta negra",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 251,
+        "protein": 10,
+        "carbs": 64,
+        "fat": 3.3
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "cayenne",
+      "name": "Cayena",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 318,
+        "protein": 12,
+        "carbs": 57,
+        "fat": 17
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "chili_dry",
+      "name": "Chile",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 282,
+        "protein": 12,
+        "carbs": 50,
+        "fat": 14
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "lemongrass_fresh",
+      "name": "Lemongrass fresco",
+      "category": "Verdulería",
+      "weightBasis": "raw",
+      "macrosPer100g": {
+        "kcal": 99,
+        "protein": 1.8,
+        "carbs": 25,
+        "fat": 0.5
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "La receta original usa tallos frescos y se retiran; no sustituir directamente con la misma masa de polvo.",
+      "allergens": []
+    },
+    {
+      "id": "harissa",
+      "name": "Pasta harissa",
+      "category": "Condimentos",
+      "weightBasis": "ready",
+      "macrosPer100g": null,
+      "estimateQuality": "requires_label",
+      "notes": "Revisar intensidad y etiqueta.",
+      "allergens": []
+    },
+    {
+      "id": "fondo_veg_concentrate",
+      "name": "FONDO vegetal concentrado",
+      "category": "Almacén",
+      "weightBasis": "frozen_concentrate",
+      "macrosPer100g": null,
+      "estimateQuality": "requires_label",
+      "notes": "Producto concentrado. Pesar gramos directo a la jarra, más agua aparte.",
+      "allergens": []
+    },
+    {
+      "id": "fondo_bone_ready",
+      "name": "FONDO caldo de huesos",
+      "category": "Congelados",
+      "weightBasis": "frozen_ready",
+      "macrosPer100g": null,
+      "estimateQuality": "requires_label",
+      "notes": "Producto listo para usar, congelado. No es concentrado; falta etiqueta nutricional.",
+      "allergens": []
+    },
+    {
+      "id": "water",
+      "name": "Agua",
+      "category": "Líquidos",
+      "weightBasis": "ready",
+      "macrosPer100g": {
+        "kcal": 0,
+        "protein": 0,
+        "carbs": 0,
+        "fat": 0
+      },
+      "estimateQuality": "generic_estimate",
+      "notes": "",
+      "allergens": []
+    },
+    {
+      "id": "protein_bar",
+      "name": "Barra proteica (genérica)",
+      "category": "Almacén",
+      "weightBasis": "ready",
+      "macrosPer100g": null,
+      "estimateQuality": "requires_label",
+      "notes": "No estimar macros hasta definir marca/producto.",
+      "allergens": []
+    }
+  ],
+  "proteins": [
+    {
+      "id": "chicken",
+      "title": "Pechuga de pollo a la plancha",
+      "ingredients": [
+        {
+          "ingredientId": "chicken_breast",
+          "grams": 200
+        }
+      ],
+      "prepMinutes": 20,
+      "tags": [
+        "lean",
+        "everyday",
+        "high_protein"
+      ],
+      "instructions": "Plancha/sartén antiadherente; condimentar al gusto; cocinar por completo."
+    },
+    {
+      "id": "beef",
+      "title": "Carne vacuna magra",
+      "ingredients": [
+        {
+          "ingredientId": "lean_beef",
+          "grams": 200
+        }
+      ],
+      "prepMinutes": 18,
+      "tags": [
+        "everyday",
+        "high_protein"
+      ],
+      "instructions": "Plancha u horno; usar corte magro."
+    },
+    {
+      "id": "salmon",
+      "title": "Salmón al horno",
+      "ingredients": [
+        {
+          "ingredientId": "salmon",
+          "grams": 220
+        }
+      ],
+      "prepMinutes": 25,
+      "tags": [
+        "favorite",
+        "omega3_source"
+      ],
+      "instructions": "Horno precalentado; cocinar hasta centro seguro y textura deseada."
+    },
+    {
+      "id": "hake",
+      "title": "Merluza al horno",
+      "ingredients": [
+        {
+          "ingredientId": "hake",
+          "grams": 230
+        }
+      ],
+      "prepMinutes": 22,
+      "tags": [
+        "lean",
+        "high_protein"
+      ],
+      "instructions": "Horno, limón y especias."
+    },
+    {
+      "id": "corvina",
+      "title": "Corvina a la plancha",
+      "ingredients": [
+        {
+          "ingredientId": "corvina",
+          "grams": 220
+        }
+      ],
+      "prepMinutes": 20,
+      "tags": [
+        "lean",
+        "high_protein"
+      ],
+      "instructions": "Plancha con limón."
+    },
+    {
+      "id": "tuna",
+      "title": "Atún al natural",
+      "ingredients": [
+        {
+          "ingredientId": "tuna_canned_drained",
+          "grams": 180
+        }
+      ],
+      "prepMinutes": 2,
+      "tags": [
+        "quick",
+        "no_cook",
+        "high_protein"
+      ],
+      "instructions": "Escurrir, condimentar; controlar frecuencia y variedad de pescados."
+    },
+    {
+      "id": "pork",
+      "title": "Bondiola al horno",
+      "ingredients": [
+        {
+          "ingredientId": "pork_shoulder",
+          "grams": 190
+        }
+      ],
+      "prepMinutes": 45,
+      "tags": [
+        "occasional",
+        "higher_fat"
+      ],
+      "instructions": "Cocción al horno hasta completamente hecha."
+    },
+    {
+      "id": "eggs",
+      "title": "Omelette proteico",
+      "ingredients": [
+        {
+          "ingredientId": "whole_egg",
+          "grams": 100
+        },
+        {
+          "ingredientId": "egg_whites",
+          "grams": 150
+        },
+        {
+          "ingredientId": "spinach",
+          "grams": 50
+        }
+      ],
+      "prepMinutes": 12,
+      "tags": [
+        "quick",
+        "vegetarian"
+      ],
+      "instructions": "Omelette de dos huevos + claras con espinaca."
+    },
+    {
+      "id": "tofu",
+      "title": "Tofu dorado",
+      "ingredients": [
+        {
+          "ingredientId": "firm_tofu",
+          "grams": 250
+        }
+      ],
+      "prepMinutes": 15,
+      "tags": [
+        "vegetarian",
+        "plant_protein"
+      ],
+      "instructions": "Dorar en sartén antiadherente; añadir condimentos a gusto."
+    },
+    {
+      "id": "shrimp",
+      "title": "Camarones salteados",
+      "ingredients": [
+        {
+          "ingredientId": "shrimp",
+          "grams": 240
+        }
+      ],
+      "prepMinutes": 12,
+      "tags": [
+        "quick",
+        "lean",
+        "high_protein"
+      ],
+      "instructions": "Saltear a temperatura suficiente hasta cocinar."
+    }
+  ],
+  "sides": [
+    {
+      "id": "rice_broccoli",
+      "title": "Arroz y brócoli",
+      "ingredients": [
+        {
+          "ingredientId": "rice_dry",
+          "grams": 65
+        },
+        {
+          "ingredientId": "broccoli",
+          "grams": 180
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 5
+        }
+      ],
+      "prepMinutes": 25,
+      "tags": [
+        "everyday",
+        "carb_source"
+      ],
+      "instructions": "Cocer arroz; hervir/vapor brócoli; añadir aceite al servir.",
+      "kind": "standard"
+    },
+    {
+      "id": "potato_tomato",
+      "title": "Papas al horno con tomate",
+      "ingredients": [
+        {
+          "ingredientId": "potato",
+          "grams": 250
+        },
+        {
+          "ingredientId": "tomato",
+          "grams": 150
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 8
+        }
+      ],
+      "prepMinutes": 35,
+      "tags": [
+        "everyday",
+        "carb_source"
+      ],
+      "instructions": "Cortar papa en cubos; hornear con aceite, servir tomate fresco.",
+      "kind": "standard"
+    },
+    {
+      "id": "salad",
+      "title": "Ensalada verde completa",
+      "ingredients": [
+        {
+          "ingredientId": "lettuce",
+          "grams": 80
+        },
+        {
+          "ingredientId": "tomato",
+          "grams": 120
+        },
+        {
+          "ingredientId": "cucumber",
+          "grams": 100
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 10
+        }
+      ],
+      "prepMinutes": 10,
+      "tags": [
+        "light",
+        "quick",
+        "low_carb"
+      ],
+      "instructions": "Lavar, cortar y aliñar al final.",
+      "kind": "standard"
+    },
+    {
+      "id": "quinoa_zucchini",
+      "title": "Quinoa con zucchini",
+      "ingredients": [
+        {
+          "ingredientId": "quinoa_dry",
+          "grams": 60
+        },
+        {
+          "ingredientId": "zucchini",
+          "grams": 150
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 5
+        }
+      ],
+      "prepMinutes": 25,
+      "tags": [
+        "carb_source"
+      ],
+      "instructions": "Cocer quinoa y saltear zucchini.",
+      "kind": "standard"
+    },
+    {
+      "id": "chickpea_salad",
+      "title": "Ensalada de garbanzos",
+      "ingredients": [
+        {
+          "ingredientId": "chickpeas_cooked",
+          "grams": 120
+        },
+        {
+          "ingredientId": "tomato",
+          "grams": 100
+        },
+        {
+          "ingredientId": "cucumber",
+          "grams": 80
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 5
+        }
+      ],
+      "prepMinutes": 10,
+      "tags": [
+        "fiber",
+        "quick",
+        "legumes"
+      ],
+      "instructions": "Garbanzos cocidos, escurridos; mezclar con verduras.",
+      "kind": "standard"
+    },
+    {
+      "id": "pumpkin",
+      "title": "Calabaza al horno",
+      "ingredients": [
+        {
+          "ingredientId": "pumpkin",
+          "grams": 250
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 7
+        },
+        {
+          "ingredientId": "lemon_juice",
+          "grams": 10
+        }
+      ],
+      "prepMinutes": 30,
+      "tags": [
+        "light",
+        "vegetables"
+      ],
+      "instructions": "Hornear calabaza en dados; terminar con limón.",
+      "kind": "standard"
+    },
+    {
+      "id": "zucchini_mushrooms",
+      "title": "Zucchini con shiitake",
+      "ingredients": [
+        {
+          "ingredientId": "zucchini",
+          "grams": 200
+        },
+        {
+          "ingredientId": "shiitake",
+          "grams": 100
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 7
+        }
+      ],
+      "prepMinutes": 15,
+      "tags": [
+        "vegetables",
+        "quick"
+      ],
+      "instructions": "Saltear verduras, evitando exceso de aceite.",
+      "kind": "standard"
+    },
+    {
+      "id": "lentil_carrot",
+      "title": "Lentejas y zanahoria",
+      "ingredients": [
+        {
+          "ingredientId": "lentils_cooked",
+          "grams": 130
+        },
+        {
+          "ingredientId": "carrot",
+          "grams": 120
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 6
+        }
+      ],
+      "prepMinutes": 12,
+      "tags": [
+        "fiber",
+        "legumes",
+        "quick"
+      ],
+      "instructions": "Usar lentejas cocidas; zanahoria rallada o previamente cocida.",
+      "kind": "standard"
+    },
+    {
+      "id": "broccoli_carrot",
+      "title": "Brócoli y zanahoria",
+      "ingredients": [
+        {
+          "ingredientId": "broccoli",
+          "grams": 150
+        },
+        {
+          "ingredientId": "carrot",
+          "grams": 150
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 7
+        }
+      ],
+      "prepMinutes": 15,
+      "tags": [
+        "vegetables",
+        "light"
+      ],
+      "instructions": "Cocinar al vapor o hervir; terminar con aceite.",
+      "kind": "standard"
+    },
+    {
+      "id": "rice_zucchini",
+      "title": "Arroz y zucchini",
+      "ingredients": [
+        {
+          "ingredientId": "rice_dry",
+          "grams": 65
+        },
+        {
+          "ingredientId": "zucchini",
+          "grams": 180
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 6
+        }
+      ],
+      "prepMinutes": 25,
+      "tags": [
+        "carb_source"
+      ],
+      "instructions": "Cocinar arroz y saltear zucchini.",
+      "kind": "standard"
+    },
+    {
+      "id": "sweet_potato",
+      "title": "Boniato al horno",
+      "ingredients": [
+        {
+          "ingredientId": "sweet_potato",
+          "grams": 250
+        },
+        {
+          "ingredientId": "olive_oil",
+          "grams": 5
+        }
+      ],
+      "prepMinutes": 35,
+      "tags": [
+        "carb_source"
+      ],
+      "instructions": "Cortar en gajos y hornear.",
+      "kind": "standard"
+    },
+    {
+      "id": "soup_miso",
+      "title": "Sopa Miso y shiitake",
+      "kind": "soup_ref",
+      "soupId": "miso",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 25,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_papa",
+      "title": "Sopa Papa, lentejas y caldo especiado",
+      "kind": "soup_ref",
+      "soupId": "papa",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 35,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_thai",
+      "title": "Sopa Thai ligera de coco y curry",
+      "kind": "soup_ref",
+      "soupId": "thai",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 30,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_calabaza",
+      "title": "Sopa Calabaza, jengibre y comino",
+      "kind": "soup_ref",
+      "soupId": "calabaza",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 35,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_tomyum",
+      "title": "Sopa Tom Yum de shiitake y lima",
+      "kind": "soup_ref",
+      "soupId": "tomyum",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 25,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_tomate",
+      "title": "Sopa Tomate, morrón y harissa",
+      "kind": "soup_ref",
+      "soupId": "tomate",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 35,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_boniato",
+      "title": "Sopa Boniato, comino y chile",
+      "kind": "soup_ref",
+      "soupId": "boniato",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 35,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_verde",
+      "title": "Sopa Puerro y arvejas",
+      "kind": "soup_ref",
+      "soupId": "verde",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 30,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    },
+    {
+      "id": "soup_sesamo",
+      "title": "Sopa Sésamo, soja y jengibre",
+      "kind": "soup_ref",
+      "soupId": "sesamo",
+      "defaultServingsForMeal": 1,
+      "ingredients": [],
+      "prepMinutes": 25,
+      "tags": [
+        "soup",
+        "ichef",
+        "light_side"
+      ],
+      "instructions": "Usar el modo cocina iChef; ingredientes y gramos se calculan desde soups.json."
+    }
+  ],
+  "breakfasts": [
+    {
+      "id": "oats_whey",
+      "title": "Avena con whey, banana y nueces",
+      "ingredients": [
+        {
+          "ingredientId": "oats_dry",
+          "grams": 45
+        },
+        {
+          "ingredientId": "whey_powder",
+          "grams": 30
+        },
+        {
+          "ingredientId": "almond_drink_unsweetened",
+          "grams": 250
+        },
+        {
+          "ingredientId": "banana",
+          "grams": 100
+        },
+        {
+          "ingredientId": "walnuts",
+          "grams": 15
+        }
+      ],
+      "prepMinutes": 8,
+      "tags": [
+        "post_training",
+        "everyday"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Mezclar avena y bebida vegetal; añadir whey una vez templado y servir fruta y nueces."
+    },
+    {
+      "id": "yogurt_oats",
+      "title": "Yogur proteico con avena y frutos rojos",
+      "ingredients": [
+        {
+          "ingredientId": "yogurt_high_protein",
+          "grams": 250
+        },
+        {
+          "ingredientId": "oats_dry",
+          "grams": 40
+        },
+        {
+          "ingredientId": "berries",
+          "grams": 100
+        },
+        {
+          "ingredientId": "chia",
+          "grams": 10
+        }
+      ],
+      "prepMinutes": 5,
+      "tags": [
+        "quick",
+        "high_protein"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Mezclar y servir."
+    },
+    {
+      "id": "egg_toast",
+      "title": "Huevos y claras con tostadas",
+      "ingredients": [
+        {
+          "ingredientId": "whole_egg",
+          "grams": 100
+        },
+        {
+          "ingredientId": "egg_whites",
+          "grams": 150
+        },
+        {
+          "ingredientId": "spinach",
+          "grams": 50
+        },
+        {
+          "ingredientId": "whole_wheat_bread",
+          "grams": 60
+        }
+      ],
+      "prepMinutes": 13,
+      "tags": [
+        "high_protein"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Omelette y tostadas."
+    },
+    {
+      "id": "shake_easy",
+      "title": "Licuado whey, banana y avena",
+      "ingredients": [
+        {
+          "ingredientId": "whey_powder",
+          "grams": 30
+        },
+        {
+          "ingredientId": "banana",
+          "grams": 120
+        },
+        {
+          "ingredientId": "oats_dry",
+          "grams": 45
+        },
+        {
+          "ingredientId": "almond_drink_unsweetened",
+          "grams": 250
+        }
+      ],
+      "prepMinutes": 5,
+      "tags": [
+        "quick",
+        "drink"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Licuar todo; no sustituir el resto del día por líquidos."
+    },
+    {
+      "id": "banana_pancakes",
+      "title": "Panqueques de banana y avena",
+      "ingredients": [
+        {
+          "ingredientId": "whole_egg",
+          "grams": 50
+        },
+        {
+          "ingredientId": "egg_whites",
+          "grams": 150
+        },
+        {
+          "ingredientId": "oats_dry",
+          "grams": 40
+        },
+        {
+          "ingredientId": "banana",
+          "grams": 120
+        }
+      ],
+      "prepMinutes": 15,
+      "tags": [
+        "post_training"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Licuar o pisar, cocinar en sartén antiadherente."
+    },
+    {
+      "id": "savory_tuna_toast",
+      "title": "Tostadas con atún y palta",
+      "ingredients": [
+        {
+          "ingredientId": "whole_wheat_bread",
+          "grams": 75
+        },
+        {
+          "ingredientId": "tuna_canned_drained",
+          "grams": 110
+        },
+        {
+          "ingredientId": "avocado",
+          "grams": 55
+        },
+        {
+          "ingredientId": "tomato",
+          "grams": 80
+        }
+      ],
+      "prepMinutes": 8,
+      "tags": [
+        "quick",
+        "savory"
+      ],
+      "mealType": "breakfast",
+      "instructions": "Preparar tostadas con atún, tomate y palta."
+    }
+  ],
+  "snacks": [
+    {
+      "id": "yogurt_fruit",
+      "title": "Yogur proteico y fruta",
+      "ingredients": [
+        {
+          "ingredientId": "yogurt_high_protein",
+          "grams": 220
+        },
+        {
+          "ingredientId": "berries",
+          "grams": 120
+        }
+      ],
+      "prepMinutes": 3,
+      "tags": [
+        "quick"
+      ],
+      "mealType": "snack",
+      "instructions": "Mezclar."
+    },
+    {
+      "id": "whey_banana",
+      "title": "Whey y banana",
+      "ingredients": [
+        {
+          "ingredientId": "whey_powder",
+          "grams": 30
+        },
+        {
+          "ingredientId": "banana",
+          "grams": 100
+        },
+        {
+          "ingredientId": "water",
+          "grams": 250
+        }
+      ],
+      "prepMinutes": 2,
+      "tags": [
+        "quick",
+        "post_training"
+      ],
+      "mealType": "snack",
+      "instructions": "Batido en shaker."
+    },
+    {
+      "id": "boxing_premeal",
+      "title": "Merienda pre-boxeo",
+      "ingredients": [
+        {
+          "ingredientId": "yogurt_high_protein",
+          "grams": 200
+        },
+        {
+          "ingredientId": "banana",
+          "grams": 100
+        },
+        {
+          "ingredientId": "whole_wheat_bread",
+          "grams": 50
+        }
+      ],
+      "prepMinutes": 5,
+      "tags": [
+        "pre_boxing",
+        "carb_source"
+      ],
+      "mealType": "snack",
+      "instructions": "Comer con margen digestivo cómodo previo al boxeo."
+    },
+    {
+      "id": "walnuts_yogurt",
+      "title": "Yogur con nueces y fruta",
+      "ingredients": [
+        {
+          "ingredientId": "yogurt_high_protein",
+          "grams": 200
+        },
+        {
+          "ingredientId": "walnuts",
+          "grams": 15
+        },
+        {
+          "ingredientId": "apple",
+          "grams": 130
+        }
+      ],
+      "prepMinutes": 3,
+      "tags": [
+        "everyday"
+      ],
+      "mealType": "snack",
+      "instructions": "Comer fruta entera."
+    },
+    {
+      "id": "eggs_fruit",
+      "title": "Huevos duros y fruta",
+      "ingredients": [
+        {
+          "ingredientId": "whole_egg",
+          "grams": 100
+        },
+        {
+          "ingredientId": "orange",
+          "grams": 160
+        }
+      ],
+      "prepMinutes": 12,
+      "tags": [
+        "portable",
+        "needs_prep"
+      ],
+      "mealType": "snack",
+      "instructions": "Hervir previamente los huevos."
+    },
+    {
+      "id": "protein_bar_fruit",
+      "title": "Barra proteica y fruta",
+      "ingredients": [
+        {
+          "ingredientId": "protein_bar",
+          "grams": 55
+        },
+        {
+          "ingredientId": "apple",
+          "grams": 150
+        }
+      ],
+      "prepMinutes": 1,
+      "tags": [
+        "quick",
+        "emergency",
+        "requires_label"
+      ],
+      "mealType": "snack",
+      "instructions": "Usar la información real de la barra para los macros."
+    }
+  ],
+  "favoriteCombos": [
+    {
+      "id": "fav_salmon_leek_peas",
+      "title": "Salmón al horno + sopa de puerro y arvejas",
+      "proteinId": "salmon",
+      "sideId": "soup_verde",
+      "starred": true,
+      "source": "Explicit user choice in conversation"
+    }
+  ],
+  "selectionRules": {
+    "proteinAndSide": "Select one protein plus one side for lunch/dinner. User can lock either part while reshuffling the other.",
+    "tagFilters": "Suggestions respond to selected day type, available time and favorites, not arbitrary calorie compensation.",
+    "avoidRepeat": "Prefer not to repeat same choice or same protein twice in a row when unlocked; avoid infinite loops when few candidates.",
+    "mealTypes": "Breakfast and snack options are standalone templates; lunches and dinners are protein+side.",
+    "soupReference": "Sides with kind=soup_ref resolve their ingredient weights, macros and shopping items through corresponding soups.json recipe and selected broth variant.",
+    "macros": "Display ingredient names and grams by default. Macros/calories only in a collapsed disclosure and as estimates."
+  }
+}

@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0d1414;
+  --color-surface: #162020;
+  --color-surface-2: #1b2827;
+  --color-border: #334440;
+  --color-text: #f3f1e9;
+  --color-muted: #a1b1a9;
+  --color-sage: #bed7a1;
+  --color-sage-2: #98b77e;
+  --color-gold: #dcbf89;
+  --color-brand: #fcf0b1;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html.large-text {
+    font-size: 112.5%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 3px;
+  }
+}
+
+@utility tap {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
