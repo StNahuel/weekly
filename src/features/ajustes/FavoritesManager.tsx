@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react';
 import { useId } from 'react';
 import { Loading } from '../../app/states/Loading';
+import { BTN_DANGER } from '../../app/ui';
 import { removeFavorite } from '../../db/repo';
 import { useFavorites } from '../shared/useFavorites';
 import { CARD } from './copy';
@@ -12,7 +13,9 @@ export function FavoritesManager() {
   return (
     <section aria-labelledby={headingId} className={CARD}>
       <h2 id={headingId} className="flex items-center gap-2 text-lg font-semibold">
-        <Star aria-hidden="true" size={20} className="text-gold" />
+        <span aria-hidden="true" className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gold/50 text-text">
+          <Star aria-hidden="true" size={20} fill="currentColor" />
+        </span>
         Favoritos
       </h2>
       {!favorites ? (
@@ -33,7 +36,7 @@ export function FavoritesManager() {
                 type="button"
                 aria-label={`Quitar ${favorite.title}`}
                 onClick={() => void removeFavorite(favorite.id)}
-                className="tap shrink-0 rounded-xl border border-border px-4 font-semibold"
+                className={`${BTN_DANGER} shrink-0`}
               >
                 Quitar
               </button>

@@ -2,7 +2,7 @@ import { useId, useState } from 'react';
 import { saveProfile } from '../../db/repo';
 import type { ProfileRecord } from '../../db/types';
 import { defaults } from '../../seed/defaults';
-import { CARD, FIELD, seedTextEs } from './copy';
+import { ALERT, CARD, FIELD, seedTextEs } from './copy';
 
 type Range = [number, number];
 type RangeKey = 'proteinDailyGramsRange' | 'calorieRangeKcal';
@@ -40,7 +40,7 @@ function RangeFields({ saved, spec, onSave }: RangeFieldsProps) {
     <fieldset className="space-y-2">
       <legend className="font-semibold">
         {`${spec.title}: `}
-        <strong className="text-sage">{`${savedMin}–${savedMax} ${spec.unit}`}</strong>
+        <strong className="text-mint-ink">{`${savedMin}–${savedMax} ${spec.unit}`}</strong>
       </legend>
       <div className="grid grid-cols-2 gap-2">
         {([spec.min, spec.max] as const).map((label, index) => (
@@ -63,7 +63,7 @@ function RangeFields({ saved, spec, onSave }: RangeFieldsProps) {
           </div>
         ))}
       </div>
-      {!valid && <p role="alert" className="text-sm text-gold">Revisá el rango: el mínimo no puede superar al máximo.</p>}
+      {!valid && <p role="alert" className={`text-sm ${ALERT}`}>Revisá el rango: el mínimo no puede superar al máximo.</p>}
     </fieldset>
   );
 }

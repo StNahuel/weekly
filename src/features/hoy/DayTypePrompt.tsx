@@ -5,8 +5,10 @@ import { suggestSlots, type DietaryExclusions } from '../../domain/day/slots';
 import type { DaySuggestion } from '../../domain/day/today';
 import type { SoupIngredientIds } from '../../domain/meals/filters';
 import type { DayType } from '../../domain/types';
+import { BTN_PRIMARY, CARD } from '../../app/ui';
 import { defaults } from '../../seed/defaults';
 import { SLOT_CATALOGS } from '../shared/slotCatalogs';
+import { DAY_TYPE_TINTS, tintChip } from '../shared/tints';
 import { DAY_TYPE_LABELS } from './labels';
 
 type DayTypePromptProps = {
@@ -36,11 +38,11 @@ export function DayTypePrompt({ dateKey, suggestion, dietary, soupIngredientIds 
   };
 
   return (
-    <section aria-labelledby="day-type-heading" className="rounded-2xl border border-border bg-surface p-4">
+    <section aria-labelledby="day-type-heading" className={CARD}>
       <h2 id="day-type-heading" className="text-lg font-semibold">
         ¿Qué tipo de día vas a tener?
       </h2>
-      {suggestion.flexible && <p className="mt-2 text-gold">Sábado flexible: elegí lo que venga</p>}
+      {suggestion.flexible && <p className="mt-2 inline-block rounded-full bg-peach px-3 py-0.5 font-semibold text-peach-ink">Sábado flexible: elegí lo que venga</p>}
       <div role="group" aria-label="Tipo de día" className="mt-4 grid gap-2">
         {defaults.interface.activityChoices.map((dayType) => {
           const pressed = dayType === chosen;
@@ -50,9 +52,10 @@ export function DayTypePrompt({ dateKey, suggestion, dietary, soupIngredientIds 
               type="button"
               aria-pressed={pressed}
               onClick={() => setChosen(dayType)}
-              className={`tap flex items-center justify-between rounded-xl border px-4 text-left ${
-                pressed ? 'border-sage bg-surface-2 font-semibold text-sage' : 'border-border text-text'
-              }`}
+              className={`tap flex items-center justify-between rounded-2xl border px-4 text-left transition-colors duration-150 ${tintChip(
+                DAY_TYPE_TINTS[dayType],
+                pressed,
+              )}`}
             >
               {DAY_TYPE_LABELS[dayType]}
               {pressed && <Check aria-hidden="true" size={20} />}
@@ -64,7 +67,7 @@ export function DayTypePrompt({ dateKey, suggestion, dietary, soupIngredientIds 
         type="button"
         onClick={() => void confirm()}
         disabled={saving}
-        className="tap mt-4 w-full rounded-xl bg-sage px-4 font-semibold text-bg disabled:opacity-60"
+        className={`${BTN_PRIMARY} mt-4 w-full`}
       >
         Confirmar
       </button>

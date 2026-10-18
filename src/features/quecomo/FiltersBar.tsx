@@ -1,16 +1,16 @@
 import { Star, Timer } from 'lucide-react';
+import { CARD, FIELD } from '../../app/ui';
 import { defaults } from '../../seed/defaults';
 import type { ComboFilters } from '../shared/candidates';
 import { DAY_TYPE_LABELS } from '../hoy/labels';
+import { DAY_TYPE_TINTS, TINTS, tintChip, type Tint } from '../shared/tints';
 
 const TIME_OPTIONS = [15, 30, 45] as const;
 
 type FiltersBarProps = { filters: ComboFilters; onChange: (filters: ComboFilters) => void };
 
-const chip = (pressed: boolean) =>
-  `tap inline-flex items-center gap-2 rounded-full border px-3 text-sm font-semibold ${
-    pressed ? 'border-sage bg-surface-2 text-sage' : 'border-border text-muted'
-  }`;
+const chip = (pressed: boolean, tint: Tint) =>
+  `tap inline-flex items-center gap-2 rounded-full border px-3 text-sm font-semibold transition-colors duration-150 ${tintChip(tint, pressed)}`;
 
 export function FiltersBar({ filters, onChange }: FiltersBarProps) {
   const setTime = (value: string) =>
@@ -21,7 +21,7 @@ export function FiltersBar({ filters, onChange }: FiltersBarProps) {
     );
 
   return (
-    <section aria-label="Filtros" className="space-y-3 rounded-2xl border border-border bg-surface p-4">
+    <section aria-label="Filtros" className={`space-y-3 ${CARD}`}>
       <div role="group" aria-label="Tipo de día" className="flex flex-wrap gap-2">
         {defaults.interface.activityChoices.map((dayType) => (
           <button
@@ -29,7 +29,7 @@ export function FiltersBar({ filters, onChange }: FiltersBarProps) {
             type="button"
             aria-pressed={filters.dayType === dayType}
             onClick={() => onChange({ ...filters, dayType })}
-            className={chip(filters.dayType === dayType)}
+            className={chip(filters.dayType === dayType, DAY_TYPE_TINTS[dayType])}
           >
             {DAY_TYPE_LABELS[dayType]}
           </button>
@@ -42,7 +42,7 @@ export function FiltersBar({ filters, onChange }: FiltersBarProps) {
           <select
             value={filters.maxPrepMinutes ?? ''}
             onChange={(event) => setTime(event.target.value)}
-            className="tap rounded-xl border border-border bg-surface-2 px-3 text-text"
+            className={FIELD}
           >
             {TIME_OPTIONS.map((minutes) => (
               <option key={minutes} value={minutes}>{`${minutes} min`}</option>
@@ -54,7 +54,7 @@ export function FiltersBar({ filters, onChange }: FiltersBarProps) {
           type="button"
           aria-pressed={filters.favoritesOnly}
           onClick={() => onChange({ ...filters, favoritesOnly: !filters.favoritesOnly })}
-          className={chip(filters.favoritesOnly)}
+          className={chip(filters.favoritesOnly, TINTS.butter)}
         >
           <Star aria-hidden="true" size={20} />
           Solo favoritos

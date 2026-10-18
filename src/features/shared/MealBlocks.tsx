@@ -1,5 +1,6 @@
 import { BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { LINK } from '../../app/ui';
 import type { ResolvedMeal } from '../../domain/meals/resolveMeal';
 import type { Protein, Side } from '../../domain/schemas/foods.schema';
 import { sideLabel } from './sideLabel';
@@ -39,7 +40,7 @@ export function SideBlock({ side, meal }: { side: Side; meal: ResolvedMeal }) {
         <Link
           to={`/cocinar/${side.soupId}?p=${meal.soup.servings}`}
           aria-label={`Ver receta de ${side.title}`}
-          className="tap mt-1 inline-flex items-center gap-2 font-semibold text-sage underline-offset-4 hover:underline"
+          className={`${LINK} mt-1`}
         >
           <BookOpen aria-hidden="true" size={20} />
           Ver receta

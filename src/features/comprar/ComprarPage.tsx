@@ -1,6 +1,7 @@
 import { ChevronDown, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 import { Loading } from '../../app/states/Loading';
+import { BTN_SECONDARY, CARD } from '../../app/ui';
 import { useProfile } from '../../app/useProfile';
 import { resetChecked } from '../../db/repo';
 import { localDateKey } from '../../domain/day/today';
@@ -47,7 +48,7 @@ export default function ComprarPage() {
       <PlanHeader key={plan ? 'plan' : 'none'} plan={plan} profile={profile} today={today} />
       {plan && (
         <>
-          <section aria-label="Comidas del plan" className="rounded-2xl border border-border bg-surface p-4">
+          <section aria-label="Comidas del plan" className={CARD}>
             <button
               type="button"
               aria-expanded={showPlan}
@@ -82,7 +83,7 @@ export default function ComprarPage() {
             type="button"
             disabled={plan.checkedKeys.length === 0}
             onClick={() => void resetChecked()}
-            className="tap inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 font-semibold disabled:opacity-50"
+            className={`${BTN_SECONDARY} w-full`}
           >
             <RotateCcw aria-hidden="true" size={20} />
             Reiniciar marcados

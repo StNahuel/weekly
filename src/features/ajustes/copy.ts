@@ -1,4 +1,7 @@
+import { BTN_PRIMARY, BTN_SECONDARY, CALLOUT } from '../../app/ui';
 import type { Weekday } from '../../domain/types';
+
+export { CARD, FIELD } from '../../app/ui';
 
 export const WEEKDAY_LABELS: Readonly<Record<Weekday, string>> = {
   monday: 'Lunes',
@@ -10,11 +13,9 @@ export const WEEKDAY_LABELS: Readonly<Record<Weekday, string>> = {
   sunday: 'Domingo',
 };
 
-export const CARD = 'rounded-2xl border border-border bg-surface p-4';
-export const FIELD = 'tap rounded-xl border border-border bg-surface-2 px-3 text-base text-text';
-export const PRIMARY = 'tap inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sage px-4 font-semibold text-bg disabled:opacity-60';
-export const SECONDARY = 'tap inline-flex items-center justify-center gap-2 rounded-xl border border-border px-4 font-semibold';
-export const ALERT = 'rounded-xl border border-gold p-3';
+export const PRIMARY = `${BTN_PRIMARY} w-full`;
+export const SECONDARY = BTN_SECONDARY;
+export const ALERT = CALLOUT;
 export const ONBOARDING_INTRO = 'Confirmá que estos horarios se parecen a los tuyos. Son una guía, no un control.';
 
 // The seed keeps these notes in English; the UI must stay in Spanish.
