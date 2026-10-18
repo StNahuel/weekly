@@ -1,0 +1,2813 @@
+{
+  "schemaVersion": 1,
+  "locale": "es-UY",
+  "description": "9 sopas para acompañar una proteína. Migradas del HTML iChef adjunto; fuente conservada. Controles de máquina NO verificados para el modelo exacto.",
+  "servingRules": {
+    "defaultServings": 3,
+    "availableServings": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "scaleFactorFormula": "requestedServings / recipe.baseServings",
+    "rounding": "Same as original HTML: >=10 g round to nearest gram, 1..10 g round to nearest 0.5 g, <1 g round to 0.1 g.",
+    "liquidRules": "vegetable: water=brothBaseScaled, concentrate=roundGram(water*concentrateRatio). bone: bone=min(waterComponent,300g*(servings/3) unless user override), water=waterComponent-bone. coconut fixed quantity scales separately and is not added over base volume.",
+    "maxFill": "Respect jug MAX indicator; never equate ingredient grams with volume.",
+    "stepAdds": "Expand computed_broth to TWO ingredient lines for vegetable or TWO lines for bone + water, with grams; never a single already-diluted broth entry."
+  },
+  "safety": {
+    "machineModelNotVerified": true,
+    "temperatureSpeedWarnings": "Settings are from home-authored source HTML; confirm iChef model/manual. Do not imply spoon icon = speed 0.3; treat reverse as optional only where confirmed.",
+    "hotBlend": "Never blend a boiling, full jug at high speed. Cool as manufacturer instructs, respect MAX, lid secured as prescribed, ramp speed.",
+    "vapor": "Follow device instructions for measuring cap/steam vent/anti-splash basket; do not assert that every version safely accepts the same configuration."
+  },
+  "recipes": [
+    {
+      "id": "miso",
+      "title": "Miso y shiitake",
+      "flavor": "Japonesa · Umami",
+      "tag": "CALDO LIGERO",
+      "texture": "Caldo claro · hongos enteros",
+      "description": "La favorita: miso, shiitake, jengibre y lima. Mismo perfil umami, con los hongos enteros y sin garbanzos que compitan con la proteína principal.",
+      "minutesApprox": 25,
+      "notes": "Conservamos los 120 g de shiitake de la versión que te encantó. No lleva garbanzos: si alguna noche los querés, incorporá aparte una cucharada pequeña. Miso al final, sin hervir. Usar agitación mínima y reversa si tu modelo lo permite.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.02,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "shiitake",
+          "legacyId": "shiitake",
+          "name": "Shiitake",
+          "gramsForBaseServings": 120,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 10,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "miso_soy",
+          "legacyId": "miso",
+          "name": "Miso",
+          "gramsForBaseServings": 22,
+          "category": "Almacén"
+        },
+        {
+          "id": "fish_sauce",
+          "legacyId": "fish",
+          "name": "Salsa de pescado",
+          "gramsForBaseServings": 4,
+          "category": "Condimentos"
+        },
+        {
+          "id": "soy_sauce",
+          "legacyId": "soy",
+          "name": "Salsa de soja",
+          "gramsForBaseServings": 4,
+          "category": "Condimentos"
+        },
+        {
+          "id": "spring_onion",
+          "legacyId": "verdeo",
+          "name": "Verdeo",
+          "gramsForBaseServings": 15,
+          "category": "Verdulería"
+        },
+        {
+          "id": "lime_juice",
+          "legacyId": "lima",
+          "name": "Jugo de lima o limón",
+          "gramsForBaseServings": 20,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar aromáticos",
+          "instructions": "Picar y bajar lo adherido a las paredes.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 10
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Cocinar shiitake",
+          "instructions": "Agregar los shiitake en láminas. Mantenerlos enteros con agitación suave; el concentrado vegetal se disuelve en la propia jarra.",
+          "sourceSettingsText": "15 minutos · 95 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              900,
+              900
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "shiitake",
+              "gramsForBaseServings": 120
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Sazonar",
+          "instructions": "Probar antes de corregir la sal, porque el miso también aportará sodio.",
+          "sourceSettingsText": "2 minutos · 85 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              120,
+              120
+            ],
+            "temperatureCRange": [
+              85,
+              85
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "fish_sauce",
+              "gramsForBaseServings": 4
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "soy_sauce",
+              "gramsForBaseServings": 4
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Incorporar el miso",
+          "instructions": "Esperar a que baje aproximadamente a 60–65 °C. Disolver el miso en un poco del caldo y devolver a la jarra; no hervir después.",
+          "sourceSettingsText": "30 segundos · Sin calor · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              30,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "miso_soy",
+              "gramsForBaseServings": 22
+            }
+          ],
+          "safetyNotes": [
+            "Incorporar miso tras dejar enfriar ligeramente; no hervir después."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Terminar",
+          "instructions": "Agregar verdeo picado y lima o limón, mezclar apenas y servir.",
+          "sourceSettingsText": "15 segundos · Sin calor · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "spring_onion",
+              "gramsForBaseServings": 15
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "lime_juice",
+              "gramsForBaseServings": 20
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "miso",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "papa",
+      "title": "Papa, lentejas y caldo especiado",
+      "flavor": "Especiada · Reconfortante",
+      "tag": "CREMA LIGERA",
+      "texture": "Crema fluida",
+      "description": "Caldo especiado con apenas papa y lentejas rojas para dar textura. Ya no es una crema espesa para comer como plato principal.",
+      "minutesApprox": 35,
+      "notes": "La papa y las lentejas son solo espesantes suaves; si queda densa, agregá agua caliente de a 50 g hasta que fluya fácilmente de la cuchara. Se puede hacer con caldo de huesos FONDO.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "huesos",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "potato",
+          "legacyId": "papa",
+          "name": "Papa pelada",
+          "gramsForBaseServings": 150,
+          "category": "Verdulería"
+        },
+        {
+          "id": "red_lentils_dry",
+          "legacyId": "lent",
+          "name": "Lentejas rojas secas",
+          "gramsForBaseServings": 20,
+          "category": "Almacén"
+        },
+        {
+          "id": "carrot",
+          "legacyId": "zan",
+          "name": "Zanahoria",
+          "gramsForBaseServings": 60,
+          "category": "Verdulería"
+        },
+        {
+          "id": "onion",
+          "legacyId": "ceb",
+          "name": "Cebolla",
+          "gramsForBaseServings": 45,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 7,
+          "category": "Verdulería"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite de oliva",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "cumin",
+          "legacyId": "comino",
+          "name": "Comino",
+          "gramsForBaseServings": 2,
+          "category": "Condimentos"
+        },
+        {
+          "id": "smoked_paprika",
+          "legacyId": "paprika",
+          "name": "Pimentón",
+          "gramsForBaseServings": 2,
+          "category": "Condimentos"
+        },
+        {
+          "id": "cayenne",
+          "legacyId": "cayena",
+          "name": "Cayena",
+          "gramsForBaseServings": 0.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "black_pepper",
+          "legacyId": "pimi",
+          "name": "Pimienta negra",
+          "gramsForBaseServings": 0.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lemon_juice",
+          "legacyId": "limon",
+          "name": "Jugo de limón",
+          "gramsForBaseServings": 18,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar verduras",
+          "instructions": "Cortar zanahoria en trozos pequeños, picar y bajar de las paredes.",
+          "sourceSettingsText": "6 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              6,
+              6
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "onion",
+              "gramsForBaseServings": 45
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "carrot",
+              "gramsForBaseServings": 60
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 7
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Sofreír especias",
+          "instructions": "Rehogar suavemente para desarrollar el aroma, evitando quemar el pimentón.",
+          "sourceSettingsText": "4 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              240,
+              240
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "cumin",
+              "gramsForBaseServings": 2
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "smoked_paprika",
+              "gramsForBaseServings": 2
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "cayenne",
+              "gramsForBaseServings": 0.5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "black_pepper",
+              "gramsForBaseServings": 0.5
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocer",
+          "instructions": "Incorporar papa en cubos pequeños y lentejas rojas secas, lavadas. Cocinar hasta que esté todo tierno.",
+          "sourceSettingsText": "20–23 minutos · 100 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              1200,
+              1380
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "potato",
+              "gramsForBaseServings": 150
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "red_lentils_dry",
+              "gramsForBaseServings": 20
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Triturar fino",
+          "instructions": "Dejar bajar parcialmente la temperatura, respetar la capacidad máxima y triturar con la tapa medidora colocada y velocidad gradual. La textura buscada es fluida.",
+          "sourceSettingsText": "20–30 segundos · Aumentar gradualmente hasta Vel. 6 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              20,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Terminar",
+          "instructions": "Añadir limón. Si quedó demasiado espesa, aligerar con agua caliente.",
+          "sourceSettingsText": "15 segundos · Vel. 2 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 2.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemon_juice",
+              "gramsForBaseServings": 18
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "papa",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "thai",
+      "title": "Thai ligera de coco y curry",
+      "flavor": "Tailandesa · Picante",
+      "tag": "CALDO CREMOSO",
+      "texture": "Caldo de coco sedoso",
+      "description": "Curry, jengibre, lima y una dosis moderada de leche de coco para un caldo sedoso y ligero, no un guiso.",
+      "minutesApprox": 30,
+      "notes": "La leche de coco culinaria es parte fija de esta sopa (120 g por 3 porciones). Se incorpora hacia el final, sin hervor fuerte. Las legumbres son opcionales y se añaden al final para evitar textura de guiso.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 730,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": true,
+        "gramsFor3": 120,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "chickpeas_cooked",
+          "legacyId": "garb",
+          "name": "Garbanzos cocidos",
+          "gramsForBaseServings": 45,
+          "category": "Almacén",
+          "conditionalSelection": "thaiLegume=chickpeas; substitute edamame_cooked when thaiLegume=edamame; omit when none"
+        },
+        {
+          "id": "carrot",
+          "legacyId": "zan",
+          "name": "Zanahoria",
+          "gramsForBaseServings": 80,
+          "category": "Verdulería"
+        },
+        {
+          "id": "onion",
+          "legacyId": "ceb",
+          "name": "Cebolla",
+          "gramsForBaseServings": 50,
+          "category": "Verdulería"
+        },
+        {
+          "id": "red_pepper",
+          "legacyId": "morr",
+          "name": "Morrón rojo",
+          "gramsForBaseServings": 30,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 12,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "curry_paste",
+          "legacyId": "curry",
+          "name": "Pasta de curry amarillo o verde",
+          "gramsForBaseServings": 25,
+          "category": "Condimentos"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "soy_sauce",
+          "legacyId": "soy",
+          "name": "Salsa de soja",
+          "gramsForBaseServings": 8,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lime_juice",
+          "legacyId": "lima",
+          "name": "Jugo de lima",
+          "gramsForBaseServings": 25,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": {
+          "enabled": true,
+          "default": "none",
+          "choices": [
+            "none",
+            "chickpeas",
+            "edamame"
+          ],
+          "gramsFor3IfSelected": 45
+        }
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar todas las verduras",
+          "instructions": "Picar las verduras pequeñas para evitar sensación de guiso; bajar con la espátula.",
+          "sourceSettingsText": "8 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              8,
+              8
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "onion",
+              "gramsForBaseServings": 50
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "red_pepper",
+              "gramsForBaseServings": 30
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "carrot",
+              "gramsForBaseServings": 80
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 12
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Despertar el curry",
+          "instructions": "Rehogar brevemente el curry con las verduras.",
+          "sourceSettingsText": "4 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              240,
+              240
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "curry_paste",
+              "gramsForBaseServings": 25
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocer base aromática",
+          "instructions": "Cocinar hasta que la zanahoria picada esté tierna.",
+          "sourceSettingsText": "12–15 minutos · 95 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              720,
+              900
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Triturar la base",
+          "instructions": "Antes de añadir coco o legumbres, dejar enfriar parcialmente y triturar los vegetales con el caldo hasta lograr una base lisa y muy fluida.",
+          "sourceSettingsText": "15–25 segundos · Subir gradualmente hasta Vel. 5–6 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              25
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Agregar leche de coco y soja",
+          "instructions": "Incorporar la leche de coco culinaria y la salsa de soja. Calentar suavemente sin hervor fuerte para conservar una textura fluida y sedosa.",
+          "sourceSettingsText": "3 minutos · 85–90 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              180,
+              180
+            ],
+            "temperatureCRange": [
+              85,
+              90
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "coconut",
+              "ingredientId": "coconut_milk_culinary",
+              "gramsForBaseServings": 120
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "soy_sauce",
+              "gramsForBaseServings": 8
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 6,
+          "title": "Legumbre opcional",
+          "instructions": "Si se eligieron garbanzos cocidos, calentar 2–3 minutos a 90 °C. Para edamame congelado, cocinar según envase hasta estar caliente y tierno (aprox. 5–7 minutos a 95 °C, si corresponde). Agitación suave, reversa solo si el modelo permite.",
+          "sourceSettingsText": "3 minutos · 90 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              180,
+              180
+            ],
+            "temperatureCRange": [
+              90,
+              90
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "selected_thai_legume",
+              "gramsForBaseServings": 45,
+              "variantIngredientIds": {
+                "chickpeas": "chickpeas_cooked",
+                "edamame": "edamame_cooked"
+              }
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ],
+          "condition": {
+            "field": "thaiLegume",
+            "not": "none"
+          },
+          "controlsByLegume": {
+            "chickpeas": {
+              "durationSecondsRange": [
+                120,
+                180
+              ],
+              "temperatureCRange": [
+                90,
+                90
+              ]
+            },
+            "edamame": {
+              "durationSecondsRange": [
+                300,
+                420
+              ],
+              "temperatureCRange": [
+                95,
+                95
+              ]
+            }
+          }
+        },
+        {
+          "step": 7,
+          "title": "Equilibrar con lima",
+          "instructions": "Agregar fuera del calor. Probar y corregir curry, lima o soja si hace falta.",
+          "sourceSettingsText": "15 segundos · Sin calor · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lime_juice",
+              "gramsForBaseServings": 25
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "thai",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "calabaza",
+      "title": "Calabaza, jengibre y comino",
+      "flavor": "Aromática · Suave",
+      "tag": "CREMA LIGERA",
+      "texture": "Crema muy fluida",
+      "description": "Crema ligera de calabaza con jengibre, comino y un toque fijo de leche de coco. Versión sin cúrcuma para respetar tu preferencia.",
+      "minutesApprox": 35,
+      "notes": "La leche de coco culinaria (90 g por 3 porciones) suaviza las especias sin transformar el caldo en puré espeso. La textura buscada es fina, fluida y liviana. Adaptación deliberada: se omite 1 g de cúrcuma por preferencia del usuario y se añade 1 g de comino.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 760,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": true,
+        "gramsFor3": 90,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "pumpkin",
+          "legacyId": "calabaza",
+          "name": "Calabaza",
+          "gramsForBaseServings": 230,
+          "category": "Verdulería"
+        },
+        {
+          "id": "red_lentils_dry",
+          "legacyId": "lent",
+          "name": "Lentejas rojas secas",
+          "gramsForBaseServings": 15,
+          "category": "Almacén"
+        },
+        {
+          "id": "carrot",
+          "legacyId": "zan",
+          "name": "Zanahoria",
+          "gramsForBaseServings": 40,
+          "category": "Verdulería"
+        },
+        {
+          "id": "onion",
+          "legacyId": "ceb",
+          "name": "Cebolla",
+          "gramsForBaseServings": 45,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 12,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite de oliva",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "cumin",
+          "legacyId": "comino",
+          "name": "Comino molido",
+          "gramsForBaseServings": 1,
+          "category": "Condimentos"
+        },
+        {
+          "id": "black_pepper",
+          "legacyId": "pimi",
+          "name": "Pimienta negra",
+          "gramsForBaseServings": 0.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lemon_juice",
+          "legacyId": "limon",
+          "name": "Jugo de limón",
+          "gramsForBaseServings": 15,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar aromáticos",
+          "instructions": "Picar y bajar restos.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "onion",
+              "gramsForBaseServings": 45
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 12
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Sofreír",
+          "instructions": "Calentar suavemente los aromas, sin quemar la comino.",
+          "sourceSettingsText": "3 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              180,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "cumin",
+              "gramsForBaseServings": 1
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "black_pepper",
+              "gramsForBaseServings": 0.5
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocer",
+          "instructions": "Calabaza y zanahoria en dados pequeños; lentejas rojas secas y lavadas. Cocinar hasta que todo esté tierno.",
+          "sourceSettingsText": "22 minutos · 100 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              1320,
+              1320
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "pumpkin",
+              "gramsForBaseServings": 230
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "carrot",
+              "gramsForBaseServings": 40
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "red_lentils_dry",
+              "gramsForBaseServings": 15
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Agregar leche de coco",
+          "instructions": "Incorporar la leche de coco culinaria y templar suavemente antes de triturar, sin hervir fuerte.",
+          "sourceSettingsText": "3 minutos · 85 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              180,
+              180
+            ],
+            "temperatureCRange": [
+              85,
+              85
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "coconut",
+              "ingredientId": "coconut_milk_culinary",
+              "gramsForBaseServings": 90
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Triturar hasta fluida",
+          "instructions": "Dejar enfriar parcialmente y triturar de forma gradual. Debe quedar una crema fina y liviana, no un puré.",
+          "sourceSettingsText": "20–30 segundos · Hasta Vel. 6 progresivamente · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              20,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 6,
+          "title": "Terminar",
+          "instructions": "Incorporar cítrico para levantar los sabores.",
+          "sourceSettingsText": "15 segundos · Vel. 2 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 2.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemon_juice",
+              "gramsForBaseServings": 15
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "calabaza",
+        "adaptations": [
+          "Omitted turmeric (1 g) and used cumin (1 g) due to explicit user preference."
+        ],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "tomyum",
+      "title": "Tom Yum de shiitake y lima",
+      "flavor": "Tailandesa · Ácida y picante",
+      "tag": "CALDO LIGERO",
+      "texture": "Caldo ácido y picante",
+      "description": "Lemongrass, shiitake, chile y lima. Quitamos los porotos: manda el caldo cítrico y picante, no las legumbres.",
+      "minutesApprox": 25,
+      "notes": "Machacar el lemongrass para infusionar y retirarlo antes de servir. No lo tritures. Si agregás coco se acerca a una variante estilo Tom Kha, más suave.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.02,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "shiitake",
+          "legacyId": "shiitake",
+          "name": "Shiitake",
+          "gramsForBaseServings": 120,
+          "category": "Verdulería"
+        },
+        {
+          "id": "tomato",
+          "legacyId": "tomate",
+          "name": "Tomate",
+          "gramsForBaseServings": 80,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 12,
+          "category": "Verdulería"
+        },
+        {
+          "id": "lemongrass_fresh",
+          "legacyId": "lemon",
+          "name": "Lemongrass",
+          "gramsForBaseServings": 20,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "fish_sauce",
+          "legacyId": "fish",
+          "name": "Salsa de pescado",
+          "gramsForBaseServings": 8,
+          "category": "Condimentos"
+        },
+        {
+          "id": "soy_sauce",
+          "legacyId": "soy",
+          "name": "Salsa de soja",
+          "gramsForBaseServings": 6,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lime_juice",
+          "legacyId": "lima",
+          "name": "Jugo de lima",
+          "gramsForBaseServings": 30,
+          "category": "Verdulería"
+        },
+        {
+          "id": "chili_dry",
+          "legacyId": "chile",
+          "name": "Chile seco",
+          "gramsForBaseServings": 1,
+          "category": "Condimentos"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar aromáticos",
+          "instructions": "Picar jengibre y ajo.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 12
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Infusionar",
+          "instructions": "Machacar el lemongrass para liberar aromas; mantenerlo en trozos grandes que puedas retirar.",
+          "sourceSettingsText": "8 minutos · 95 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              480,
+              480
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemongrass_fresh",
+              "gramsForBaseServings": 20
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "chili_dry",
+              "gramsForBaseServings": 1
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocinar hongos",
+          "instructions": "Incorporar shiitake laminados y tomate en trozos pequeños.",
+          "sourceSettingsText": "10–12 minutos · 95 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              600,
+              720
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "shiitake",
+              "gramsForBaseServings": 120
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "tomato",
+              "gramsForBaseServings": 80
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Sazonar",
+          "instructions": "Agregar salsas y probar antes de añadir sal.",
+          "sourceSettingsText": "1 minuto · 85 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              60,
+              60
+            ],
+            "temperatureCRange": [
+              85,
+              85
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "fish_sauce",
+              "gramsForBaseServings": 8
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "soy_sauce",
+              "gramsForBaseServings": 6
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Terminar",
+          "instructions": "Retirar el lemongrass; agregar la lima fuera del calor.",
+          "sourceSettingsText": "15 segundos · Sin calor · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lime_juice",
+              "gramsForBaseServings": 30
+            }
+          ],
+          "safetyNotes": [
+            "Retirar el lemongrass fresco en trozos grandes antes de servir."
+          ]
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "tomyum",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "tomate",
+      "title": "Tomate, morrón y harissa",
+      "flavor": "Mediterránea · Ahumada",
+      "tag": "SOPA LIGERA",
+      "texture": "Caldo rojo aterciopelado",
+      "description": "Tomate, morrón y harissa con su carácter ahumado y picante, pero sin garbanzos y con base completamente triturada.",
+      "minutesApprox": 35,
+      "notes": "La harissa varía mucho de intensidad; empezá por menos si tu pasta es muy picante. Como ya hay mucha acidez del tomate, ajustá el limón al final.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "tomato",
+          "legacyId": "tomate",
+          "name": "Tomate",
+          "gramsForBaseServings": 230,
+          "category": "Verdulería"
+        },
+        {
+          "id": "red_pepper",
+          "legacyId": "morr",
+          "name": "Morrón rojo",
+          "gramsForBaseServings": 90,
+          "category": "Verdulería"
+        },
+        {
+          "id": "onion",
+          "legacyId": "ceb",
+          "name": "Cebolla",
+          "gramsForBaseServings": 50,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "harissa",
+          "legacyId": "harissa",
+          "name": "Pasta harissa",
+          "gramsForBaseServings": 12,
+          "category": "Condimentos"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite de oliva",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "cumin",
+          "legacyId": "comino",
+          "name": "Comino",
+          "gramsForBaseServings": 2,
+          "category": "Condimentos"
+        },
+        {
+          "id": "smoked_paprika",
+          "legacyId": "pimenton",
+          "name": "Pimentón ahumado",
+          "gramsForBaseServings": 1,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lemon_juice",
+          "legacyId": "limon",
+          "name": "Jugo de limón",
+          "gramsForBaseServings": 10,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar verduras",
+          "instructions": "Picar fino para que el morrón no quede en cubos grandes.",
+          "sourceSettingsText": "7 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              7,
+              7
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "onion",
+              "gramsForBaseServings": 50
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "red_pepper",
+              "gramsForBaseServings": 90
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Sofreír",
+          "instructions": "Rehogar sin quemar las especias.",
+          "sourceSettingsText": "4 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              240,
+              240
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "harissa",
+              "gramsForBaseServings": 12
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "cumin",
+              "gramsForBaseServings": 2
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "smoked_paprika",
+              "gramsForBaseServings": 1
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocinar tomate",
+          "instructions": "Añadir tomate troceado y cocinar hasta que el morrón esté muy tierno.",
+          "sourceSettingsText": "20 minutos · 100 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              1200,
+              1200
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "tomato",
+              "gramsForBaseServings": 230
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Triturar bien",
+          "instructions": "Dejar enfriar parcialmente. Triturar hasta conseguir un caldo rojo liso, no una salsa de tomate espesa.",
+          "sourceSettingsText": "20–30 segundos · Hasta Vel. 6 progresivamente · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              20,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Terminar",
+          "instructions": "Agregar limón poco a poco y ajustar.",
+          "sourceSettingsText": "15 segundos · Vel. 2 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 2.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemon_juice",
+              "gramsForBaseServings": 10
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "tomate",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "boniato",
+      "title": "Boniato, comino y chile",
+      "flavor": "Especiada · Terrosa",
+      "tag": "CREMA LIGERA",
+      "texture": "Crema especiada fluida",
+      "description": "Boniato, comino y chile equilibrados con limón y un toque ligero de leche de coco.",
+      "minutesApprox": 35,
+      "notes": "La leche de coco culinaria (75 g por 3 porciones) equilibra el comino y el picante sin taparlos. Triturar para una crema fluida y acompañar con proteína aparte.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 775,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": true,
+        "gramsFor3": 75,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "sweet_potato",
+          "legacyId": "boniato",
+          "name": "Boniato",
+          "gramsForBaseServings": 175,
+          "category": "Verdulería"
+        },
+        {
+          "id": "red_lentils_dry",
+          "legacyId": "lent",
+          "name": "Lentejas rojas secas",
+          "gramsForBaseServings": 15,
+          "category": "Almacén"
+        },
+        {
+          "id": "carrot",
+          "legacyId": "zan",
+          "name": "Zanahoria",
+          "gramsForBaseServings": 40,
+          "category": "Verdulería"
+        },
+        {
+          "id": "onion",
+          "legacyId": "ceb",
+          "name": "Cebolla",
+          "gramsForBaseServings": 45,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite de oliva",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "cumin",
+          "legacyId": "comino",
+          "name": "Comino",
+          "gramsForBaseServings": 2,
+          "category": "Condimentos"
+        },
+        {
+          "id": "smoked_paprika",
+          "legacyId": "paprika",
+          "name": "Pimentón",
+          "gramsForBaseServings": 1.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "chili_dry",
+          "legacyId": "chile",
+          "name": "Chile",
+          "gramsForBaseServings": 0.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lemon_juice",
+          "legacyId": "limon",
+          "name": "Jugo de limón",
+          "gramsForBaseServings": 20,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar",
+          "instructions": "Picar y bajar los restos.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "onion",
+              "gramsForBaseServings": 45
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Sofreír especias",
+          "instructions": "Rehogar para desarrollar el aroma.",
+          "sourceSettingsText": "4 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              240,
+              240
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "cumin",
+              "gramsForBaseServings": 2
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "smoked_paprika",
+              "gramsForBaseServings": 1.5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "chili_dry",
+              "gramsForBaseServings": 0.5
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocer",
+          "instructions": "Agregar boniato y zanahoria en cubitos y lentejas rojas lavadas y secas. Cocinar hasta que estén tiernos.",
+          "sourceSettingsText": "22 minutos · 100 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              1320,
+              1320
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "sweet_potato",
+              "gramsForBaseServings": 175
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "carrot",
+              "gramsForBaseServings": 40
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "red_lentils_dry",
+              "gramsForBaseServings": 15
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Agregar leche de coco",
+          "instructions": "Incorporar la leche de coco culinaria y templar suavemente antes de triturar, manteniendo una consistencia ligera.",
+          "sourceSettingsText": "3 minutos · 85 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              180,
+              180
+            ],
+            "temperatureCRange": [
+              85,
+              85
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "coconut",
+              "ingredientId": "coconut_milk_culinary",
+              "gramsForBaseServings": 75
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Triturar fluido",
+          "instructions": "Dejar enfriar parcialmente y triturar gradualmente hasta que quede una sopa suave.",
+          "sourceSettingsText": "20–30 segundos · Hasta Vel. 6 progresivamente · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              20,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 6,
+          "title": "Terminar",
+          "instructions": "Equilibrar dulzor con limón.",
+          "sourceSettingsText": "15 segundos · Vel. 2 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 2.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemon_juice",
+              "gramsForBaseServings": 20
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "boniato",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "verde",
+      "title": "Puerro y arvejas",
+      "flavor": "Vegetal · Delicada",
+      "tag": "CREMA LIGERA",
+      "texture": "Crema verde muy fluida",
+      "description": "Puerro y arvejas frescas como protagonistas, con apenas papa para aportar una textura suave en lugar de una crema pesada.",
+      "minutesApprox": 30,
+      "notes": "Añadí las arvejas al final para conservar el color. La cantidad pequeña de papa suaviza sin hacer de la sopa otro plato principal.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.025,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "peas",
+          "legacyId": "arvejas",
+          "name": "Arvejas congeladas",
+          "gramsForBaseServings": 140,
+          "category": "Almacén"
+        },
+        {
+          "id": "leek",
+          "legacyId": "puerro",
+          "name": "Puerro",
+          "gramsForBaseServings": 105,
+          "category": "Verdulería"
+        },
+        {
+          "id": "potato",
+          "legacyId": "papa",
+          "name": "Papa pelada",
+          "gramsForBaseServings": 50,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 4,
+          "category": "Verdulería"
+        },
+        {
+          "id": "olive_oil",
+          "legacyId": "aceite",
+          "name": "Aceite de oliva",
+          "gramsForBaseServings": 6,
+          "category": "Condimentos"
+        },
+        {
+          "id": "black_pepper",
+          "legacyId": "pimi",
+          "name": "Pimienta negra",
+          "gramsForBaseServings": 0.5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "lemon_juice",
+          "legacyId": "limon",
+          "name": "Jugo de limón",
+          "gramsForBaseServings": 15,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar puerro",
+          "instructions": "Picar fino y bajar restos.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "leek",
+              "gramsForBaseServings": 105
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 4
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Rehogar",
+          "instructions": "Rehogar el puerro sin dorarlo.",
+          "sourceSettingsText": "4 minutos · 100 °C · Vel. 1",
+          "controls": {
+            "durationSecondsRange": [
+              240,
+              240
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "olive_oil",
+              "gramsForBaseServings": 6
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Cocer papa",
+          "instructions": "Agregar papa en dados pequeños. Cocinar hasta que esté tierna.",
+          "sourceSettingsText": "13–15 minutos · 100 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              780,
+              900
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "potato",
+              "gramsForBaseServings": 50
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Agregar arvejas",
+          "instructions": "Añadir arvejas congeladas y cocinar apenas hasta que estén bien calientes y tiernas.",
+          "sourceSettingsText": "5–7 minutos · 95 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              300,
+              420
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "peas",
+              "gramsForBaseServings": 140
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "black_pepper",
+              "gramsForBaseServings": 0.5
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Triturar suave",
+          "instructions": "Dejar enfriar parcialmente y procesar hasta una sopa fina y fluida.",
+          "sourceSettingsText": "20–30 segundos · Hasta Vel. 6 progresivamente · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              20,
+              30
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "gradual",
+              "value": null,
+              "maxValue": 6.0
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [],
+          "safetyNotes": [
+            "Mezcla caliente: enfriar según manual, respetar marca máxima y aumentar velocidad gradualmente. No licuar líquido hirviendo a velocidad alta."
+          ]
+        },
+        {
+          "step": 6,
+          "title": "Finalizar",
+          "instructions": "Añadir limón al final para conservar frescura.",
+          "sourceSettingsText": "15 segundos · Vel. 2 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              15,
+              15
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 2.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "lemon_juice",
+              "gramsForBaseServings": 15
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "verde",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    },
+    {
+      "id": "sesamo",
+      "title": "Sésamo, soja y jengibre",
+      "flavor": "Asiática · Umami",
+      "tag": "CALDO LIGERO",
+      "texture": "Caldo asiático con hongos",
+      "description": "Shiitake, jengibre y sésamo en un caldo transparente. Poco tofu porque la proteína principal va servida aparte.",
+      "minutesApprox": 25,
+      "notes": "El tofu es un pequeño agregado, no la proteína principal. El aceite de sésamo va al final: unas gotas aportan muchísimo aroma. Reversa si está disponible para preservar los hongos.",
+      "baseServings": 3,
+      "minServings": 1,
+      "maxServings": 4,
+      "broth": {
+        "baseBrothComponentGramsFor3": 850,
+        "defaultType": "vegetal",
+        "types": [
+          "vegetable_concentrate",
+          "bone_ready"
+        ],
+        "vegetableConcentrateGramsPerGramOfWater": 0.02,
+        "referenceVegetableMix": "FONDO referencia 15 g de concentrado por 500 g de agua; el recetario usa una intensidad algo menor.",
+        "defaultBoneBrothGramsFor3": 300,
+        "waterAndConcentrateMustBeMeasuredSeparately": true,
+        "boneBrothIsReadyToUse": true
+      },
+      "coconut": {
+        "ingredientId": "coconut_milk_culinary",
+        "fixed": false,
+        "gramsFor3": 0,
+        "replacesPartOfLiquidRatherThanBeingAddedOnTop": true
+      },
+      "ingredients": [
+        {
+          "id": "shiitake",
+          "legacyId": "shiitake",
+          "name": "Shiitake",
+          "gramsForBaseServings": 120,
+          "category": "Verdulería"
+        },
+        {
+          "id": "firm_tofu",
+          "legacyId": "tofu",
+          "name": "Tofu firme",
+          "gramsForBaseServings": 60,
+          "category": "Almacén"
+        },
+        {
+          "id": "carrot",
+          "legacyId": "zan",
+          "name": "Zanahoria",
+          "gramsForBaseServings": 55,
+          "category": "Verdulería"
+        },
+        {
+          "id": "ginger",
+          "legacyId": "ging",
+          "name": "Jengibre",
+          "gramsForBaseServings": 14,
+          "category": "Verdulería"
+        },
+        {
+          "id": "garlic",
+          "legacyId": "ajo",
+          "name": "Ajo",
+          "gramsForBaseServings": 5,
+          "category": "Verdulería"
+        },
+        {
+          "id": "soy_sauce",
+          "legacyId": "soy",
+          "name": "Salsa de soja",
+          "gramsForBaseServings": 12,
+          "category": "Condimentos"
+        },
+        {
+          "id": "sesame_oil",
+          "legacyId": "sesamo",
+          "name": "Aceite de sésamo",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "sesame_seeds",
+          "legacyId": "semillas",
+          "name": "Semillas de sésamo",
+          "gramsForBaseServings": 5,
+          "category": "Condimentos"
+        },
+        {
+          "id": "spring_onion",
+          "legacyId": "verdeo",
+          "name": "Verdeo",
+          "gramsForBaseServings": 15,
+          "category": "Verdulería"
+        }
+      ],
+      "options": {
+        "thaiLegume": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "title": "Picar aromáticos",
+          "instructions": "Picar jengibre y ajo.",
+          "sourceSettingsText": "5 segundos · Vel. 5 · Sin calor",
+          "controls": {
+            "durationSecondsRange": [
+              5,
+              5
+            ],
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "numeric",
+              "value": 5.0,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "ginger",
+              "gramsForBaseServings": 14
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "garlic",
+              "gramsForBaseServings": 5
+            }
+          ],
+          "safetyNotes": []
+        },
+        {
+          "step": 2,
+          "title": "Cocinar zanahoria",
+          "instructions": "Zanahoria en láminas muy finas, no cubos grandes.",
+          "sourceSettingsText": "10 minutos · 95 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              600,
+              600
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "computed_broth",
+              "label": "Agregar por separado el agua y el caldo FONDO; no usar caldo diluido ya preparado"
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "carrot",
+              "gramsForBaseServings": 55
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Agregar shiitake y tofu",
+          "instructions": "Añadir los shiitake laminados y el tofu en cubos pequeños.",
+          "sourceSettingsText": "10 minutos · 95 °C · Vel. 0.5 (reversa si disponible)",
+          "controls": {
+            "durationSecondsRange": [
+              600,
+              600
+            ],
+            "temperatureCRange": [
+              95,
+              95
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": true,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "shiitake",
+              "gramsForBaseServings": 120
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "firm_tofu",
+              "gramsForBaseServings": 60
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Sazonar",
+          "instructions": "Agregar soja, probar antes de salar.",
+          "sourceSettingsText": "1 minuto · 85 °C · Vel. 0.5",
+          "controls": {
+            "durationSecondsRange": [
+              60,
+              60
+            ],
+            "temperatureCRange": [
+              85,
+              85
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.5,
+              "maxValue": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": false
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "soy_sauce",
+              "gramsForBaseServings": 12
+            }
+          ],
+          "safetyNotes": [
+            "Con calor, seguir manual específico de iChef para escape de vapor, tapa y canasta; no asumir compatibilidad de accesorios."
+          ]
+        },
+        {
+          "step": 5,
+          "title": "Terminar",
+          "instructions": "Añadir el aceite de sésamo sin calor; poner verdeo y semillas al servir.",
+          "sourceSettingsText": "Sin calor · Mezclar suavemente con espátula",
+          "controls": {
+            "durationSecondsRange": null,
+            "temperatureCRange": null,
+            "speed": {
+              "mode": "manual",
+              "value": null
+            },
+            "reverseIfSupported": false,
+            "heatOff": true
+          },
+          "additions": [
+            {
+              "kind": "ingredient",
+              "ingredientId": "sesame_oil",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "sesame_seeds",
+              "gramsForBaseServings": 5
+            },
+            {
+              "kind": "ingredient",
+              "ingredientId": "spring_onion",
+              "gramsForBaseServings": 15
+            }
+          ],
+          "safetyNotes": []
+        }
+      ],
+      "provenance": {
+        "sourceFile": "source/original_ichef_recetario.html",
+        "sourceId": "sesamo",
+        "adaptations": [],
+        "machineSettingsVerified": false
+      }
+    }
+  ]
+}

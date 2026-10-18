@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "locale": "es-UY",
+  "timezone": "America/Montevideo",
+  "uiLanguage": "es-UY",
+  "onboarding": {
+    "required": [
+      "wakeTime",
+      "sleepGoal",
+      "workStart",
+      "workEnd",
+      "trainingTemplate",
+      "dietaryPreferences"
+    ],
+    "copy": "Confirmar que los horarios predeterminados se ajustan a los reales. No comenzar con seguimiento compulsivo."
+  },
+  "schedule": {
+    "wakeTime": "08:30",
+    "sleepTimeTarget": "00:30",
+    "workStart": "09:30",
+    "workEnd": "18:30",
+    "meals": {
+      "breakfast": "09:15",
+      "lunch": "13:30",
+      "snack": "17:00",
+      "dinner": "20:30"
+    },
+    "template": {
+      "monday": "strength",
+      "tuesday": "boxing",
+      "wednesday": "strength",
+      "thursday": "boxing",
+      "friday": "strength",
+      "saturday": "flexible",
+      "sunday": "rest"
+    },
+    "preferredExerciseTimes": {
+      "strength": "08:30",
+      "boxing": "18:00"
+    },
+    "notes": "Morning strength and evening boxing times are preferences, not confirmed. Work 9–10 to 18–19 can conflict with boxing 18:00. In onboarding show overlap warning and let user edit, never assume that schedule is feasible.",
+    "socialDinnersPerWeek": {
+      "friends": 1,
+      "family": 1,
+      "datesFlexible": true,
+      "weeklyPlanningOptional": true
+    },
+    "recoveryDayProtected": true,
+    "socialDinnerMode": "Mark dinner as friends/family per date; do not automatically assign fixed weekdays; can overlap with any day activity except when unwell."
+  },
+  "nutrition": {
+    "objective": "Gradual fat loss while preserving muscle and energy; no crash diets",
+    "proteinDailyGramsRange": [
+      150,
+      170
+    ],
+    "calorieRangeKcalInitiallySuggested": [
+      2200,
+      2300
+    ],
+    "calorieGoalIsProvisional": true,
+    "activityEffects": {
+      "strength": "Keep protein; include carbohydrates around training and enough total food.",
+      "boxing": "Consider digestible carbohydrates before/after class; do not force aggressive reductions.",
+      "rest": "Keep protein; modest flexibility in carb portions, not automatic large calorie deductions.",
+      "busy": "Prioritize fast meals and convenience; do not punish missed exercise.",
+      "sick": "Prioritize hydration, easy-to-tolerate foods, recovery; no forced deficit or training.",
+      "social": "A flexible meal, no compensatory fasting or excessive cardio afterwards."
+    },
+    "mealTypes": [
+      "breakfast",
+      "lunch",
+      "snack",
+      "dinner"
+    ],
+    "defaultVisibleNutrition": [
+      "ingredient_names",
+      "grams"
+    ],
+    "expandedNutrition": [
+      "estimated_kcal",
+      "estimated_protein_g",
+      "estimated_carbs_g",
+      "estimated_fat_g"
+    ],
+    "supplements": {
+      "creatine": {
+        "gramsPerDayRange": [
+          3,
+          5
+        ],
+        "infoOnly": true
+      },
+      "whey": {
+        "use": "When useful to meet protein, not mandatory",
+        "infoOnly": true
+      },
+      "magnesium": {
+        "status": "not_recommended_by_app",
+        "note": "Do not automate until dose and clinical advice reviewed"
+      },
+      "omega3": {
+        "status": "not_recommended_by_app",
+        "note": "Depends on fatty fish intake and professional advice"
+      }
+    }
+  },
+  "interface": {
+    "dailyActivityPromptOncePerDate": true,
+    "activityChoices": [
+      "strength",
+      "boxing",
+      "rest",
+      "busy",
+      "sick"
+    ],
+    "activityCanChangeAnytime": true,
+    "avoidMandatoryLogging": true,
+    "macrosCollapsedDefault": true,
+    "shuffling": {
+      "canLockProtein": true,
+      "canLockSide": true,
+      "supportsFavorites": true,
+      "noFullScreenCalendar": true
+    },
+    "socialDinnerMode": "Independent dinner override (friends or family), NOT a mutually exclusive day activity; can occur after boxing or strength."
+  },
+  "shopping": {
+    "horizonDaysOptions": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "defaultHorizonDays": 5,
+    "optionalMealsOnly": true,
+    "excludeSocialMealIngredients": true,
+    "showGramTotals": true
+  },
+  "storage": {
+    "offlineFirst": true,
+    "database": "IndexedDB",
+    "noBackend": true,
+    "jsonExportImport": true,
+    "migrationRequired": true,
+    "noTelemetry": true,
+    "localDeviceOnly": true
+  },
+  "excludedFeatures": [
+    "notifications",
+    "push",
+    "reminders",
+    "Hevy integration",
+    "gym workouts",
+    "weight tracking",
+    "waist tracking",
+    "mood tracking",
+    "sleep tracking",
+    "habits checklist",
+    "Apple Health",
+    "AI integration",
+    "barcode scanning",
+    "account",
+    "login",
+    "cloud backend",
+    "weekly dashboard"
+  ]
+}
