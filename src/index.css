@@ -1,21 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0d1414;
-  --color-surface: #162020;
-  --color-surface-2: #1b2827;
-  --color-border: #334440;
-  --color-text: #f3f1e9;
-  --color-muted: #a1b1a9;
-  --color-sage: #bed7a1;
-  --color-sage-2: #98b77e;
-  --color-gold: #dcbf89;
+  --color-bg: #fdf7dc;
+  --color-surface: #fffdf4;
+  --color-surface-2: #fcf0b1;
+  --color-border: #ead9a3;
+  --color-text: #464955;
+  --color-muted: #646976;
+  --color-mint: #cfe8d5;
+  --color-mint-ink: #2f5d3f;
+  --color-peach: #fbd3c0;
+  --color-peach-ink: #7a3e24;
+  --color-lavender: #ddd6f3;
+  --color-lavender-ink: #4a3d7a;
+  --color-sky: #cfe3f7;
+  --color-sky-ink: #244a6e;
+  --color-rose: #f7d0dc;
+  --color-rose-ink: #7a2e49;
+  --color-butter: #fcf0b1;
+  --color-butter-ink: #464955;
+  --color-sage: #b9dfc4;
+  --color-sage-2: #a9d7b7;
+  --color-gold: #f0c96b;
   --color-brand: #fcf0b1;
+  --shadow-soft: 0 6px 20px rgba(70, 73, 85, 0.08);
 }
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html.large-text {
@@ -35,8 +48,8 @@
   input:focus-visible,
   select:focus-visible,
   summary:focus-visible {
-    outline: 2px solid var(--color-sage);
-    outline-offset: 3px;
+    outline: 2px solid var(--color-sky-ink);
+    outline-offset: 2px;
   }
 }
 

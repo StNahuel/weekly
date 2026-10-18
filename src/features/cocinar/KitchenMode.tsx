@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Empty } from '../../app/states/Empty';
 import { Loading } from '../../app/states/Loading';
+import { LINK } from '../../app/ui';
 import { servingsLabel } from '../shared/sideLabel';
 import { MachineNotice } from './MachineNotice';
 import { StepCard } from './StepCard';
 import { useRecipeView } from './useRecipeView';
 
 const navButton =
-  'tap inline-flex min-h-14 items-center justify-center gap-2 rounded-xl px-4 text-lg font-semibold disabled:opacity-40';
+  'tap inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-4 text-lg font-semibold transition-colors duration-150 disabled:opacity-40';
 
 export default function KitchenMode() {
   const { recipeId = '' } = useParams();
@@ -48,11 +49,11 @@ export default function KitchenMode() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <Link to={recipeUrl} className="tap inline-flex items-center gap-2 font-semibold text-sage">
+        <Link to={recipeUrl} className={LINK}>
           <ArrowLeft aria-hidden="true" size={20} />
           Volver a la receta
         </Link>
-        <Link to="/comprar" className="tap inline-flex items-center gap-2 font-semibold text-sage">
+        <Link to="/comprar" className={LINK}>
           <ShoppingBasket aria-hidden="true" size={20} />
           Ir a la lista de compras
         </Link>
@@ -73,24 +74,24 @@ export default function KitchenMode() {
       />
       <nav
         aria-label="Pasos"
-        className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] grid grid-cols-2 gap-3 bg-bg/95 py-3"
+        className="sticky bottom-[calc(5.75rem+env(safe-area-inset-bottom))] grid grid-cols-2 gap-3 bg-bg/95 py-3"
       >
         <button
           type="button"
           disabled={position === 0}
           onClick={() => setIndex(position - 1)}
-          className={`${navButton} border border-border`}
+          className={`${navButton} border border-border bg-surface hover:bg-surface-2`}
         >
           <ChevronLeft aria-hidden="true" size={20} />
           Anterior
         </button>
         {last ? (
-          <button type="button" onClick={() => void navigate(recipeUrl)} className={`${navButton} bg-sage text-bg`}>
+          <button type="button" onClick={() => void navigate(recipeUrl)} className={`${navButton} bg-sage text-mint-ink hover:bg-sage-2 active:bg-sage-2`}>
             <Check aria-hidden="true" size={20} />
             Terminé
           </button>
         ) : (
-          <button type="button" onClick={() => setIndex(position + 1)} className={`${navButton} bg-sage text-bg`}>
+          <button type="button" onClick={() => setIndex(position + 1)} className={`${navButton} bg-sage text-mint-ink hover:bg-sage-2 active:bg-sage-2`}>
             Siguiente
             <ChevronRight aria-hidden="true" size={20} />
           </button>

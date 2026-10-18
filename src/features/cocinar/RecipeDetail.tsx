@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Empty } from '../../app/states/Empty';
 import { Loading } from '../../app/states/Loading';
+import { BTN_PRIMARY, BTN_SECONDARY, CALLOUT, CARD, LINK } from '../../app/ui';
 import { formatGrams } from '../../domain/format';
 import { groupByCategory } from '../../domain/shopping/aggregate';
 import type { AdditionRole } from '../../domain/soups/types';
@@ -26,7 +27,7 @@ export default function RecipeDetail() {
     return (
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">Receta no encontrada</h1>
-        <Empty title="No encontramos esa sopa." action={<Link to="/cocinar" className="tap inline-flex items-center font-semibold text-sage">Ver todas las sopas</Link>} />
+        <Empty title="No encontramos esa sopa." action={<Link to="/cocinar" className={LINK}>Ver todas las sopas</Link>} />
       </div>
     );
   }
@@ -40,20 +41,20 @@ export default function RecipeDetail() {
 
   return (
     <div className="space-y-4">
-      <Link to="/cocinar" className="tap inline-flex items-center gap-2 font-semibold text-sage">
+      <Link to="/cocinar" className={LINK}>
         <ArrowLeft aria-hidden="true" size={20} />
         Sopas
       </Link>
       <header className="space-y-1">
-        <p className="text-sm font-semibold tracking-wide text-gold uppercase">{`${recipe.flavor} · ${recipe.tag}`}</p>
+        <p className="inline-block rounded-full bg-surface-2 px-3 py-0.5 text-sm font-semibold tracking-wide text-butter-ink uppercase">{`${recipe.flavor} · ${recipe.tag}`}</p>
         <h1 className="text-2xl font-semibold">{recipe.title}</h1>
         <p className="text-muted">{`${recipe.texture} · ${recipe.minutesApprox} min aprox.`}</p>
         <p>{recipe.description}</p>
         {recipe.notes && <p className="text-sm text-muted">{recipe.notes}</p>}
       </header>
 
-      <section aria-label="Directo a la iChef" className="rounded-2xl border border-sage/60 bg-surface p-4">
-        <h2 className="font-semibold text-sage">Directo a la iChef:</h2>
+      <section aria-label="Directo a la iChef" className="rounded-3xl border-2 border-sage bg-surface p-4 shadow-soft">
+        <h2 className="font-semibold text-mint-ink">Directo a la iChef:</h2>
         <ul className="mt-1 space-y-1 text-lg">
           {liquids.map((line) => (
             <li key={line.ingredientId}>
@@ -67,7 +68,7 @@ export default function RecipeDetail() {
 
       <SoupOptionsPanel recipe={recipe} prefs={prefs} servings={servings} onServingsChange={setServings} />
 
-      <section aria-label="Ingredientes" className="space-y-3 rounded-2xl border border-border bg-surface p-4">
+      <section aria-label="Ingredientes" className={`space-y-3 ${CARD}`}>
         <h2 className="text-lg font-semibold">{`Ingredientes para ${servings} ${servings === 1 ? 'porción' : 'porciones'}`}</h2>
         {groupByCategory(soup.totals).map(({ category, items }) => (
           <div key={category}>
@@ -82,7 +83,7 @@ export default function RecipeDetail() {
             </ul>
           </div>
         ))}
-        <p className={soup.capacityWarning ? 'rounded-xl border border-gold/60 p-3 text-gold' : 'text-sm text-muted'}>
+        <p className={soup.capacityWarning ? CALLOUT : 'text-sm text-muted'}>
           {capacityText(soup)}
         </p>
       </section>
@@ -101,7 +102,7 @@ export default function RecipeDetail() {
       <div className="grid gap-2">
         <Link
           to={`/cocinar/${recipe.id}/cocina?p=${servings}`}
-          className="tap inline-flex items-center justify-center gap-2 rounded-xl bg-sage px-4 font-semibold text-bg"
+          className={BTN_PRIMARY}
         >
           <ChefHat aria-hidden="true" size={20} />
           Cocinar paso a paso
@@ -109,12 +110,12 @@ export default function RecipeDetail() {
         <button
           type="button"
           onClick={() => void addToList()}
-          className="tap inline-flex items-center justify-center gap-2 rounded-xl border border-border px-4 font-semibold"
+          className={BTN_SECONDARY}
         >
           <ListPlus aria-hidden="true" size={20} />
           Agregar a la lista de compras
         </button>
-        <p role="status" className="min-h-6 text-center text-sm text-sage">
+        <p role="status" className="min-h-6 text-center text-sm font-semibold text-mint-ink">
           {toast}
         </p>
       </div>

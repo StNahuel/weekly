@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { calculateNutrition, type NutritionLine } from '../../domain/meals/calculateNutrition';
+import { CALLOUT } from '../../app/ui';
 import { defaults } from '../../seed/defaults';
 import { ingredientById } from '../../seed/foods';
 
@@ -10,7 +11,7 @@ export function NutritionDisclosure({ lines }: { lines: readonly NutritionLine[]
   const missingNames = [...new Set(estimate.missing.map((m) => m.name))].join(', ');
 
   return (
-    <details open={open} className="rounded-xl border border-border bg-surface-2">
+    <details open={open} className="rounded-3xl border border-border bg-surface p-1">
       <summary
         aria-expanded={open}
         onClick={(event) => {
@@ -18,20 +19,20 @@ export function NutritionDisclosure({ lines }: { lines: readonly NutritionLine[]
           event.preventDefault();
           setOpen((value) => !value);
         }}
-        className="tap flex cursor-pointer list-none items-center justify-between gap-2 px-4 font-semibold"
+        className="tap flex cursor-pointer list-none items-center justify-between gap-2 rounded-full bg-lavender px-4 font-semibold text-lavender-ink transition-colors duration-150"
       >
         Ver nutrición estimada
         <ChevronDown aria-hidden="true" size={20} className={open ? 'rotate-180' : ''} />
       </summary>
       {open && (
-        <div className="space-y-2 px-4 pb-4 text-base">
+        <div className="space-y-2 px-3 pt-3 pb-3 text-base">
           <p>{`≈ ${estimate.kcal} kcal · ${estimate.protein} g prot · ${estimate.carbs} g carb · ${estimate.fat} g grasa`}</p>
           <p className="text-sm text-muted">
             Estimación a partir de valores genéricos por 100 g; no es una etiqueta ni una indicación médica.
           </p>
           {!estimate.complete && (
-            <div className="rounded-lg border border-gold/60 p-3 text-sm">
-              <p className="font-semibold text-gold">Estimación incompleta</p>
+            <div className={`${CALLOUT} text-sm`}>
+              <p className="font-semibold">Estimación incompleta</p>
               <p>{`Sin datos de etiqueta: ${missingNames}`}</p>
             </div>
           )}

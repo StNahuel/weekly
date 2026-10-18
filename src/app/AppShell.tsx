@@ -18,7 +18,7 @@ export function AppShell() {
 
   return (
     <>
-      <main className="mx-auto w-full max-w-xl pt-[calc(1.5rem+env(safe-area-inset-top))] pr-[calc(1rem+env(safe-area-inset-right))] pb-[calc(6rem+env(safe-area-inset-bottom))] pl-[calc(1rem+env(safe-area-inset-left))]">
+      <main className="mx-auto w-full max-w-xl pt-[calc(1.5rem+env(safe-area-inset-top))] pr-[calc(1rem+env(safe-area-inset-right))] pb-[calc(6.5rem+env(safe-area-inset-bottom))] pl-[calc(1rem+env(safe-area-inset-left))]">
         {error ? (
           <ErrorState error={error} onRetry={retry} />
         ) : !ready ? (

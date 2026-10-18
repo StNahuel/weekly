@@ -97,7 +97,7 @@ export function ScheduleForm({ profile }: { profile: ProfileRecord }) {
         <div role="alert" className={`space-y-1 ${ALERT}`}>
           {conflicts.map((conflict) => (
             <p key={conflict.kind} className="flex gap-2">
-              <TriangleAlert aria-hidden="true" size={20} className="mt-0.5 shrink-0 text-gold" />
+              <TriangleAlert aria-hidden="true" size={20} className="mt-0.5 shrink-0" />
               {conflict.message}
             </p>
           ))}

@@ -1,6 +1,7 @@
 import { CalendarDays } from 'lucide-react';
 import { useId, useState } from 'react';
 import { Empty } from '../../app/states/Empty';
+import { BTN_PRIMARY, CARD, FIELD, SEGMENTS } from '../../app/ui';
 import type { ProfileRecord, ShoppingPlanRecord } from '../../db/types';
 import { formatDateKey } from '../../domain/format';
 import { defaultHorizonDays, horizonOptions } from '../../domain/shopping/horizon';
@@ -28,7 +29,7 @@ export function PlanHeader({ plan, profile, today }: PlanHeaderProps) {
 
   return (
     <div className="space-y-4">
-      <section aria-label="Plan de compras" className="space-y-4 rounded-2xl border border-border bg-surface p-4">
+      <section aria-label="Plan de compras" className={`space-y-4 ${CARD}`}>
         <div>
           <p id={`${startId}-horizon`} className="text-sm font-semibold">
             Planificar próximos
@@ -37,7 +38,7 @@ export function PlanHeader({ plan, profile, today }: PlanHeaderProps) {
             <div
               role="group"
               aria-labelledby={`${startId}-horizon`}
-              className="grid flex-1 grid-flow-col gap-1 rounded-xl border border-border p-1"
+              className={`${SEGMENTS} flex-1 grid-flow-col`}
             >
               {horizonOptions.map((days) => (
                 <button
@@ -46,7 +47,7 @@ export function PlanHeader({ plan, profile, today }: PlanHeaderProps) {
                   aria-label={`${days} días`}
                   aria-pressed={days === horizon}
                   onClick={() => setHorizon(days)}
-                  className="tap rounded-lg font-semibold text-muted aria-pressed:bg-surface-2 aria-pressed:text-sage"
+                  className="tap rounded-full font-semibold text-muted transition-colors duration-150 aria-pressed:bg-butter aria-pressed:text-butter-ink"
                 >
                   {days}
                 </button>
@@ -66,14 +67,14 @@ export function PlanHeader({ plan, profile, today }: PlanHeaderProps) {
             type="date"
             value={start}
             onChange={(event) => setStart(event.target.value)}
-            className="tap w-full rounded-xl border border-border bg-surface-2 px-3 text-base"
+            className={`${FIELD} w-full`}
           />
         </div>
         <button
           type="button"
           disabled={saving || start === ''}
           onClick={() => void build()}
-          className="tap inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sage px-4 font-semibold text-bg disabled:opacity-60"
+          className={`${BTN_PRIMARY} w-full`}
         >
           <CalendarDays aria-hidden="true" size={20} />
           {plan ? 'Rearmar plan' : 'Armar plan'}

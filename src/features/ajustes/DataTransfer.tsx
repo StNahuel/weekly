@@ -1,5 +1,6 @@
 import { Download, Upload } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type ChangeEvent } from 'react';
+import { BTN_DANGER } from '../../app/ui';
 import { db } from '../../db';
 import { buildExport, downloadExport } from '../../db/export';
 import { applyImport, IMPORT_TOO_LARGE, MAX_IMPORT_CHARS, parseImport, type ParsedImport } from '../../db/import';
@@ -123,14 +124,14 @@ export function DataTransfer() {
               type="button"
               disabled={busy}
               onClick={() => void replace(pending)}
-              className="tap rounded-xl bg-gold px-4 font-semibold text-bg disabled:opacity-60"
+              className={BTN_DANGER}
             >
               Reemplazar datos
             </button>
           </div>
         </div>
       )}
-      <p role="status" className="text-sm text-sage">
+      <p role="status" className="text-sm font-semibold text-mint-ink">
         {status}
       </p>
     </section>

@@ -2,6 +2,7 @@ import { BookOpen, Clock, ListChecks, Shuffle } from 'lucide-react';
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Empty } from '../../app/states/Empty';
+import { BTN_PRIMARY, BTN_SECONDARY, CARD, LINK, WARN_PILL } from '../../app/ui';
 import { setSlot } from '../../db/repo';
 import type { FavoriteRecord } from '../../db/types';
 import { slotSuitability, type MealSlot } from '../../domain/day/slots';
@@ -14,6 +15,7 @@ import { NutritionDisclosure } from '../quecomo/NutritionDisclosure';
 import type { Dietary } from '../shared/candidates';
 import { IngredientLines, ProteinBlock, SideBlock } from '../shared/MealBlocks';
 import { soupSlotLabel } from '../shared/sideLabel';
+import { MEAL_TINTS } from '../shared/tints';
 import { MEAL_LABELS, SOCIAL_DINNER_TEXT } from './labels';
 import { nextSlot } from './reshuffle';
 import { SlotPicker } from './SlotPicker';
@@ -49,7 +51,7 @@ function SlotBody({ slot, ctx }: { slot: MealSlot; ctx: MealContext }) {
             <Link
               to={`/cocinar/${recipe.id}?p=${slot.servings}`}
               aria-label={`Ver receta de ${recipe.title}`}
-              className="tap mt-1 inline-flex items-center gap-2 font-semibold text-sage underline-offset-4 hover:underline"
+              className={`${LINK} mt-1`}
             >
               <BookOpen aria-hidden="true" size={20} />
               Ver receta
@@ -101,28 +103,31 @@ export function MealSlotCard({ date, mealType, time, slot, dayType, ctx, favorit
   const [picking, setPicking] = useState(false);
   const slow = slotSuitability(slot, dayType, ctx) === 'slow_for_busy';
   const soupIngredientIds = soupIngredientLookup(ctx);
+  const tint = MEAL_TINTS[mealType];
 
   return (
-    <section aria-labelledby={headingId} className="rounded-2xl border border-border bg-surface p-4">
-      <header className="flex items-baseline justify-between gap-3">
+    <section aria-labelledby={headingId} className={`${CARD} overflow-hidden`}>
+      <header className={`-mx-4 -mt-4 flex items-center justify-between gap-3 px-4 py-3 ${tint.fill} ${tint.ink}`}>
         <h2 id={headingId} className="text-lg font-semibold">
           {MEAL_LABELS[mealType]}
         </h2>
-        <span className="inline-flex items-center gap-1 text-muted">
+        <span className="inline-flex items-center gap-1 rounded-full bg-surface/70 px-3 py-0.5 font-semibold">
           <Clock aria-hidden="true" size={20} />
           {formatTime(time)}
         </span>
       </header>
       <SlotBody slot={slot} ctx={ctx} />
       {slow && (
-        <p className="mt-2 text-sm text-gold">{`Lleva más de ${BUSY_MAX_PREP_MINUTES} min`}</p>
+        <p className="mt-2">
+          <span className={WARN_PILL}>{`Lleva más de ${BUSY_MAX_PREP_MINUTES} min`}</span>
+        </p>
       )}
       {slot.kind !== 'social' && (
         <div className="mt-3 grid grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => void setSlot(date, mealType, nextSlot(mealType, slot, dayType, dietary, soupIngredientIds))}
-            className="tap inline-flex items-center justify-center gap-2 rounded-xl bg-sage px-3 font-semibold text-bg"
+            className={BTN_PRIMARY}
           >
             <Shuffle aria-hidden="true" size={20} />
             Otra opción
@@ -130,7 +135,7 @@ export function MealSlotCard({ date, mealType, time, slot, dayType, ctx, favorit
           <button
             type="button"
             onClick={() => setPicking(true)}
-            className="tap inline-flex items-center justify-center gap-2 rounded-xl border border-border px-3 font-semibold"
+            className={BTN_SECONDARY}
           >
             <ListChecks aria-hidden="true" size={20} />
             Elegir

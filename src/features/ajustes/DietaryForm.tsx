@@ -15,7 +15,7 @@ const TAG_OPTIONS: readonly { tag: string; label: string }[] = [
 const EXCLUDABLE = groupByCategory(foods.ingredients.filter((i) => i.category !== 'Líquidos'));
 
 const row = 'tap flex cursor-pointer items-center gap-3 rounded-xl px-2';
-const box = 'h-6 w-6 shrink-0 accent-sage';
+const box = 'h-6 w-6 shrink-0 accent-mint-ink';
 
 function toggle(list: readonly string[], value: string): string[] {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];

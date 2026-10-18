@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+import { BTN_SECONDARY } from '../../app/ui';
 import { setSlot } from '../../db/repo';
 import type { FavoriteRecord } from '../../db/types';
 import type { MealSlot } from '../../domain/day/slots';
@@ -66,14 +67,14 @@ export function SlotPicker(props: SlotPickerProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-20 flex items-end justify-center bg-bg/80 sm:items-center">
+    <div className="fixed inset-0 z-20 flex items-end justify-center bg-text/30 sm:items-center">
       <div
         ref={dialog}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         onKeyDown={trapFocus}
-        className="safe-bottom max-h-[90dvh] w-full max-w-xl space-y-4 overflow-y-auto rounded-t-2xl border border-border bg-bg p-4 sm:rounded-2xl"
+        className="safe-bottom max-h-[90dvh] w-full max-w-xl space-y-4 overflow-y-auto rounded-t-3xl border border-border bg-bg p-4 shadow-soft sm:rounded-3xl"
       >
         <div className="flex items-center justify-between gap-3">
           <h2 id={titleId} className="text-lg font-semibold">
@@ -82,7 +83,7 @@ export function SlotPicker(props: SlotPickerProps) {
           <button
             type="button"
             onClick={onClose}
-            className="tap inline-flex items-center gap-2 rounded-xl border border-border px-3 font-semibold"
+            className={BTN_SECONDARY}
           >
             <X aria-hidden="true" size={20} />
             Cerrar
@@ -96,10 +97,10 @@ export function SlotPicker(props: SlotPickerProps) {
                   type="button"
                   aria-pressed={slot.kind === 'template' && slot.templateId === template.id}
                   onClick={() => void save({ kind: 'template', templateId: template.id })}
-                  className="tap flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 text-left aria-pressed:border-sage"
+                  className="tap group flex w-full items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-4 text-left transition-colors duration-150 hover:bg-surface-2 aria-pressed:border-transparent aria-pressed:bg-mint aria-pressed:text-mint-ink aria-pressed:ring-2 aria-pressed:ring-mint-ink"
                 >
                   {template.title}
-                  <span className="shrink-0 text-sm text-muted">{`${template.prepMinutes} min`}</span>
+                  <span className="shrink-0 text-sm text-muted group-aria-pressed:text-mint-ink">{`${template.prepMinutes} min`}</span>
                 </button>
               </li>
             ))}

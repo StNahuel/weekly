@@ -1,3 +1,4 @@
+import { SEGMENT, SEGMENTS } from '../../app/ui';
 import { db } from '../../db';
 import { setSlot } from '../../db/repo';
 import type { MealSlot } from '../../domain/day/slots';
@@ -37,14 +38,14 @@ export function SocialDinnerMenu({ date, slot, dayType, dietary, soupIngredientI
       type="button"
       aria-pressed={pressed}
       onClick={() => void onClick()}
-      className={`tap rounded-lg px-2 text-sm font-semibold ${pressed ? 'bg-surface-2 text-sage' : 'text-muted'}`}
+      className={SEGMENT}
     >
       {label}
     </button>
   );
 
   return (
-    <div role="group" aria-label="Cena social" className="mt-3 grid grid-cols-3 gap-1 rounded-xl border border-border p-1">
+    <div role="group" aria-label="Cena social" className={`${SEGMENTS} mt-3 grid-cols-3`}>
       {option('Plan normal', slot.kind !== 'social', choosePlan)}
       {SOCIAL_KINDS.map((social) =>
         option(SOCIAL_LABELS[social], slot.kind === 'social' && slot.social === social, () => chooseSocial(social)),

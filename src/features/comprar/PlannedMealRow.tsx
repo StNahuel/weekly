@@ -1,5 +1,6 @@
 import { ListChecks, Shuffle } from 'lucide-react';
 import { useState } from 'react';
+import { BTN_SECONDARY, SEGMENT, SEGMENTS } from '../../app/ui';
 import { setPlanMeal } from '../../db/repo';
 import type { FavoriteRecord } from '../../db/types';
 import type { MealSlot } from '../../domain/day/slots';
@@ -12,6 +13,7 @@ import { nextSlot } from '../hoy/reshuffle';
 import { SlotPicker } from '../hoy/SlotPicker';
 import type { Dietary } from '../shared/candidates';
 import { sideLabel, soupSlotLabel } from '../shared/sideLabel';
+import { MEAL_TINTS } from '../shared/tints';
 
 const MARKS = [
   { kind: 'social', label: 'Social' },
@@ -69,13 +71,15 @@ export function PlannedMealRow({ meal, index, dayType, ctx, favorites, dietary }
     return save(kind === 'social' ? { kind, social: SOCIAL_KINDS[0] } : { kind });
   };
 
-  const chip = 'tap rounded-lg px-2 text-sm font-semibold text-muted aria-pressed:bg-surface-2 aria-pressed:text-sage';
+  const tint = MEAL_TINTS[mealType];
 
   return (
     <section aria-label={`${MEAL_LABELS[mealType]} del ${formatDateKey(meal.date)}`} className="space-y-2 border-t border-border py-3 first:border-t-0">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-muted">{MEAL_LABELS[mealType]}</p>
+          <p className={`inline-block rounded-full px-2.5 py-0.5 text-sm font-semibold ${tint.fill} ${tint.ink}`}>
+            {MEAL_LABELS[mealType]}
+          </p>
           <p className={isMark(slot.kind) ? 'text-muted' : ''}>{slotTitle(slot, ctx)}</p>
         </div>
         {isMark(slot.kind) && (
@@ -86,7 +90,7 @@ export function PlannedMealRow({ meal, index, dayType, ctx, favorites, dietary }
         <button
           type="button"
           onClick={() => void reshuffle()}
-          className="tap inline-flex items-center justify-center gap-2 rounded-xl border border-border px-3 font-semibold"
+          className={BTN_SECONDARY}
         >
           <Shuffle aria-hidden="true" size={20} />
           Otra opción
@@ -94,28 +98,28 @@ export function PlannedMealRow({ meal, index, dayType, ctx, favorites, dietary }
         <button
           type="button"
           onClick={() => setPicking(true)}
-          className="tap inline-flex items-center justify-center gap-2 rounded-xl border border-border px-3 font-semibold"
+          className={BTN_SECONDARY}
         >
           <ListChecks aria-hidden="true" size={20} />
           Elegir
         </button>
       </div>
-      <div role="group" aria-label="Marcar comida" className="grid grid-cols-3 gap-1 rounded-xl border border-border p-1">
+      <div role="group" aria-label="Marcar comida" className={`${SEGMENTS} grid-cols-3`}>
         {MARKS.map(({ kind, label }) => (
-          <button key={kind} type="button" aria-pressed={slot.kind === kind} onClick={() => void mark(kind)} className={chip}>
+          <button key={kind} type="button" aria-pressed={slot.kind === kind} onClick={() => void mark(kind)} className={SEGMENT}>
             {label}
           </button>
         ))}
       </div>
       {slot.kind === 'social' && (
-        <div role="group" aria-label="Con quién" className="grid grid-cols-2 gap-1 rounded-xl border border-border p-1">
+        <div role="group" aria-label="Con quién" className={`${SEGMENTS} grid-cols-2`}>
           {SOCIAL_KINDS.map((social) => (
             <button
               key={social}
               type="button"
               aria-pressed={slot.social === social}
               onClick={() => void save({ kind: 'social', social })}
-              className={chip}
+              className={SEGMENT}
             >
               {SOCIAL_LABELS[social]}
             </button>

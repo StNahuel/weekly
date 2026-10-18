@@ -1,6 +1,7 @@
 import { RotateCcw, Trash } from 'lucide-react';
 import { useId, useMemo, useState, type FormEvent } from 'react';
 import { Empty } from '../../app/states/Empty';
+import { BTN_PRIMARY, BTN_SECONDARY, CARD, FIELD } from '../../app/ui';
 import { removeGroceryItem, restoreGroceryItems, setGroceryOverride, toggleChecked } from '../../db/repo';
 import type { ShoppingPlanRecord } from '../../db/types';
 import { formatGrams } from '../../domain/format';
@@ -8,6 +9,7 @@ import type { MealContext } from '../../domain/meals/resolveMeal';
 import { aggregateGroceries, applyEdits, groupByCategory, type GroceryItem } from '../../domain/shopping/aggregate';
 import { planToGroceryLines } from '../../domain/shopping/planLines';
 import { BASIS_LABELS } from '../shared/basisLabels';
+import { rotatingTint } from '../shared/tints';
 
 type GroceryRowProps = { item: GroceryItem; checked: boolean; edited: boolean };
 
@@ -27,7 +29,7 @@ function GroceryRow({ item, checked, edited }: GroceryRowProps) {
   };
 
   return (
-    <li className={`py-1 ${checked ? 'opacity-60' : ''}`}>
+    <li className={`py-1 ${checked ? 'text-muted' : ''}`}>
       <div className="flex items-center gap-2">
         <label className="tap flex min-w-0 flex-1 cursor-pointer items-center gap-3">
           <input
@@ -35,7 +37,7 @@ function GroceryRow({ item, checked, edited }: GroceryRowProps) {
             aria-label={`${item.name} — ${grams} · ${basis}`}
             checked={checked}
             onChange={() => void toggleChecked(item.key)}
-            className="h-6 w-6 shrink-0 accent-sage"
+            className="h-6 w-6 shrink-0 accent-mint-ink"
           />
           <span className="min-w-0">
             <span className={`block ${checked ? 'line-through' : ''}`}>{item.name}</span>
@@ -50,7 +52,7 @@ function GroceryRow({ item, checked, edited }: GroceryRowProps) {
             setDraft(String(item.grams));
             setEditing((value) => !value);
           }}
-          className={`tap shrink-0 rounded-lg px-2 text-right font-semibold tabular-nums ${checked ? 'line-through' : ''}`}
+          className={`tap shrink-0 rounded-full px-3 text-right font-semibold tabular-nums transition-colors duration-150 hover:bg-surface-2 ${checked ? 'line-through' : ''}`}
         >
           {grams}
         </button>
@@ -58,7 +60,7 @@ function GroceryRow({ item, checked, edited }: GroceryRowProps) {
           type="button"
           aria-label={`Quitar ${item.name}`}
           onClick={() => void removeGroceryItem(item.key)}
-          className="tap inline-flex shrink-0 items-center justify-center rounded-lg text-muted"
+          className="tap inline-flex shrink-0 items-center justify-center rounded-full bg-rose text-rose-ink transition-colors duration-150 hover:brightness-95"
         >
           <Trash aria-hidden="true" size={20} />
         </button>
@@ -74,16 +76,16 @@ function GroceryRow({ item, checked, edited }: GroceryRowProps) {
             step={1}
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
-            className="tap w-28 rounded-xl border border-border bg-surface-2 px-3 text-base"
+            className={`${FIELD} w-28`}
           />
-          <button type="submit" className="tap rounded-xl border border-sage px-3 font-semibold text-sage">
+          <button type="submit" className={BTN_PRIMARY}>
             Guardar
           </button>
           {edited && (
             <button
               type="button"
               onClick={() => void setGroceryOverride(item.key, undefined).then(() => setEditing(false))}
-              className="tap inline-flex items-center gap-2 rounded-xl border border-border px-3 font-semibold"
+              className={BTN_SECONDARY}
             >
               <RotateCcw aria-hidden="true" size={20} />
               Volver al cálculo
@@ -114,13 +116,17 @@ export function GroceryList({ plan, ctx }: { plan: ShoppingPlanRecord; ctx: Meal
   }
 
   return (
-    <section aria-labelledby="grocery-heading" className="space-y-4 rounded-2xl border border-border bg-surface p-4">
+    <section aria-labelledby="grocery-heading" className={`space-y-4 ${CARD}`}>
       <h2 id="grocery-heading" className="text-lg font-semibold">
         Lista de compras
       </h2>
-      {groupByCategory(visible).map(({ category, items: group }) => (
+      {groupByCategory(visible).map(({ category, items: group }, index) => (
         <div key={category}>
-          <h3 className="text-sm font-semibold tracking-wide text-muted uppercase">{category}</h3>
+          <h3
+            className={`inline-block rounded-full px-3 py-0.5 text-sm font-semibold tracking-wide uppercase ${rotatingTint(index).fill} ${rotatingTint(index).ink}`}
+          >
+            {category}
+          </h3>
           <ul className="mt-1 divide-y divide-border">
             {group.map((item) => (
               <GroceryRow
@@ -139,7 +145,7 @@ export function GroceryList({ plan, ctx }: { plan: ShoppingPlanRecord; ctx: Meal
           <button
             type="button"
             onClick={() => void restoreGroceryItems()}
-            className="tap inline-flex items-center gap-2 rounded-xl px-3 font-semibold text-sage"
+            className="tap inline-flex items-center gap-2 rounded-full px-3 font-semibold text-mint-ink transition-colors duration-150 hover:bg-mint"
           >
             <RotateCcw aria-hidden="true" size={20} />
             {`Restaurar quitados (${removed})`}

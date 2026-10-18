@@ -7,6 +7,7 @@ import { resolveMeal, resolveProteinAlone, resolveSideAlone, type MealContext } 
 import { pickCombo, type Combo } from '../../domain/meals/shuffle';
 import type { MealType } from '../../domain/types';
 import { Empty } from '../../app/states/Empty';
+import { BTN_PRIMARY, CARD, SECTION_LABEL, WARN_PILL } from '../../app/ui';
 import { MEAL_LABELS } from '../hoy/labels';
 import { firstPair, NO_LOCKS, type ComboCandidates, type ComboDraft, type ComboLocks } from '../shared/candidates';
 import { ProteinBlock, SideBlock } from '../shared/MealBlocks';
@@ -33,7 +34,10 @@ type ComboPickerProps = {
   onLocksChange?: (locks: ComboLocks) => void;
 };
 
-const outlined = 'tap inline-flex items-center justify-center gap-2 rounded-xl border px-3 font-semibold';
+const outlined =
+  'tap inline-flex items-center justify-center gap-2 rounded-full border px-4 font-semibold transition-colors duration-150 disabled:opacity-50';
+const IDLE = 'border-border bg-surface text-text hover:bg-surface-2';
+const ACTIVE = 'border-gold bg-gold text-text';
 
 export function ComboPicker(props: ComboPickerProps) {
   const { ctx, candidates, favorites, combo, onComboChange, dateKey, saveTo, saveLabel, onSaved, saveSlot } = props;
@@ -96,20 +100,20 @@ export function ComboPicker(props: ComboPickerProps) {
       ? protein && <ProteinBlock protein={protein} meal={meal ?? resolveProteinAlone(protein, ctx)} />
       : side && <SideBlock side={side} meal={meal ?? resolveSideAlone(side, ctx)} />;
     const heading = (
-      <h3 className="text-sm font-semibold tracking-wide text-muted uppercase">
+      <h3 className={SECTION_LABEL}>
         {isProtein ? 'Proteína' : 'Acompañamiento'}
       </h3>
     );
     if (!block) {
       return (
-        <div className="rounded-xl border border-border bg-surface-2 p-3">
+        <div className="rounded-2xl border border-border bg-bg p-3">
           {heading}
           <Empty title={EMPTY_COMBO_TEXT} />
         </div>
       );
     }
     return (
-      <div className="rounded-xl border border-border bg-surface-2 p-3">
+      <div className="rounded-2xl border border-border bg-bg p-3">
         {heading}
         <div className="mt-1">{block}</div>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -121,7 +125,7 @@ export function ComboPicker(props: ComboPickerProps) {
               if (!locked && openList === part) setOpenList(null);
               setLocks({ ...locks, [part]: !locked });
             }}
-            className={`${outlined} ${locked ? 'border-gold text-gold' : 'border-border text-text'}`}
+            className={`${outlined} ${locked ? ACTIVE : IDLE}`}
           >
             {locked ? <Lock aria-hidden="true" size={20} /> : <LockOpen aria-hidden="true" size={20} />}
             Fijar
@@ -132,7 +136,7 @@ export function ComboPicker(props: ComboPickerProps) {
             aria-expanded={openList === part}
             disabled={locked}
             onClick={() => setOpenList(openList === part ? null : part)}
-            className={`${outlined} border-border text-text disabled:opacity-50`}
+            className={`${outlined} ${IDLE}`}
           >
             Cambiar
           </button>
@@ -148,7 +152,7 @@ export function ComboPicker(props: ComboPickerProps) {
                     if (locks[part] || !pair) return;
                     change(isProtein ? { ...pair, proteinId: option.id } : { ...pair, sideId: option.id });
                   }}
-                  className="tap w-full rounded-lg px-3 text-left hover:bg-surface"
+                  className="tap w-full rounded-xl px-3 text-left transition-colors duration-150 hover:bg-surface-2"
                 >
                   {option.label}
                   <span className="ml-2 text-sm text-muted">{`${option.prepMinutes} min`}</span>
@@ -162,15 +166,15 @@ export function ComboPicker(props: ComboPickerProps) {
   };
 
   return (
-    <section aria-label="Combinación" className="space-y-3 rounded-2xl border border-border bg-surface p-4">
+    <section aria-label="Combinación" className={`space-y-3 ${CARD}`}>
       <h2 className="text-lg font-semibold">{favorite?.title ?? meal?.title ?? protein?.title ?? side?.title}</h2>
-      {lockedMismatch && <p className="text-sm text-gold">{LOCKED_MISMATCH_TEXT}</p>}
+      {lockedMismatch && <p className={WARN_PILL}>{LOCKED_MISMATCH_TEXT}</p>}
       {panel('protein')}
       {panel('side')}
       <button
         type="button"
         onClick={shuffle}
-        className="tap flex w-full items-center justify-center gap-2 rounded-xl bg-sage px-4 font-semibold text-bg"
+        className={`${BTN_PRIMARY} w-full`}
       >
         <Shuffle aria-hidden="true" size={20} />
         Otra opción
@@ -181,7 +185,7 @@ export function ComboPicker(props: ComboPickerProps) {
           aria-pressed={favorite !== undefined}
           disabled={!pair}
           onClick={() => void toggleFavorite()}
-          className={`${outlined} ${favorite ? 'border-gold text-gold' : 'border-border text-text'}`}
+          className={`${outlined} ${favorite ? ACTIVE : IDLE}`}
         >
           <Star aria-hidden="true" size={20} fill={favorite ? 'currentColor' : 'none'} />
           Favorito
@@ -192,7 +196,7 @@ export function ComboPicker(props: ComboPickerProps) {
             type="button"
             disabled={!dateKey || !pair}
             onClick={() => void save(mealType)}
-            className={`${outlined} border-border text-text disabled:opacity-50`}
+            className={`${outlined} ${IDLE}`}
           >
             <Save aria-hidden="true" size={20} />
             {saveLabel ?? `Guardar en ${MEAL_LABELS[mealType].toLowerCase()}`}
@@ -200,7 +204,7 @@ export function ComboPicker(props: ComboPickerProps) {
         ))}
       </div>
       {!dateKey && <p className="text-sm text-muted">Confirmá tu día en Hoy para guardar.</p>}
-      <p role="status" className="text-sm text-gold">
+      <p role="status" className="text-sm font-semibold text-mint-ink">
         {notice}
       </p>
     </section>

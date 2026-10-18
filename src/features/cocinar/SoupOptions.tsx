@@ -1,5 +1,6 @@
 import { RotateCcw } from 'lucide-react';
 import { useId, useState } from 'react';
+import { BTN_SECONDARY, CARD, FIELD, SEGMENTS } from '../../app/ui';
 import { saveSoupPrefs, type SoupPrefsPatch } from '../../db/repo';
 import type { SoupPrefRecord } from '../../db/types';
 import type { Recipe } from '../../domain/schemas/soups.schema';
@@ -71,13 +72,13 @@ function OverrideInput({ recipe, prefs, brothType }: { recipe: Recipe; prefs: So
           value={draft}
           placeholder={String(defaultFor3(recipe, brothType))}
           onChange={(event) => change(event.target.value)}
-          className="tap w-full rounded-xl border border-border bg-surface-2 px-3 text-base"
+          className={`${FIELD} w-full`}
         />
         <button
           type="button"
           disabled={draft === ''}
           onClick={() => change('')}
-          className="tap inline-flex shrink-0 items-center gap-2 rounded-xl border border-border px-3 font-semibold disabled:opacity-50"
+          className={`${BTN_SECONDARY} shrink-0`}
         >
           <RotateCcw aria-hidden="true" size={20} />
           Restablecer
@@ -91,20 +92,21 @@ export function SoupOptionsPanel({ recipe, prefs, servings, onServingsChange }: 
   const name = useId();
   const brothType = prefs?.brothType ?? brothTypeFromDefault(recipe.broth.defaultType);
   const legume = recipe.options.thaiLegume;
-  const radio = 'tap flex items-center gap-3 rounded-xl border border-border px-3 has-[:checked]:border-sage';
+  const radio =
+    'tap flex items-center gap-3 rounded-2xl border border-border px-3 transition-colors duration-150 has-[:checked]:border-mint-ink has-[:checked]:bg-mint has-[:checked]:text-mint-ink';
 
   return (
-    <section aria-label="Opciones de la sopa" className="space-y-4 rounded-2xl border border-border bg-surface p-4">
+    <section aria-label="Opciones de la sopa" className={`space-y-4 ${CARD}`}>
       <div>
         <p className="text-sm font-semibold">Porciones</p>
-        <div role="group" aria-label="Porciones" className="mt-1 grid grid-cols-4 gap-1 rounded-xl border border-border p-1">
+        <div role="group" aria-label="Porciones" className={`${SEGMENTS} mt-1 grid-cols-4`}>
           {servingChoices(recipe).map((choice) => (
             <button
               key={choice}
               type="button"
               aria-pressed={choice === servings}
               onClick={() => onServingsChange(choice)}
-              className="tap rounded-lg font-semibold text-muted aria-pressed:bg-sage aria-pressed:text-bg"
+              className="tap rounded-full font-semibold text-muted transition-colors duration-150 aria-pressed:bg-sage aria-pressed:text-mint-ink"
             >
               {choice}
             </button>
@@ -121,7 +123,7 @@ export function SoupOptionsPanel({ recipe, prefs, servings, onServingsChange }: 
               name={`${name}-broth`}
               checked={brothType === type}
               onChange={() => void saveSoupPrefs(recipe.id, { brothType: type })}
-              className="h-5 w-5 accent-sage"
+              className="h-5 w-5 accent-mint-ink"
             />
             {BROTH_LABELS[type]}
           </label>
@@ -149,7 +151,7 @@ export function SoupOptionsPanel({ recipe, prefs, servings, onServingsChange }: 
                 name={`${name}-legume`}
                 checked={(prefs?.thaiLegume ?? legume.default) === choice}
                 onChange={() => void saveSoupPrefs(recipe.id, { thaiLegume: choice })}
-                className="h-5 w-5 accent-sage"
+                className="h-5 w-5 accent-mint-ink"
               />
               {LEGUME_LABELS[choice]}
             </label>

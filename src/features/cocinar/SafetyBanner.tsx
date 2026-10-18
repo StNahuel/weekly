@@ -12,13 +12,13 @@ export function SafetyBanner({ controls, defaultOpen }: { controls: Controls; de
   if (!needsSafetyBanner(controls)) return null;
 
   return (
-    <section aria-label="Seguridad con la jarra caliente" className="rounded-2xl border-2 border-gold/70 bg-surface-2">
+    <section aria-label="Seguridad con la jarra caliente" className="rounded-3xl border-2 border-gold bg-gold/25">
       <button
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
-        className="tap flex w-full items-center justify-between gap-2 px-4 text-left font-semibold text-gold"
+        className="tap flex w-full items-center justify-between gap-2 px-4 text-left font-semibold text-text"
       >
         <span className="inline-flex items-center gap-2">
           <TriangleAlert aria-hidden="true" size={20} />

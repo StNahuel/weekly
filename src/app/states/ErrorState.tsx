@@ -1,8 +1,10 @@
+import { BTN_PRIMARY } from '../ui';
+
 type ErrorStateProps = { error: Error; onRetry: () => void };
 
 export function ErrorState({ error, onRetry }: ErrorStateProps) {
   return (
-    <div role="alert" className="rounded-2xl border border-gold/60 bg-surface p-5">
+    <div role="alert" className="rounded-3xl border border-gold bg-surface p-5 shadow-soft">
       <p className="font-semibold">Algo falló al cargar los datos.</p>
       <p className="mt-1 text-sm text-muted">Probá de nuevo.</p>
       <details className="mt-2 text-sm text-muted">
@@ -12,7 +14,7 @@ export function ErrorState({ error, onRetry }: ErrorStateProps) {
       <button
         type="button"
         onClick={onRetry}
-        className="tap mt-4 rounded-xl bg-sage px-4 font-semibold text-bg"
+        className={`${BTN_PRIMARY} mt-4`}
       >
         Reintentar
       </button>
