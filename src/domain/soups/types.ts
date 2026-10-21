@@ -1,6 +1,6 @@
 import type { Ingredient } from '../schemas/foods.schema';
 import type { Controls } from '../schemas/soups.schema';
-import type { BrothType, StoreCategory, ThaiLegume, WeightBasis } from '../types';
+import type { BrothType, IngredientCategory, ThaiLegume, WeightBasis } from '../types';
 
 export const SOUP_SERVINGS = [1, 2, 3, 4] as const;
 export type SoupServings = (typeof SOUP_SERVINGS)[number];
@@ -24,7 +24,7 @@ export type ResolvedAddition = {
   name: string;
   grams: number;
   weightBasis: WeightBasis;
-  category: StoreCategory;
+  category: IngredientCategory;
   role: AdditionRole;
 };
 

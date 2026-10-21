@@ -1,109 +1,93 @@
-import { BookOpen, Clock, ListChecks, Shuffle } from 'lucide-react';
-import { useId, useState } from 'react';
+import { BookOpen, Check, Clock, ListChecks, Lock, LockOpen, Shuffle } from 'lucide-react';
+import { useId, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Empty } from '../../app/states/Empty';
-import { BTN_PRIMARY, BTN_SECONDARY, CARD, LINK, WARN_PILL } from '../../app/ui';
-import { setSlot } from '../../db/repo';
-import type { FavoriteRecord } from '../../db/types';
-import { slotSuitability, type MealSlot } from '../../domain/day/slots';
-import { BUSY_MAX_PREP_MINUTES } from '../../domain/meals/filters';
-import { resolveMeal, resolveTemplate, soupIngredientLookup, type MealContext } from '../../domain/meals/resolveMeal';
-import { resolveSoup } from '../../domain/soups/resolveSoup';
+import { BTN_PRIMARY, BTN_SECONDARY, CARD, LINK, TOGGLE, WARN_PILL } from '../../app/ui';
+import { setFlag, setSlot } from '../../db/repo';
+import {
+  BUSY_MAX_PREP_MINUTES,
+  slotSuitability,
+  type DietaryExclusions,
+  type MealSlot,
+  type SlotFlags,
+} from '../../domain/day/slots';
 import { formatTime } from '../../domain/format';
+import { resolveSlot, type MealContext, type ResolvedMeal } from '../../domain/meals/resolveSlot';
 import type { DayType, MealType } from '../../domain/types';
-import { NutritionDisclosure } from '../quecomo/NutritionDisclosure';
-import type { Dietary } from '../shared/candidates';
-import { IngredientLines, ProteinBlock, SideBlock } from '../shared/MealBlocks';
-import { soupSlotLabel } from '../shared/sideLabel';
+import { IngredientLines } from '../shared/IngredientLines';
+import { NutritionDisclosure } from '../shared/NutritionDisclosure';
+import { soupSlotLabel } from '../shared/servings';
 import { MEAL_TINTS } from '../shared/tints';
 import { MEAL_LABELS, SOCIAL_DINNER_TEXT } from './labels';
+import { MealChooser } from './MealChooser';
 import { nextSlot } from './reshuffle';
-import { SlotPicker } from './SlotPicker';
 import { SocialDinnerMenu } from './SocialDinnerMenu';
 
-export const EMPTY_SLOT_TEXT = 'Sin opciones con estos filtros. Probá quitar filtros en Ajustes.';
-export const FREE_SLOT_TEXT = 'Comida libre — sin plan de comida.';
+const EMPTY_TEXT = 'Sin comida elegida. Probá Otra opción o Cambiar; si no aparece nada, revisá tus exclusiones en Ajustes.';
+const V1_EMPTY_TEXT = 'Tu elección anterior ya no existe en el catálogo.';
+const SKIP_TEXT = 'Sin plan para esta comida.';
 
 type MealSlotCardProps = {
   date: string;
   mealType: MealType;
   time: string;
   slot: MealSlot;
+  flags: SlotFlags;
   dayType: DayType;
   ctx: MealContext;
-  favorites: readonly FavoriteRecord[];
-  dietary: Dietary;
+  dietary: DietaryExclusions;
+  onChanged: (mealType: MealType) => void;
 };
 
-function SlotBody({ slot, ctx }: { slot: MealSlot; ctx: MealContext }) {
-  if (slot.kind === 'social') return <p className="mt-2">{SOCIAL_DINNER_TEXT[slot.social]}</p>;
-  if (slot.kind === 'skip') return <p className="mt-2 text-muted">Sin plan para esta comida.</p>;
-  if (slot.kind === 'free') return <p className="mt-2 text-muted">{FREE_SLOT_TEXT}</p>;
-  if (slot.kind === 'soup') {
-    const recipe = ctx.recipes.get(slot.soupId);
-    if (recipe) {
-      const soup = resolveSoup(recipe, { ...ctx.soupPrefs(slot.soupId), servings: slot.servings }, ctx.catalog);
-      return (
-        <div className="mt-2 space-y-3">
-          <div>
-            <p className="font-semibold">{soupSlotLabel(recipe.title, slot.servings)}</p>
-            <IngredientLines lines={soup.totals} />
-            <Link
-              to={`/cocinar/${recipe.id}?p=${slot.servings}`}
-              aria-label={`Ver receta de ${recipe.title}`}
-              className={`${LINK} mt-1`}
-            >
-              <BookOpen aria-hidden="true" size={20} />
-              Ver receta
-            </Link>
-          </div>
-          <NutritionDisclosure lines={soup.totals} />
-        </div>
-      );
-    }
-  }
-  if (slot.kind === 'template') {
-    const template = ctx.templates.get(slot.templateId);
-    if (template) {
-      const meal = resolveTemplate(template, ctx.catalog);
-      return (
-        <div className="mt-2 space-y-3">
-          <div>
-            <p className="font-semibold">{meal.title}</p>
-            <IngredientLines lines={meal.lines} />
-          </div>
-          <NutritionDisclosure lines={meal.lines} />
-        </div>
-      );
-    }
-  }
-  if (slot.kind === 'combo') {
-    const protein = ctx.proteins.get(slot.proteinId);
-    const side = ctx.sides.get(slot.sideId);
-    if (protein && side) {
-      const meal = resolveMeal(protein, side, ctx);
-      return (
-        <div className="mt-2 space-y-3">
-          <ProteinBlock protein={protein} meal={meal} />
-          <SideBlock side={side} meal={meal} />
-          <NutritionDisclosure lines={meal.lines} />
-        </div>
-      );
-    }
-  }
+function MealBody({ slot, meal, ctx }: { slot: MealSlot; meal: ResolvedMeal; ctx: MealContext }) {
+  const recipe = slot.kind === 'dinner' ? ctx.recipes.get(slot.soupRecipeId) : undefined;
+  if (slot.kind !== 'dinner' || !recipe) return <IngredientLines lines={meal.lines} />;
   return (
-    <div className="mt-2">
-      <Empty title={EMPTY_SLOT_TEXT} />
-    </div>
+    <>
+      <IngredientLines lines={meal.lines.filter((l) => l.source === 'protein')} />
+      <p className="mt-2 font-semibold">{soupSlotLabel(recipe.title, slot.soupServings)}</p>
+      <IngredientLines lines={meal.lines.filter((l) => l.source === 'soup')} />
+      <Link
+        to={`/sopas/${recipe.id}?p=${slot.soupServings}`}
+        aria-label={`Ver receta de ${recipe.title}`}
+        className={`${LINK} mt-1`}
+      >
+        <BookOpen aria-hidden="true" size={20} />
+        Ver receta
+      </Link>
+    </>
   );
 }
 
-export function MealSlotCard({ date, mealType, time, slot, dayType, ctx, favorites, dietary }: MealSlotCardProps) {
+function placeholderText(slot: MealSlot): string | null {
+  switch (slot.kind) {
+    case 'social':
+      return SOCIAL_DINNER_TEXT[slot.social];
+    case 'skip':
+      return SKIP_TEXT;
+    case 'empty':
+      return slot.note?.startsWith('v1:') ? V1_EMPTY_TEXT : EMPTY_TEXT;
+    default:
+      return null;
+  }
+}
+
+export function MealSlotCard(props: MealSlotCardProps) {
+  const { date, mealType, time, slot, flags, dayType, ctx, dietary, onChanged } = props;
   const headingId = useId();
-  const [picking, setPicking] = useState(false);
-  const slow = slotSuitability(slot, dayType, ctx) === 'slow_for_busy';
-  const soupIngredientIds = soupIngredientLookup(ctx);
+  const [choosing, setChoosing] = useState(false);
+  const meal = useMemo(() => resolveSlot(slot, ctx), [slot, ctx]);
+  const lookup = useMemo(
+    () => ({ templates: ctx.templates, dinners: [...ctx.dinners.values()], recipes: ctx.recipes }),
+    [ctx],
+  );
+  const slow = slotSuitability(slot, dayType, lookup) === 'slow_for_busy';
   const tint = MEAL_TINTS[mealType];
+  const placeholder = placeholderText(slot);
+
+  const reshuffle = async () => {
+    await setSlot(date, mealType, nextSlot(mealType, slot, dietary));
+    onChanged(mealType);
+  };
 
   return (
     <section aria-labelledby={headingId} className={`${CARD} overflow-hidden`}>
@@ -116,7 +100,17 @@ export function MealSlotCard({ date, mealType, time, slot, dayType, ctx, favorit
           {formatTime(time)}
         </span>
       </header>
-      <SlotBody slot={slot} ctx={ctx} />
+      {meal ? (
+        <div className="mt-3 space-y-3">
+          <div>
+            <p className="font-semibold">{meal.title}</p>
+            <MealBody slot={slot} meal={meal} ctx={ctx} />
+          </div>
+          <NutritionDisclosure lines={meal.lines} />
+        </div>
+      ) : (
+        <p className={`mt-3 ${slot.kind === 'social' ? '' : 'text-muted'}`}>{placeholder}</p>
+      )}
       {slow && (
         <p className="mt-2">
           <span className={WARN_PILL}>{`Lleva más de ${BUSY_MAX_PREP_MINUTES} min`}</span>
@@ -124,43 +118,51 @@ export function MealSlotCard({ date, mealType, time, slot, dayType, ctx, favorit
       )}
       {slot.kind !== 'social' && (
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => void setSlot(date, mealType, nextSlot(mealType, slot, dayType, dietary, soupIngredientIds))}
-            className={BTN_PRIMARY}
-          >
+          <button type="button" onClick={() => void reshuffle()} className={BTN_PRIMARY}>
             <Shuffle aria-hidden="true" size={20} />
             Otra opción
           </button>
-          <button
-            type="button"
-            onClick={() => setPicking(true)}
-            className={BTN_SECONDARY}
-          >
+          <button type="button" onClick={() => setChoosing(true)} className={BTN_SECONDARY}>
             <ListChecks aria-hidden="true" size={20} />
-            Elegir
+            Cambiar
           </button>
         </div>
       )}
-      {mealType === 'dinner' && (
-        <SocialDinnerMenu
-          date={date}
-          slot={slot}
-          dayType={dayType}
-          dietary={dietary}
-          soupIngredientIds={soupIngredientIds}
-        />
+      {meal && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          <button
+            type="button"
+            aria-pressed={flags.eaten}
+            onClick={() => void setFlag(date, mealType, { eaten: !flags.eaten })}
+            className={TOGGLE}
+          >
+            <Check aria-hidden="true" size={16} />
+            {flags.eaten ? 'Comido' : 'Marcar comido'}
+          </button>
+          <button
+            type="button"
+            aria-pressed={flags.locked}
+            onClick={() => void setFlag(date, mealType, { locked: !flags.locked })}
+            className={TOGGLE}
+          >
+            {flags.locked ? <Lock aria-hidden="true" size={16} /> : <LockOpen aria-hidden="true" size={16} />}
+            {flags.locked ? 'Fijado' : 'Fijar'}
+          </button>
+        </div>
       )}
-      {picking && (
-        <SlotPicker
+      {mealType === 'dinner' && <SocialDinnerMenu date={date} slot={slot} dietary={dietary} onChanged={onChanged} />}
+      {choosing && (
+        <MealChooser
           date={date}
           mealType={mealType}
-          dayType={dayType}
           slot={slot}
           ctx={ctx}
-          favorites={favorites}
           dietary={dietary}
-          onClose={() => setPicking(false)}
+          onSaved={() => {
+            setChoosing(false);
+            onChanged(mealType);
+          }}
+          onClose={() => setChoosing(false)}
         />
       )}
     </section>

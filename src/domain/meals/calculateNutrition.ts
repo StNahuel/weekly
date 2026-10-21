@@ -12,12 +12,16 @@ export type NutritionEstimate = {
   protein: number;
   carbs: number;
   fat: number;
+  fiber?: number;
   complete: boolean;
   missing: MissingNutrition[];
 };
 
+const oneDecimal = (x: number) => Math.round(x * 10) / 10;
+
 export function calculateNutrition(lines: readonly NutritionLine[], catalog: IngredientCatalog): NutritionEstimate {
-  const sum = { kcal: 0, protein: 0, carbs: 0, fat: 0 };
+  const sum = { kcal: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 };
+  let fiberKnown = true;
   const missing: MissingNutrition[] = [];
   for (const line of lines) {
     const ingredient = catalog.get(line.ingredientId);
@@ -39,12 +43,15 @@ export function calculateNutrition(lines: readonly NutritionLine[], catalog: Ing
     sum.protein += macros.protein * factor;
     sum.carbs += macros.carbs * factor;
     sum.fat += macros.fat * factor;
+    if (macros.fiber === undefined) fiberKnown = false;
+    else sum.fiber += macros.fiber * factor;
   }
   return {
     kcal: Math.round(sum.kcal),
-    protein: Math.round(sum.protein),
-    carbs: Math.round(sum.carbs),
-    fat: Math.round(sum.fat),
+    protein: oneDecimal(sum.protein),
+    carbs: oneDecimal(sum.carbs),
+    fat: oneDecimal(sum.fat),
+    ...(fiberKnown ? { fiber: oneDecimal(sum.fiber) } : {}),
     complete: missing.length === 0,
     missing,
   };

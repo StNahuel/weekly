@@ -14,3 +14,7 @@ export const SEGMENTS = 'grid gap-1 rounded-full border border-border bg-bg p-1'
 export const SEGMENT =
   'tap rounded-full px-2 text-sm font-semibold text-muted transition-colors duration-150 aria-pressed:bg-butter aria-pressed:text-butter-ink';
 export const SECTION_LABEL = 'text-sm font-semibold tracking-wide text-muted uppercase';
+export const OPTION_BUTTON =
+  'tap group flex w-full items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-4 py-2 text-left transition-colors duration-150 hover:bg-surface-2 disabled:opacity-50 aria-pressed:border-transparent aria-pressed:bg-mint aria-pressed:text-mint-ink aria-pressed:ring-2 aria-pressed:ring-mint-ink';
+export const TOGGLE =
+  'tap inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-surface px-3 text-sm font-semibold text-text transition-colors duration-150 disabled:opacity-50 aria-pressed:border-transparent aria-pressed:bg-butter aria-pressed:text-butter-ink';

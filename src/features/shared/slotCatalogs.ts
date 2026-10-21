@@ -1,11 +1,12 @@
 import type { SlotCatalogs } from '../../domain/day/slots';
-import { foods } from '../../seed/foods';
+import { foods, ingredientById } from '../../seed/foods';
 import { recipeById } from '../../seed/soups';
 
 export const SLOT_CATALOGS: SlotCatalogs = {
-  proteins: foods.proteins,
-  sides: foods.sides,
   breakfasts: foods.breakfasts,
+  lunches: foods.lunches,
   snacks: foods.snacks,
+  dinners: foods.dinners,
   recipes: recipeById,
+  catalog: ingredientById,
 };

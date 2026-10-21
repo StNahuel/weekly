@@ -19,10 +19,11 @@ export const WEIGHT_BASES = [
   'cooked',
   'frozen_concentrate',
   'frozen_ready',
+  'as_purchased',
 ] as const;
 export type WeightBasis = (typeof WEIGHT_BASES)[number];
 
-export const ESTIMATE_QUALITIES = ['generic_estimate', 'requires_label'] as const;
+export const ESTIMATE_QUALITIES = ['generic_estimate', 'requires_label', 'label_supplied_by_user'] as const;
 export type EstimateQuality = (typeof ESTIMATE_QUALITIES)[number];
 
 export const BROTH_TYPES = ['vegetable_concentrate', 'bone_ready'] as const;
@@ -34,11 +35,12 @@ export type ThaiLegume = (typeof THAI_LEGUMES)[number];
 export const SOCIAL_KINDS = ['friends', 'family'] as const;
 export type SocialKind = (typeof SOCIAL_KINDS)[number];
 
-export const STORE_CATEGORIES = [
+export const INGREDIENT_CATEGORIES = [
   'Verdulería',
   'Carnicería',
   'Pescadería',
   'Lácteos y huevos',
+  'Lácteos y bebidas',
   'Panadería',
   'Almacén',
   'Congelados',
@@ -47,7 +49,7 @@ export const STORE_CATEGORIES = [
   'Suplementos',
   'Líquidos',
 ] as const;
-export type StoreCategory = (typeof STORE_CATEGORIES)[number];
+export type IngredientCategory = (typeof INGREDIENT_CATEGORIES)[number];
 
 export type GramLine = { ingredientId: string; grams: number };
 

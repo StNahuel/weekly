@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { ESTIMATE_QUALITIES, STORE_CATEGORIES, WEIGHT_BASES } from '../types';
+import { ESTIMATE_QUALITIES, INGREDIENT_CATEGORIES, WEIGHT_BASES } from '../types';
 
-export const storeCategorySchema = z.enum(STORE_CATEGORIES);
+export const ingredientCategorySchema = z.enum(INGREDIENT_CATEGORIES);
 
 export const macrosSchema = z
   .object({
@@ -9,6 +9,9 @@ export const macrosSchema = z
     protein: z.number().nonnegative(),
     carbs: z.number().nonnegative(),
     fat: z.number().nonnegative(),
+    fiber: z.number().nonnegative().exactOptional(),
+    saturatedFat: z.number().nonnegative().exactOptional(),
+    sodiumMg: z.number().nonnegative().exactOptional(),
   })
   .strict();
 
@@ -16,7 +19,7 @@ export const ingredientSchema = z
   .object({
     id: z.string().min(1),
     name: z.string().min(1),
-    category: storeCategorySchema,
+    category: ingredientCategorySchema,
     weightBasis: z.enum(WEIGHT_BASES),
     macrosPer100g: macrosSchema.nullable(),
     estimateQuality: z.enum(ESTIMATE_QUALITIES),
@@ -32,82 +35,70 @@ export const gramLineSchema = z
   })
   .strict();
 
-const dishFields = {
+const templateFields = {
   id: z.string().min(1),
   title: z.string().min(1),
   ingredients: z.array(gramLineSchema),
   prepMinutes: z.number().int().positive(),
-  tags: z.array(z.string()),
   instructions: z.string(),
+  tags: z.array(z.string()),
 };
 
-export const proteinSchema = z.object(dishFields).strict();
-
-export const sideSchema = z.discriminatedUnion('kind', [
-  z.object({ ...dishFields, kind: z.literal('standard') }).strict(),
-  z
-    .object({
-      ...dishFields,
-      kind: z.literal('soup_ref'),
-      soupId: z.string().min(1),
-      defaultServingsForMeal: z.number().int().positive(),
-      ingredients: z.tuple([]),
-    })
-    .strict(),
-]);
-
 export const templateSchema = z
-  .object({ ...dishFields, mealType: z.enum(['breakfast', 'snack']) })
+  .object({ ...templateFields, mealType: z.enum(['breakfast', 'lunch', 'snack']) })
   .strict();
 
-export const favoriteComboSchema = z
+const templateListSchema = <M extends 'breakfast' | 'lunch' | 'snack'>(mealType: M) =>
+  z.array(z.object({ ...templateFields, mealType: z.literal(mealType) }).strict());
+
+export const dinnerPresetSchema = z
   .object({
     id: z.string().min(1),
     title: z.string().min(1),
-    proteinId: z.string().min(1),
-    sideId: z.string().min(1),
-    starred: z.boolean(),
-    source: z.string(),
+    mealType: z.literal('dinner'),
+    proteinIngredients: z.array(gramLineSchema).min(1),
+    soupRecipeId: z.string().min(1),
+    soupServings: z.literal(1),
+    swapSoupAllowed: z.boolean(),
+    prepMinutesExcludingSoup: z.number().int().positive(),
+    instructions: z.string(),
   })
   .strict();
 
+const idListSchema = z.array(z.string().min(1)).min(1);
+
+export const swapsSchema = z
+  .object({
+    lunchCarbs: idListSchema,
+    proteins: idListSchema,
+    vegetables: idListSchema,
+    soupReferenceFile: z.string(),
+  })
+  .strict();
+
+const range = z.tuple([z.number().nonnegative(), z.number().nonnegative()]);
+
 export const foodsSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     locale: z.literal('es-UY'),
-    metadata: z
-      .object({
-        nutritionValuesAreEstimates: z.boolean(),
-        macroUnits: z.string(),
-        source: z.string(),
-        weightWarning: z.string(),
-        missingNutrients: z.string(),
-        sodium: z.string(),
-      })
+    purpose: z.string(),
+    nutritionTargets: z
+      .object({ energyKcalRange: range, proteinGRange: range, notes: z.string() })
       .strict(),
     ingredients: z.array(ingredientSchema),
-    proteins: z.array(proteinSchema),
-    sides: z.array(sideSchema),
-    breakfasts: z.array(templateSchema.extend({ mealType: z.literal('breakfast') }).strict()),
-    snacks: z.array(templateSchema.extend({ mealType: z.literal('snack') }).strict()),
-    favoriteCombos: z.array(favoriteComboSchema),
-    selectionRules: z
-      .object({
-        proteinAndSide: z.string(),
-        tagFilters: z.string(),
-        avoidRepeat: z.string(),
-        mealTypes: z.string(),
-        soupReference: z.string(),
-        macros: z.string(),
-      })
-      .strict(),
+    breakfasts: templateListSchema('breakfast'),
+    lunches: templateListSchema('lunch'),
+    snacks: templateListSchema('snack'),
+    dinners: z.array(dinnerPresetSchema),
+    swaps: swapsSchema,
+    dataNotes: z.array(z.string()),
   })
   .strict();
 
 export type Foods = z.infer<typeof foodsSchema>;
 export type Ingredient = z.infer<typeof ingredientSchema>;
 export type Macros = z.infer<typeof macrosSchema>;
-export type Protein = z.infer<typeof proteinSchema>;
-export type Side = z.infer<typeof sideSchema>;
 export type Template = z.infer<typeof templateSchema>;
-export type FavoriteCombo = z.infer<typeof favoriteComboSchema>;
+export type DinnerPreset = z.infer<typeof dinnerPresetSchema>;
+export type Swaps = z.infer<typeof swapsSchema>;

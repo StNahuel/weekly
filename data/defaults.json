@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "locale": "es-UY",
   "timezone": "America/Montevideo",
   "uiLanguage": "es-UY",
@@ -52,10 +52,10 @@
     "objective": "Gradual fat loss while preserving muscle and energy; no crash diets",
     "proteinDailyGramsRange": [
       150,
-      170
+      165
     ],
     "calorieRangeKcalInitiallySuggested": [
-      2200,
+      2100,
       2300
     ],
     "calorieGoalIsProvisional": true,
@@ -103,7 +103,9 @@
         "status": "not_recommended_by_app",
         "note": "Depends on fatty fish intake and professional advice"
       }
-    }
+    },
+    "dailyCalorieTargetKcal": 2200,
+    "mealStrategy": "Minimal: small whey+oat-milk breakfast, robust lunch with starch and vegetables, compact snack, light protein+soup dinner. Do not force very low calories."
   },
   "interface": {
     "dailyActivityPromptOncePerDate": true,
@@ -120,23 +122,35 @@
     "shuffling": {
       "canLockProtein": true,
       "canLockSide": true,
-      "supportsFavorites": true,
+      "supportsFavorites": false,
       "noFullScreenCalendar": true
     },
-    "socialDinnerMode": "Independent dinner override (friends or family), NOT a mutually exclusive day activity; can occur after boxing or strength."
+    "socialDinnerMode": "Independent dinner override (friends or family), NOT a mutually exclusive day activity; can occur after boxing or strength.",
+    "topLevelTabs": [
+      "Hoy",
+      "Sopas"
+    ],
+    "settingsAccess": "Icono en Hoy, no tab principal.",
+    "mealChooser": "Inline from Hoy; breakfast/snack templates and main+side for lunch/dinner, quick shuffle, no separate screen required.",
+    "rebalancing": {
+      "mode": "propose_confirm",
+      "targetKcal": 2200,
+      "allowTargetEdit": true,
+      "toleranceKcal": 75,
+      "primaryAdjustment": "available future lunch carbohydrate portion",
+      "forbid": [
+        "retroactively adjusting already eaten meals",
+        "protein reduction below floor",
+        "auto-compensating social meals",
+        "blind exactness with unknown soup macros",
+        "silent adjustments",
+        "unbounded portions"
+      ],
+      "minDailyProteinGrams": 150
+    }
   },
   "shopping": {
-    "horizonDaysOptions": [
-      3,
-      4,
-      5,
-      6,
-      7
-    ],
-    "defaultHorizonDays": 5,
-    "optionalMealsOnly": true,
-    "excludeSocialMealIngredients": true,
-    "showGramTotals": true
+    "enabled": false
   },
   "storage": {
     "offlineFirst": true,
@@ -148,22 +162,30 @@
     "localDeviceOnly": true
   },
   "excludedFeatures": [
+    "AI integration",
+    "Apple Health",
+    "Hevy integration",
+    "account",
+    "barcode scanning",
+    "cloud backend",
+    "daily macro tracking",
+    "favorite combos",
+    "favorites",
+    "grocery inventory",
+    "gym workouts",
+    "habits checklist",
+    "login",
+    "mood tracking",
     "notifications",
     "push",
     "reminders",
-    "Hevy integration",
-    "gym workouts",
-    "weight tracking",
-    "waist tracking",
-    "mood tracking",
+    "separate meal chooser tab",
+    "shopping",
+    "shopping lists",
+    "shopping planning",
     "sleep tracking",
-    "habits checklist",
-    "Apple Health",
-    "AI integration",
-    "barcode scanning",
-    "account",
-    "login",
-    "cloud backend",
-    "weekly dashboard"
+    "waist tracking",
+    "weekly dashboard",
+    "weight tracking"
   ]
 }

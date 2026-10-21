@@ -46,7 +46,7 @@ export const scheduleSchema = z
 
 export const defaultsSchema = z
   .object({
-    schemaVersion: z.literal(1),
+    schemaVersion: z.literal(2),
     locale: z.literal('es-UY'),
     timezone: z.string().min(1),
     uiLanguage: z.literal('es-UY'),
@@ -79,6 +79,8 @@ export const defaultsSchema = z
             omega3: notRecommendedSchema,
           })
           .strict(),
+        dailyCalorieTargetKcal: z.number().positive(),
+        mealStrategy: z.string(),
       })
       .strict(),
     interface: z
@@ -92,22 +94,28 @@ export const defaultsSchema = z
           .object({
             canLockProtein: z.boolean(),
             canLockSide: z.boolean(),
-            supportsFavorites: z.boolean(),
+            supportsFavorites: z.literal(false),
             noFullScreenCalendar: z.boolean(),
           })
           .strict(),
         socialDinnerMode: z.string(),
+        topLevelTabs: z.tuple([z.literal('Hoy'), z.literal('Sopas')]),
+        settingsAccess: z.string(),
+        mealChooser: z.string(),
+        rebalancing: z
+          .object({
+            mode: z.literal('propose_confirm'),
+            targetKcal: z.number().positive(),
+            allowTargetEdit: z.boolean(),
+            toleranceKcal: z.number().nonnegative(),
+            primaryAdjustment: z.string(),
+            forbid: z.array(z.string()),
+            minDailyProteinGrams: z.number().nonnegative(),
+          })
+          .strict(),
       })
       .strict(),
-    shopping: z
-      .object({
-        horizonDaysOptions: z.array(z.number().int().positive()),
-        defaultHorizonDays: z.number().int().positive(),
-        optionalMealsOnly: z.boolean(),
-        excludeSocialMealIngredients: z.boolean(),
-        showGramTotals: z.boolean(),
-      })
-      .strict(),
+    shopping: z.object({ enabled: z.literal(false) }).strict(),
     storage: z
       .object({
         offlineFirst: z.boolean(),

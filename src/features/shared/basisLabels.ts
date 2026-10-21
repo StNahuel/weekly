@@ -12,4 +12,5 @@ export const BASIS_LABELS: Readonly<Record<WeightBasis, string>> = {
   cooked: 'cocido',
   frozen_concentrate: 'concentrado congelado',
   frozen_ready: 'congelado listo',
+  as_purchased: 'tal como se compra',
 };

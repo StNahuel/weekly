@@ -1,9 +1,8 @@
 import { Check } from 'lucide-react';
 import { useState } from 'react';
 import { upsertDay } from '../../db/repo';
-import { suggestSlots, type DietaryExclusions } from '../../domain/day/slots';
+import { EMPTY_FLAGS, suggestSlots, type DietaryExclusions } from '../../domain/day/slots';
 import type { DaySuggestion } from '../../domain/day/today';
-import type { SoupIngredientIds } from '../../domain/meals/filters';
 import type { DayType } from '../../domain/types';
 import { BTN_PRIMARY, CARD } from '../../app/ui';
 import { defaults } from '../../seed/defaults';
@@ -15,10 +14,9 @@ type DayTypePromptProps = {
   dateKey: string;
   suggestion: DaySuggestion;
   dietary: DietaryExclusions;
-  soupIngredientIds: SoupIngredientIds;
 };
 
-export function DayTypePrompt({ dateKey, suggestion, dietary, soupIngredientIds }: DayTypePromptProps) {
+export function DayTypePrompt({ dateKey, suggestion, dietary }: DayTypePromptProps) {
   const [chosen, setChosen] = useState<DayType>(suggestion.dayType);
   const [saving, setSaving] = useState(false);
 
@@ -29,7 +27,8 @@ export function DayTypePrompt({ dateKey, suggestion, dietary, soupIngredientIds 
         date: dateKey,
         dayType: chosen,
         flexible: suggestion.flexible && chosen === suggestion.dayType,
-        slots: suggestSlots(chosen, SLOT_CATALOGS, Math.random, dietary, soupIngredientIds),
+        slots: suggestSlots(chosen, SLOT_CATALOGS, Math.random, dietary),
+        flags: structuredClone(EMPTY_FLAGS),
         confirmedAt: new Date().toISOString(),
       });
     } finally {

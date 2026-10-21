@@ -27,3 +27,7 @@ export function suggestDayType(template: WeeklyTemplate, weekday: Weekday): DayS
 export function applyDayType<T extends { dayType: DayType }>(day: T, dayType: DayType): T {
   return { ...day, dayType };
 }
+
+export function localTimeKey(now: Date, tz: string = APP_TIME_ZONE): string {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(now);
+}

@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useMemo } from 'react';
 import { db } from '../../db';
-import type { MealContext } from '../../domain/meals/resolveMeal';
+import type { MealContext } from '../../domain/meals/resolveSlot';
 import { buildMealContext } from './mealContext';
 
 export function useMealContext(): MealContext | undefined {

@@ -1,40 +1,62 @@
 import type { MealSlot } from '../domain/day/slots';
 import { MEAL_TYPES } from '../domain/types';
 import { seeds } from '../seed';
-import { ingredientById, proteinById, sideById, templateById } from '../seed/foods';
+import { ingredientById, lunchById, swaps, templateById } from '../seed/foods';
 import { recipeById } from '../seed/soups';
 import { EXPORT_SCHEMA_VERSION, exportSchema, type WeeklyExport } from './export';
+import { exportSchemaV1, type WeeklyExportV1 } from './exportV1';
 import { hydrate } from './hydrate';
 import type { WeeklyDB } from './index';
+import { migrateDayV1, migrateProfileV1, v1LookupFromSeeds } from './migrateSlots';
 
 export const MAX_IMPORT_CHARS = 2_000_000;
 export const IMPORT_TOO_LARGE = 'El archivo supera 2 MB.';
 
 export type ImportSummary = {
   days: number;
-  favorites: number;
   soupPrefs: number;
   hasProfile: boolean;
   exportedAt: string;
+  fromVersion: 1 | 2;
+  emptiedSlots: number;
 };
 
 export type ParsedImport = { ok: true; data: WeeklyExport; summary: ImportSummary } | { ok: false; error: string };
 
 const fail = (error: string): ParsedImport => ({ ok: false, error });
 
-type IdCheck = { path: (string | number)[]; id: string; known: ReadonlyMap<string, unknown> };
+type Path = (string | number)[];
+type IdCheck = { path: Path; id: string; known: ReadonlySet<string> | ReadonlyMap<string, unknown> };
 
-function slotChecks(slot: MealSlot, path: (string | number)[]): IdCheck[] {
+const SWAP_PROTEINS = new Set(swaps.proteins);
+const SWAP_CARBS = new Set(swaps.lunchCarbs);
+
+const lineChecks = (lines: readonly { ingredientId: string }[], path: Path): IdCheck[] =>
+  lines.map((line, i) => ({ path: [...path, i, 'ingredientId'], id: line.ingredientId, known: ingredientById }));
+
+function slotChecks(slot: MealSlot, path: Path): IdCheck[] {
   switch (slot.kind) {
-    case 'combo':
-      return [
-        { path: [...path, 'proteinId'], id: slot.proteinId, known: proteinById },
-        { path: [...path, 'sideId'], id: slot.sideId, known: sideById },
-      ];
     case 'template':
-      return [{ path: [...path, 'templateId'], id: slot.templateId, known: templateById }];
-    case 'soup':
-      return [{ path: [...path, 'soupId'], id: slot.soupId, known: recipeById }];
+      return [
+        { path: [...path, 'templateId'], id: slot.templateId, known: templateById },
+        ...Object.keys(slot.gramOverrides ?? {}).map((key) => ({
+          path: [...path, 'gramOverrides', key],
+          id: key,
+          known: ingredientById,
+        })),
+      ];
+    case 'lunch':
+      return [
+        { path: [...path, 'presetId'], id: slot.presetId, known: lunchById },
+        { path: [...path, 'proteinId'], id: slot.proteinId, known: SWAP_PROTEINS },
+        { path: [...path, 'carbId'], id: slot.carbId, known: SWAP_CARBS },
+        ...lineChecks(slot.vegetables, [...path, 'vegetables']),
+      ];
+    case 'dinner':
+      return [
+        { path: [...path, 'proteinId'], id: slot.proteinId, known: SWAP_PROTEINS },
+        { path: [...path, 'soupRecipeId'], id: slot.soupRecipeId, known: recipeById },
+      ];
     default:
       return [];
   }
@@ -48,17 +70,44 @@ function unknownIdPath(data: WeeklyExport): string | null {
       known: ingredientById,
     })),
     ...data.days.flatMap((day, d) => MEAL_TYPES.flatMap((meal) => slotChecks(day.slots[meal], ['days', d, 'slots', meal]))),
-    ...data.favorites.flatMap((favorite, i) => [
-      { path: ['favorites', i, 'proteinId'], id: favorite.proteinId, known: proteinById },
-      { path: ['favorites', i, 'sideId'], id: favorite.sideId, known: sideById },
-    ]),
     ...data.soupPrefs.map((pref, i) => ({ path: ['soupPrefs', i, 'recipeId'], id: pref.recipeId, known: recipeById })),
-    ...data.shoppingPlans.flatMap((plan, p) =>
-      plan.meals.flatMap((meal, i) => slotChecks(meal.slot, ['shoppingPlans', p, 'meals', i, 'slot'])),
-    ),
   ];
   const unknown = checks.find(({ id, known }) => !known.has(id));
   return unknown ? unknown.path.join('.') : null;
+}
+
+function fromV1(v1: WeeklyExportV1): { data: WeeklyExport; emptiedSlots: number } {
+  const lookup = v1LookupFromSeeds(seeds);
+  const days = v1.days.map((day) => migrateDayV1(day, lookup));
+  const emptiedSlots = days.reduce(
+    (count, day, d) =>
+      count +
+      MEAL_TYPES.filter((meal) => day.slots[meal].kind === 'empty' && v1.days[d]?.slots[meal].kind !== 'empty').length,
+    0,
+  );
+  return {
+    data: {
+      app: 'weekly',
+      schemaVersion: EXPORT_SCHEMA_VERSION,
+      exportedAt: v1.exportedAt,
+      profile: v1.profile && migrateProfileV1(v1.profile, lookup.targetKcal, lookup.ingredientIds),
+      days,
+      soupPrefs: v1.soupPrefs,
+    },
+    emptiedSlots,
+  };
+}
+
+function parseVersioned(json: unknown): { data: WeeklyExport; fromVersion: 1 | 2; emptiedSlots: number } | string {
+  const version = typeof json === 'object' && json !== null && 'schemaVersion' in json ? json.schemaVersion : undefined;
+  if (version !== 1 && version !== EXPORT_SCHEMA_VERSION) return 'Versión de respaldo no compatible.';
+  const result = version === 1 ? exportSchemaV1.safeParse(json) : exportSchema.safeParse(json);
+  if (!result.success) {
+    const path = result.error.issues[0]?.path.map(String).join('.') ?? '';
+    return `Formato no reconocido: ${path || '(raíz)'}`;
+  }
+  if (result.data.schemaVersion === 1) return { ...fromV1(result.data), fromVersion: 1 };
+  return { data: result.data, fromVersion: 2, emptiedSlots: 0 };
 }
 
 export function parseImport(text: string): ParsedImport {
@@ -69,15 +118,9 @@ export function parseImport(text: string): ParsedImport {
   } catch {
     return fail('El archivo no es JSON válido.');
   }
-  if (typeof json === 'object' && json !== null && 'schemaVersion' in json && json.schemaVersion !== EXPORT_SCHEMA_VERSION) {
-    return fail('Versión de respaldo no compatible.');
-  }
-  const result = exportSchema.safeParse(json);
-  if (!result.success) {
-    const path = result.error.issues[0]?.path.map(String).join('.') ?? '';
-    return fail(`Formato no reconocido: ${path || '(raíz)'}`);
-  }
-  const data = result.data;
+  const parsed = parseVersioned(json);
+  if (typeof parsed === 'string') return fail(parsed);
+  const { data, fromVersion, emptiedSlots } = parsed;
   const unknownPath = unknownIdPath(data);
   if (unknownPath) return fail(`Formato no reconocido: ${unknownPath}`);
   return {
@@ -85,30 +128,21 @@ export function parseImport(text: string): ParsedImport {
     data,
     summary: {
       days: data.days.length,
-      favorites: data.favorites.length,
       soupPrefs: data.soupPrefs.length,
       hasProfile: data.profile !== null,
       exportedAt: data.exportedAt,
+      fromVersion,
+      emptiedSlots,
     },
   };
 }
 
-// meta is not part of a backup, so seed-favorite bookkeeping survives an import.
 export async function applyImport(db: WeeklyDB, data: WeeklyExport): Promise<void> {
-  const tables = [db.profile, db.days, db.favorites, db.soupPrefs, db.shoppingPlans, db.meta];
-  await db.transaction('rw', tables, async () => {
-    await Promise.all([
-      db.profile.clear(),
-      db.days.clear(),
-      db.favorites.clear(),
-      db.soupPrefs.clear(),
-      db.shoppingPlans.clear(),
-    ]);
+  await db.transaction('rw', [db.profile, db.days, db.soupPrefs, db.meta], async () => {
+    await Promise.all([db.profile.clear(), db.days.clear(), db.soupPrefs.clear()]);
     if (data.profile) await db.profile.add(data.profile);
     await db.days.bulkAdd(data.days);
-    await db.favorites.bulkAdd(data.favorites);
     await db.soupPrefs.bulkAdd(data.soupPrefs);
-    await db.shoppingPlans.bulkAdd(data.shoppingPlans);
     await db.meta.put({ key: 'lastImportAt', value: new Date().toISOString() });
     // A backup without a profile would otherwise leave the app profile-less until reload.
     await hydrate(db, seeds);

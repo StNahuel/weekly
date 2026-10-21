@@ -2,17 +2,12 @@ import { ChevronDown } from 'lucide-react';
 import { useId, useState } from 'react';
 import { saveProfile } from '../../db/repo';
 import type { ProfileRecord } from '../../db/types';
-import { groupByCategory } from '../../domain/shopping/aggregate';
-import { foods } from '../../seed/foods';
+import { groupByCategory } from '../../domain/meals/groupByCategory';
+import { WATER_ID } from '../../domain/soups/resolveSoup';
+import { ingredientById } from '../../seed/foods';
 import { CARD } from './copy';
 
-const TAG_OPTIONS: readonly { tag: string; label: string }[] = [
-  { tag: 'occasional', label: 'Comidas ocasionales' },
-  { tag: 'higher_fat', label: 'Opciones con más grasa' },
-  { tag: 'legumes', label: 'Legumbres' },
-];
-
-const EXCLUDABLE = groupByCategory(foods.ingredients.filter((i) => i.category !== 'Líquidos'));
+const EXCLUDABLE = groupByCategory([...ingredientById.values()].filter((i) => i.id !== WATER_ID));
 
 const row = 'tap flex cursor-pointer items-center gap-3 rounded-xl px-2';
 const box = 'h-6 w-6 shrink-0 accent-mint-ink';
@@ -27,7 +22,7 @@ export function DietaryForm({ profile }: { profile: ProfileRecord }) {
   const [dietary, setDietary] = useState(profile.dietary);
   const [largeText, setLargeText] = useState(profile.device.largeText);
   const [open, setOpen] = useState(false);
-  const excludedNames = foods.ingredients.filter((i) => dietary.excludedIngredientIds.includes(i.id)).map((i) => i.name);
+  const excludedNames = dietary.excludedIngredientIds.flatMap((id) => ingredientById.get(id)?.name ?? []);
 
   const saveDietary = (next: ProfileRecord['dietary']) => {
     setDietary(next);
@@ -80,20 +75,6 @@ export function DietaryForm({ profile }: { profile: ProfileRecord }) {
           </div>
         )}
       </div>
-      <fieldset>
-        <legend className="font-semibold">Evitar</legend>
-        {TAG_OPTIONS.map(({ tag, label }) => (
-          <label key={tag} className={row}>
-            <input
-              type="checkbox"
-              checked={dietary.excludedTags.includes(tag)}
-              onChange={() => saveDietary({ ...dietary, excludedTags: toggle(dietary.excludedTags, tag) })}
-              className={box}
-            />
-            {label}
-          </label>
-        ))}
-      </fieldset>
       <fieldset>
         <legend className="font-semibold">Pantalla</legend>
         <label className={row}>

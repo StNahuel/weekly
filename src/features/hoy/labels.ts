@@ -23,6 +23,13 @@ export const MEAL_LABELS: Readonly<Record<MealType, string>> = {
   dinner: 'Cena',
 };
 
+export const MEAL_WITH_ARTICLE: Readonly<Record<MealType, string>> = {
+  breakfast: 'el desayuno',
+  lunch: 'el almuerzo',
+  snack: 'la merienda',
+  dinner: 'la cena',
+};
+
 export const SOCIAL_LABELS: Readonly<Record<SocialKind, string>> = {
   friends: 'Amigos',
   family: 'Familia',
@@ -32,3 +39,21 @@ export const SOCIAL_DINNER_TEXT: Readonly<Record<SocialKind, string>> = {
   friends: 'Cena con amigos — sin plan de comida',
   family: 'Cena con familia — sin plan de comida',
 };
+
+export type BuilderPart = 'protein' | 'carb' | 'soup';
+
+export const PART_LABELS: Readonly<Record<BuilderPart, string>> = {
+  protein: 'Proteína',
+  carb: 'Carbohidrato',
+  soup: 'Sopa',
+};
+
+export const BOTH_LOCKED_TEXT = 'Las dos partes están fijadas; destrabá una para ver otra opción.';
+
+export function lockedMismatchText(part: BuilderPart): string {
+  return `${PART_LABELS[part]} fijada fuera de tus preferencias actuales; destrabala para elegir otra.`;
+}
+
+export function noOptionsText(part: BuilderPart): string {
+  return `No hay otra opción de ${PART_LABELS[part].toLowerCase()} con tus preferencias.`;
+}

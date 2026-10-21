@@ -112,10 +112,13 @@ export function DataTransfer() {
             ¿Reemplazar los datos de este dispositivo?
           </h3>
           <p>
-            {`Se reemplazarán: ${pending.summary.days} días, ${pending.summary.favorites} favoritos, perfil ${
+            {`Se reemplazarán: ${pending.summary.days} días, perfil ${
               pending.summary.hasProfile ? 'sí' : 'no'
             }. Exportado el ${formatDateTime(pending.summary.exportedAt)}.`}
           </p>
+          {pending.summary.fromVersion === 1 && (
+            <p>{`Respaldo de la versión anterior: ${pending.summary.emptiedSlots} comidas quedarán sin elegir.`}</p>
+          )}
           <div className="grid grid-cols-2 gap-2">
             <button ref={cancelButton} type="button" onClick={cancel} className={SECONDARY}>
               Cancelar

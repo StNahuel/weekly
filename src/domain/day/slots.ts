@@ -1,59 +1,102 @@
-import type { Protein, Side, Template } from '../schemas/foods.schema';
+import type { DinnerPreset, Ingredient, Template } from '../schemas/foods.schema';
 import type { Recipe } from '../schemas/soups.schema';
-import type { SoupServings } from '../soups/types';
-import { fitsTime, filterCandidates, rankForDay, type SoupIngredientIds } from '../meals/filters';
-import { pickCombo } from '../meals/shuffle';
-import type { DayType, MealType, SocialKind } from '../types';
+import type { DayType, GramLine, MealType, SocialKind } from '../types';
+
+export type SlotFlags = { eaten: boolean; locked: boolean };
+
+export type TemplateSlot = { kind: 'template'; templateId: string; gramOverrides?: Record<string, number> };
+export type LunchSlot = {
+  kind: 'lunch';
+  presetId: string;
+  proteinId: string;
+  proteinGrams: number;
+  carbId: string;
+  carbGrams: number;
+  vegetables: GramLine[];
+  oilGrams: number;
+};
+export type DinnerSlot = {
+  kind: 'dinner';
+  proteinId: string;
+  proteinGrams: number;
+  soupRecipeId: string;
+  soupServings: 1;
+};
 
 export type MealSlot =
-  | { kind: 'template'; templateId: string }
-  | { kind: 'combo'; proteinId: string; sideId: string }
-  | { kind: 'soup'; soupId: string; servings: SoupServings }
+  | TemplateSlot
+  | LunchSlot
+  | DinnerSlot
   | { kind: 'social'; social: SocialKind }
-  | { kind: 'free' }
   | { kind: 'skip' }
-  | { kind: 'empty' };
+  | { kind: 'empty'; note?: string };
 
 export type DaySlots = Record<MealType, MealSlot>;
+export type DayFlags = Record<MealType, SlotFlags>;
+
+const NO_FLAGS: SlotFlags = Object.freeze({ eaten: false, locked: false });
+
+export const EMPTY_FLAGS: Readonly<DayFlags> = Object.freeze({
+  breakfast: NO_FLAGS,
+  lunch: NO_FLAGS,
+  snack: NO_FLAGS,
+  dinner: NO_FLAGS,
+});
 
 export type DayRecord = {
   date: string;
   dayType: DayType;
   flexible: boolean;
   slots: DaySlots;
+  flags: DayFlags;
   confirmedAt: string;
 };
 
 export type SlotCatalogs = {
-  proteins: readonly Protein[];
-  sides: readonly Side[];
   breakfasts: readonly Template[];
+  lunches: readonly Template[];
   snacks: readonly Template[];
+  dinners: readonly DinnerPreset[];
   recipes: ReadonlyMap<string, Recipe>;
+  catalog: ReadonlyMap<string, Ingredient>;
 };
 
 export type SlotLookup = {
-  proteins: ReadonlyMap<string, Protein>;
-  sides: ReadonlyMap<string, Side>;
   templates: ReadonlyMap<string, Template>;
+  dinners: readonly DinnerPreset[];
+  recipes: ReadonlyMap<string, Recipe>;
 };
 
 export type Suitability = 'ok' | 'slow_for_busy';
 
-export type DietaryExclusions = { excludedIngredientIds: readonly string[]; excludedTags: readonly string[] };
+export type DietaryExclusions = { excludedIngredientIds: readonly string[] };
 
-const NO_EXCLUSIONS: DietaryExclusions = { excludedIngredientIds: [], excludedTags: [] };
+const NO_EXCLUSIONS: DietaryExclusions = { excludedIngredientIds: [] };
+export const BUSY_MAX_PREP_MINUTES = 15;
 
-function suggestTemplate(templates: readonly Template[], dayType: DayType, dietary: DietaryExclusions): MealSlot {
-  const [best] = templates
-    .filter(
-      (t) =>
-        fitsTime(t, dayType) &&
-        !t.tags.some((tag) => dietary.excludedTags.includes(tag)) &&
-        !t.ingredients.some((i) => dietary.excludedIngredientIds.includes(i.ingredientId)),
-    )
-    .sort(rankForDay(dayType));
-  return best ? { kind: 'template', templateId: best.id } : { kind: 'empty' };
+const PREFERRED_BREAKFAST = 'whey_oat_milk';
+const PREFERRED_LUNCH: Partial<Record<DayType, string>> = { sick: 'chicken_potato' };
+const PREFERRED_SNACK: Partial<Record<DayType, string>> = {
+  boxing: 'b3st_fruit',
+  strength: 'b3st_fruit',
+  sick: 'yogurt_small_fruit',
+};
+
+function pickTemplate(pool: readonly Template[], preferredId: string | undefined, rng: () => number): MealSlot {
+  const chosen = pool.find((t) => t.id === preferredId) ?? pool[Math.floor(rng() * pool.length)];
+  return chosen ? { kind: 'template', templateId: chosen.id } : { kind: 'empty' };
+}
+
+export function dinnerSlotFromPreset(preset: DinnerPreset): DinnerSlot {
+  const [protein] = preset.proteinIngredients;
+  if (!protein) throw new Error(`Dinner preset "${preset.id}" has no protein`);
+  return {
+    kind: 'dinner',
+    proteinId: protein.ingredientId,
+    proteinGrams: protein.grams,
+    soupRecipeId: preset.soupRecipeId,
+    soupServings: 1,
+  };
 }
 
 export function suggestSlots(
@@ -61,37 +104,40 @@ export function suggestSlots(
   catalogs: SlotCatalogs,
   rng: () => number = Math.random,
   dietary: DietaryExclusions = NO_EXCLUSIONS,
-  soupIngredientIds?: SoupIngredientIds,
 ): DaySlots {
-  const { proteins, sides } = filterCandidates({
-    proteins: catalogs.proteins,
-    sides: catalogs.sides,
-    dayType,
-    excludedIngredientIds: dietary.excludedIngredientIds,
-    excludedTags: dietary.excludedTags,
-    favoritesOnly: false,
-    favorites: [],
-    recipes: catalogs.recipes,
-    ...(soupIngredientIds ? { soupIngredientIds } : {}),
-  });
-  const lunch = pickCombo({ proteins, sides, rng });
-  const lunchSlot: MealSlot = lunch.status === 'empty' ? { kind: 'empty' } : { kind: 'combo', ...lunch.combo };
-  const dinner = pickCombo({ proteins, sides, rng, ...(lunch.status === 'empty' ? {} : { previous: lunch.combo }) });
-  const dinnerSlot: MealSlot = dinner.status === 'empty' ? { kind: 'empty' } : { kind: 'combo', ...dinner.combo };
-  return {
-    breakfast: suggestTemplate(catalogs.breakfasts, dayType, dietary),
-    lunch: lunchSlot,
-    snack: suggestTemplate(catalogs.snacks, dayType, dietary),
-    dinner: dinnerSlot,
-  };
+  const excluded = (ids: readonly string[]) => ids.some((id) => dietary.excludedIngredientIds.includes(id));
+  const allowed = (templates: readonly Template[]) =>
+    templates.filter((t) => !excluded(t.ingredients.map((i) => i.ingredientId)));
+  const dinners = catalogs.dinners.filter(
+    (d) =>
+      !excluded(d.proteinIngredients.map((i) => i.ingredientId)) &&
+      !excluded(catalogs.recipes.get(d.soupRecipeId)?.ingredients.map((i) => i.id) ?? []),
+  );
+  const breakfast = pickTemplate(allowed(catalogs.breakfasts), PREFERRED_BREAKFAST, rng);
+  const lunch = pickTemplate(allowed(catalogs.lunches), PREFERRED_LUNCH[dayType], rng);
+  const snack = pickTemplate(allowed(catalogs.snacks), PREFERRED_SNACK[dayType], rng);
+  const dinner = dinners[Math.floor(rng() * dinners.length)];
+  return { breakfast, lunch, snack, dinner: dinner ? dinnerSlotFromPreset(dinner) : { kind: 'empty' } };
+}
+
+function prepMinutes(slot: MealSlot, lookup: SlotLookup): number | undefined {
+  switch (slot.kind) {
+    case 'template':
+      return lookup.templates.get(slot.templateId)?.prepMinutes;
+    case 'lunch':
+      return lookup.templates.get(slot.presetId)?.prepMinutes;
+    case 'dinner': {
+      const preset = lookup.dinners.find((d) => d.proteinIngredients[0]?.ingredientId === slot.proteinId);
+      const recipe = lookup.recipes.get(slot.soupRecipeId);
+      return preset && recipe ? preset.prepMinutesExcludingSoup + recipe.minutesApprox : undefined;
+    }
+    default:
+      return undefined;
+  }
 }
 
 export function slotSuitability(slot: MealSlot, dayType: DayType, lookup: SlotLookup): Suitability {
-  const items =
-    slot.kind === 'combo'
-      ? [lookup.proteins.get(slot.proteinId), lookup.sides.get(slot.sideId)]
-      : slot.kind === 'template'
-        ? [lookup.templates.get(slot.templateId)]
-        : [];
-  return items.every((item) => item === undefined || fitsTime(item, dayType)) ? 'ok' : 'slow_for_busy';
+  if (dayType !== 'busy') return 'ok';
+  const minutes = prepMinutes(slot, lookup);
+  return minutes !== undefined && minutes > BUSY_MAX_PREP_MINUTES ? 'slow_for_busy' : 'ok';
 }

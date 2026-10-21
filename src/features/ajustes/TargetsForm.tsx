@@ -68,17 +68,61 @@ function RangeFields({ saved, spec, onSave }: RangeFieldsProps) {
   );
 }
 
+const TARGET_MIN_KCAL = 800;
+const TARGET_MAX_KCAL = 6000;
+
+function parseTarget(draft: string): number | null {
+  const value = Number(draft);
+  if (draft.trim() === '' || !Number.isFinite(value)) return null;
+  return value >= TARGET_MIN_KCAL && value <= TARGET_MAX_KCAL ? Math.round(value) : null;
+}
+
+function DailyTargetField({ saved, onSave }: { saved: number; onSave: (kcal: number) => void }) {
+  const id = useId();
+  const [draft, setDraft] = useState(String(saved));
+  const [low, high] = defaults.nutrition.calorieRangeKcalInitiallySuggested;
+  const valid = parseTarget(draft) !== null;
+
+  return (
+    <div className="space-y-1">
+      <label htmlFor={id} className="block font-semibold">
+        Objetivo diario (kcal)
+      </label>
+      <input
+        id={id}
+        type="number"
+        inputMode="numeric"
+        min={TARGET_MIN_KCAL}
+        max={TARGET_MAX_KCAL}
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+        onBlur={() => {
+          const kcal = parseTarget(draft);
+          if (kcal !== null) onSave(kcal);
+        }}
+        className={`${FIELD} w-full`}
+      />
+      <p className="text-sm text-muted">{`Referencia inicial ${low}–${high} kcal; es provisional.`}</p>
+      {!valid && (
+        <p role="alert" className={`text-sm ${ALERT}`}>
+          {`Revisá el objetivo: entre ${TARGET_MIN_KCAL} y ${TARGET_MAX_KCAL} kcal.`}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function TargetsForm({ profile }: { profile: ProfileRecord }) {
   const headingId = useId();
   const { creatine, whey, magnesium, omega3 } = defaults.nutrition.supplements;
   const [creatineMin, creatineMax] = creatine.gramsPerDayRange;
   const [nutrition, setNutrition] = useState(profile.nutrition);
 
-  const save = (key: RangeKey, range: Range) => {
-    const next = { ...nutrition, [key]: range };
+  const persist = (next: ProfileRecord['nutrition']) => {
     setNutrition(next);
     void saveProfile({ nutrition: next });
   };
+  const save = (key: RangeKey, range: Range) => persist({ ...nutrition, [key]: range });
 
   return (
     <section aria-labelledby={headingId} className={`space-y-4 ${CARD}`}>
@@ -90,6 +134,10 @@ export function TargetsForm({ profile }: { profile: ProfileRecord }) {
           Provisional — sin peso confirmado, no es una indicación médica.
         </p>
       </header>
+      <DailyTargetField
+        saved={profile.nutrition.dailyCalorieTargetKcal}
+        onSave={(kcal) => persist({ ...nutrition, dailyCalorieTargetKcal: kcal })}
+      />
       {RANGES.map((spec) => (
         <RangeFields key={spec.key} saved={profile.nutrition[spec.key]} spec={spec} onSave={save} />
       ))}

@@ -1,7 +1,7 @@
 import type { SoupPrefRecord } from '../../db/types';
-import type { MealContext } from '../../domain/meals/resolveMeal';
+import type { MealContext } from '../../domain/meals/resolveSlot';
 import type { SoupOptions } from '../../domain/soups/types';
-import { ingredientById, proteinById, sideById, templateById } from '../../seed/foods';
+import { dinnerById, ingredientById, swaps, templateById } from '../../seed/foods';
 import { brothTypeFromDefault, recipeById } from '../../seed/soups';
 
 export function buildMealContext(prefs: readonly SoupPrefRecord[]): MealContext {
@@ -22,8 +22,8 @@ export function buildMealContext(prefs: readonly SoupPrefRecord[]): MealContext 
     soupPrefs,
     catalog: ingredientById,
     recipes: recipeById,
-    proteins: proteinById,
-    sides: sideById,
     templates: templateById,
+    dinners: dinnerById,
+    swaps,
   };
 }

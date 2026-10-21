@@ -1,6 +1,6 @@
 import { createHashRouter, type RouteObject } from 'react-router-dom';
 import { AppShell } from './AppShell';
-import { AjustesPage, CocinarPage, ComprarPage, HoyPage, KitchenMode, QueComoPage, RecipeDetail } from './pages';
+import { AjustesPage, HoyPage, KitchenMode, RecipeDetail, SopasPage } from './pages';
 
 export const routes: RouteObject[] = [
   {
@@ -8,11 +8,9 @@ export const routes: RouteObject[] = [
     element: <AppShell />,
     children: [
       { index: true, element: <HoyPage /> },
-      { path: 'que-como', element: <QueComoPage /> },
-      { path: 'cocinar', element: <CocinarPage /> },
-      { path: 'cocinar/:recipeId', element: <RecipeDetail /> },
-      { path: 'cocinar/:recipeId/cocina', element: <KitchenMode /> },
-      { path: 'comprar', element: <ComprarPage /> },
+      { path: 'sopas', element: <SopasPage /> },
+      { path: 'sopas/:recipeId', element: <RecipeDetail /> },
+      { path: 'sopas/:recipeId/cocina', element: <KitchenMode /> },
       { path: 'ajustes', element: <AjustesPage /> },
     ],
   },

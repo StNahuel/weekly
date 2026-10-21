@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { BROTH_TYPES, THAI_LEGUMES } from '../types';
-import { storeCategorySchema } from './foods.schema';
+import { ingredientCategorySchema } from './foods.schema';
 
 const range = z.tuple([z.number().nonnegative(), z.number().nonnegative()]);
 
@@ -96,7 +96,7 @@ export const recipeIngredientSchema = z
     legacyId: z.string().min(1),
     name: z.string().min(1),
     gramsForBaseServings: z.number().positive(),
-    category: storeCategorySchema,
+    category: ingredientCategorySchema,
     conditionalSelection: z.string().optional(),
   })
   .strict();
