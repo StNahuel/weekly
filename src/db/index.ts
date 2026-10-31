@@ -1,13 +1,10 @@
 import Dexie, { type EntityTable } from 'dexie';
 import { applyVersions } from './migrations';
-import type { DayRecord, MetaRecord, ProfileRecord, SoupPrefRecord } from './types';
-
-export { DB_SCHEMA_VERSION } from './migrations';
+import type { MetaRecord, ShoppingRecord, SoupPrefRecord } from './types';
 
 export class WeeklyDB extends Dexie {
-  declare profile: EntityTable<ProfileRecord, 'id'>;
-  declare days: EntityTable<DayRecord, 'date'>;
   declare soupPrefs: EntityTable<SoupPrefRecord, 'recipeId'>;
+  declare shopping: EntityTable<ShoppingRecord, 'id'>;
   declare meta: EntityTable<MetaRecord, 'key'>;
 
   constructor(name: string) {

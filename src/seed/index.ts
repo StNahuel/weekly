@@ -1,12 +1,23 @@
-import type { Defaults } from '../domain/schemas/defaults.schema';
-import type { Foods } from '../domain/schemas/foods.schema';
-import type { SoupIngredients } from '../domain/schemas/soupIngredients.schema';
-import type { Soups } from '../domain/schemas/soups.schema';
-import { defaults } from './defaults';
-import { foods } from './foods';
-import { soupIngredients } from './soupIngredients';
-import { soups } from './soups';
+import raw from '../../data/recetario.json';
+import { normalizeRecetario } from '../domain/recipes/normalize';
+import { rawRecetarioSchema } from '../domain/recipes/raw.schema';
+import type { Recipe, Soup } from '../domain/recipes/types';
 
-export type Seeds = { defaults: Defaults; foods: Foods; soupIngredients: SoupIngredients; soups: Soups };
+function parse() {
+  const result = rawRecetarioSchema.safeParse(raw);
+  if (!result.success) {
+    const issue = result.error.issues[0];
+    throw new Error(`recetario.json is invalid at "${issue?.path.map(String).join('.') ?? ''}": ${issue?.message ?? 'unknown'}`);
+  }
+  return normalizeRecetario(result.data);
+}
 
-export const seeds: Seeds = { defaults, foods, soupIngredients, soups };
+const { catalog, recipes } = parse();
+
+export { catalog, recipes };
+
+export const recipeById: ReadonlyMap<string, Recipe> = new Map(recipes.map((r) => [r.id, r]));
+
+export const soupById: ReadonlyMap<string, Soup> = new Map(
+  recipes.flatMap((r) => (r.kind === 'soupMeal' ? [[r.soup.id, r.soup] as const] : [])),
+);

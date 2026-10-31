@@ -1,16 +1,13 @@
-import Dexie from 'dexie';
-import type { V1DayRecord, V1ProfileRecord } from './exportV1';
-import { isV1Slot, migrateDayV1, migrateProfileV1, migrateSlotV1, v1LookupFromSeeds } from './migrateSlots';
-import type { DayRecord, MetaRecord, ProfileRecord } from './types';
+import type Dexie from 'dexie';
+import type { MetaRecord, SoupPrefRecord } from './types';
 
-export const DB_SCHEMA_VERSION = 2;
+export const SETTINGS_KEY = 'settings';
 
-const LAST_DINNER_PREFIX = 'lastDinnerBeforeSocial:';
-
-const isV1Profile = (profile: V1ProfileRecord | ProfileRecord): profile is V1ProfileRecord =>
-  !('dailyCalorieTargetKcal' in profile.nutrition);
+type OldSoupPref = { recipeId: string; brothType: SoupPrefRecord['brothType']; thaiLegume?: string };
+type OldProfile = { device?: { largeText?: boolean } };
 
 export function applyVersions(db: Dexie): void {
+  // Never edit a shipped version; add db.version(n).stores({...}).upgrade(tx => ...) below it.
   db.version(1).stores({
     profile: 'id',
     days: 'date',
@@ -19,26 +16,27 @@ export function applyVersions(db: Dexie): void {
     shoppingPlans: 'id',
     meta: 'key',
   });
-  // Never edit a shipped version; add db.version(n).stores({...}).upgrade(tx => ...) below it.
-  db.version(2)
-    .stores({ profile: 'id', days: 'date', soupPrefs: 'recipeId', meta: 'key', favorites: null, shoppingPlans: null })
+  // v2 (unreleased planner) only dropped tables; its row rewrites are irrelevant now that days are gone.
+  db.version(2).stores({ favorites: null, shoppingPlans: null });
+  // v3: recipe book. Soup prefs move to the embedded soup ids; the text-size setting moves to meta.
+  db.version(3)
+    .stores({ shopping: 'id' })
     .upgrade(async (tx) => {
-      // Seeds load lazily; waitFor keeps the upgrade transaction alive across the import.
-      const { seeds } = await Dexie.waitFor(import('../seed'));
-      const lookup = v1LookupFromSeeds(seeds);
-      await tx.table<V1DayRecord | DayRecord, string>('days').toCollection().modify((day, ref) => {
-        if (!('flags' in day)) ref.value = migrateDayV1(day, lookup);
-      });
-      await tx.table<V1ProfileRecord | ProfileRecord, string>('profile').toCollection().modify((profile, ref) => {
-        if (isV1Profile(profile)) ref.value = migrateProfileV1(profile, lookup.targetKcal, lookup.ingredientIds);
-      });
+      const prefs = tx.table<OldSoupPref & Partial<SoupPrefRecord>, string>('soupPrefs');
+      const old = await prefs.toArray();
+      await prefs.clear();
+      await prefs.bulkPut(
+        old.map((p) => ({
+          recipeId: p.recipeId.startsWith('soup_') ? p.recipeId : `soup_${p.recipeId}`,
+          brothType: p.brothType,
+          includeOptional: p.includeOptional ?? p.thaiLegume === 'edamame',
+        })),
+      );
+      const profile = await tx.table<OldProfile, string>('profile').get('me');
       const meta = tx.table<MetaRecord, string>('meta');
-      await meta.delete('hydratedSeedFavoriteIds');
-      await meta
-        .where('key')
-        .startsWith(LAST_DINNER_PREFIX)
-        .modify((row) => {
-          if (isV1Slot(row.value)) row.value = migrateSlotV1(row.value, lookup);
-        });
+      // Planner leftovers (seed version, saved dinners before a social one, import stamps).
+      await meta.clear();
+      await meta.put({ key: SETTINGS_KEY, value: { largeText: profile?.device?.largeText === true } });
     });
+  db.version(4).stores({ profile: null, days: null });
 }

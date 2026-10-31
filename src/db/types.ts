@@ -1,26 +1,12 @@
-import type { DayRecord } from '../domain/day/slots';
-import type { Schedule } from '../domain/schemas/defaults.schema';
-import type { SoupOptions } from '../domain/soups/types';
+import type { ShoppingEntry } from '../domain/recipes/shopping';
+import type { BrothType } from '../domain/recipes/types';
 
-export type { DayRecord };
+// Keyed by the embedded soup id (e.g. "soup_miso"): broth and the optional ingredient apply to the soup
+// wherever it is cooked.
+export type SoupPrefRecord = { recipeId: string; brothType: BrothType; includeOptional: boolean };
 
-export type ProfileRecord = {
-  id: 'me';
-  schedule: Schedule;
-  nutrition: {
-    proteinDailyGramsRange: [number, number];
-    calorieRangeKcal: [number, number];
-    dailyCalorieTargetKcal: number;
-    provisional: true;
-  };
-  dietary: { excludedIngredientIds: string[]; notes: string };
-  device: { largeText: boolean };
-  onboardingCompletedAt?: string;
-  updatedAt: string;
-};
+export type ShoppingRecord = { id: 'current'; entries: ShoppingEntry[]; checked: string[]; updatedAt: string };
 
-type Flatten<T> = { [K in keyof T]: T[K] };
-
-export type SoupPrefRecord = Flatten<{ recipeId: string } & Omit<SoupOptions, 'servings'>>;
+export type Settings = { largeText: boolean };
 
 export type MetaRecord = { key: string; value: unknown };

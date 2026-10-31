@@ -1,62 +1,84 @@
-import type { MealSlot, SlotFlags } from '../domain/day/slots';
-import { applyDayType } from '../domain/day/today';
-import type { DayType, MealType } from '../domain/types';
+import { useLiveQuery } from 'dexie-react-hooks';
+import type { SoupPrefs } from '../domain/recipes/resolve';
+import type { ShoppingEntry } from '../domain/recipes/shopping';
+import type { Soup } from '../domain/recipes/types';
 import { db } from './index';
-import type { DayRecord, ProfileRecord, SoupPrefRecord } from './types';
+import { SETTINGS_KEY } from './migrations';
+import type { Settings, ShoppingRecord, SoupPrefRecord } from './types';
 
-export type ProfilePatch = Partial<Omit<ProfileRecord, 'id' | 'updatedAt'>>;
+export const DEFAULT_SETTINGS: Settings = { largeText: false };
 
-export type SoupPrefsPatch = Partial<Pick<SoupPrefRecord, 'brothType' | 'thaiLegume'>> & {
-  boneBrothGramsFor3?: number | undefined;
-  concentrateGramsFor3?: number | undefined;
-};
+const isSettings = (value: unknown): value is Settings =>
+  typeof value === 'object' && value !== null && 'largeText' in value && typeof value.largeText === 'boolean';
 
-export async function saveProfile(patch: ProfilePatch): Promise<void> {
-  const updated = await db.profile.update('me', { ...patch, updatedAt: new Date().toISOString() });
-  if (updated === 0) throw new Error('Profile missing; hydrate first');
-}
-
-export async function upsertDay(day: DayRecord): Promise<void> {
-  await db.days.put(day);
-}
-
-export async function setDayType(date: string, dayType: DayType): Promise<void> {
-  await db.transaction('rw', db.days, async () => {
-    const day = await db.days.get(date);
-    if (!day) throw new Error(`Day ${date} missing`);
-    await db.days.put({ ...applyDayType(day, dayType), flexible: false });
+export function useSettings(): Settings | undefined {
+  return useLiveQuery(async () => {
+    const value = (await db.meta.get(SETTINGS_KEY))?.value;
+    return isSettings(value) ? value : DEFAULT_SETTINGS;
   });
 }
 
-export async function setSlot(date: string, mealType: MealType, slot: MealSlot): Promise<void> {
-  await db.transaction('rw', db.days, async () => {
-    const day = await db.days.get(date);
-    if (!day) throw new Error(`Day ${date} missing`);
-    await db.days.put({ ...day, slots: { ...day.slots, [mealType]: slot } });
+export async function saveSettings(settings: Settings): Promise<void> {
+  await db.meta.put({ key: SETTINGS_KEY, value: settings });
+}
+
+export function soupPrefsOf(soup: Soup, record: SoupPrefRecord | undefined): SoupPrefs {
+  return { brothType: record?.brothType ?? soup.defaultBroth, includeOptional: record?.includeOptional ?? false };
+}
+
+export function useSoupPrefRecords(): ReadonlyMap<string, SoupPrefRecord> | undefined {
+  return useLiveQuery(async () => new Map((await db.soupPrefs.toArray()).map((p) => [p.recipeId, p])));
+}
+
+export async function saveSoupPrefs(soup: Soup, patch: Partial<SoupPrefs>): Promise<void> {
+  await db.transaction('rw', db.soupPrefs, async () => {
+    const current = soupPrefsOf(soup, await db.soupPrefs.get(soup.id));
+    await db.soupPrefs.put({ recipeId: soup.id, ...current, ...patch });
   });
 }
 
-export async function setFlag(date: string, mealType: MealType, patch: Partial<SlotFlags>): Promise<void> {
-  await db.transaction('rw', db.days, async () => {
-    const day = await db.days.get(date);
-    if (!day) throw new Error(`Day ${date} missing`);
-    await db.days.put({ ...day, flags: { ...day.flags, [mealType]: { ...day.flags[mealType], ...patch } } });
+const EMPTY_SHOPPING = (): ShoppingRecord => ({
+  id: 'current',
+  entries: [],
+  checked: [],
+  updatedAt: new Date().toISOString(),
+});
+
+export function useShopping(): ShoppingRecord | undefined {
+  return useLiveQuery(async () => (await db.shopping.get('current')) ?? EMPTY_SHOPPING());
+}
+
+async function updateShopping(change: (current: ShoppingRecord) => Partial<ShoppingRecord>): Promise<void> {
+  await db.transaction('rw', db.shopping, async () => {
+    const current = (await db.shopping.get('current')) ?? EMPTY_SHOPPING();
+    await db.shopping.put({ ...current, ...change(current), updatedAt: new Date().toISOString() });
   });
 }
 
-const OVERRIDE_KEYS = ['boneBrothGramsFor3', 'concentrateGramsFor3'] as const;
+const newKey = () => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 
-// An undefined override deletes the stored value, restoring the recipe default.
-export async function saveSoupPrefs(recipeId: string, patch: SoupPrefsPatch): Promise<void> {
-  const updated = await db.soupPrefs.update(recipeId, (prefs) => {
-    if (patch.brothType) prefs.brothType = patch.brothType;
-    if (patch.thaiLegume) prefs.thaiLegume = patch.thaiLegume;
-    for (const key of OVERRIDE_KEYS) {
-      if (!(key in patch)) continue;
-      const value = patch[key];
-      if (value === undefined) delete prefs[key];
-      else prefs[key] = value;
-    }
-  });
-  if (updated === 0) throw new Error(`Soup prefs for ${recipeId} missing`);
+export function addShoppingEntry(entry: Omit<ShoppingEntry, 'key'>): Promise<void> {
+  return updateShopping((s) => ({ entries: [...s.entries, { ...entry, key: newKey() }] }));
+}
+
+export function updateShoppingEntry(key: string, patch: Partial<Omit<ShoppingEntry, 'key' | 'recipeId'>>): Promise<void> {
+  return updateShopping((s) => ({ entries: s.entries.map((e) => (e.key === key ? { ...e, ...patch } : e)) }));
+}
+
+export function removeShoppingEntry(key: string): Promise<void> {
+  return updateShopping((s) => ({ entries: s.entries.filter((e) => e.key !== key) }));
+}
+
+export function toggleChecked(ingredientId: string): Promise<void> {
+  return updateShopping((s) => ({
+    checked: s.checked.includes(ingredientId) ? s.checked.filter((id) => id !== ingredientId) : [...s.checked, ingredientId],
+  }));
+}
+
+export function clearChecked(): Promise<void> {
+  return updateShopping(() => ({ checked: [] }));
+}
+
+export function clearShopping(): Promise<void> {
+  return updateShopping(() => ({ entries: [], checked: [] }));
 }
