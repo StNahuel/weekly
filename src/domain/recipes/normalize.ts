@@ -1,6 +1,7 @@
-import type { RawCatalogItem, RawPlate, RawRecetario, RawSoupMeal, RawStep, RawVariants } from './raw.schema';
+import type { RawCatalogItem, RawPlate, RawRecetario, RawSoupMeal, RawStep, RawStepFixes, RawVariants } from './raw.schema';
 import type {
   Addition,
+  AdditionPlace,
   Catalog,
   CatalogItem,
   Category,
@@ -122,10 +123,20 @@ function notesOf(notes: string[] | string | undefined): string[] {
 }
 
 function makeStepNormalizer(catalog: Catalog) {
-  const addition = (a: { ingredientId: string; grams: number; optional?: boolean | undefined }, where: string): Addition => {
+  type RawAddition = {
+    ingredientId: string;
+    grams: number;
+    optional?: boolean | undefined;
+    fixed?: boolean | undefined;
+    place?: AdditionPlace | undefined;
+  };
+  const addition = (a: RawAddition, where: string): Addition => {
     const item = catalog.get(a.ingredientId);
     if (!item) throw new Error(`Unknown ingredient "${a.ingredientId}" in ${where}`);
-    return { ingredientId: a.ingredientId, name: item.name, grams: a.grams, optional: a.optional === true };
+    const out: Addition = { ingredientId: a.ingredientId, name: item.name, grams: a.grams, optional: a.optional === true };
+    if (a.fixed) out.fixed = true;
+    if (a.place) out.place = a.place;
+    return out;
   };
 
   return (raw: RawStep, where: string): Step => {
@@ -190,6 +201,25 @@ function assertSameIngredients(recipeId: string, original: readonly Step[], vari
       throw new Error(`iChef variant for ${recipeId}: ${id} has ${got.get(id) ?? 0} g, original ${want.get(id) ?? 0} g`);
     }
   }
+}
+
+// Returns a copy of the recipe book with reviewed corrections applied to individual steps.
+export function applyStepFixes(raw: RawRecetario, fixes: RawStepFixes): RawRecetario {
+  const copy = structuredClone(raw);
+  const byId = new Map(Object.values(copy.categories).flat().map((r) => [r.id, r]));
+  for (const fix of fixes.fixes) {
+    const recipe = byId.get(fix.recipeId);
+    if (!recipe) throw new Error(`Step fix for unknown recipe "${fix.recipeId}"`);
+    let steps: RawStep[] | undefined;
+    if (fix.part === 'main') steps = 'embeddedSoup' in recipe ? undefined : recipe.steps;
+    else if (fix.part === 'soup') steps = 'embeddedSoup' in recipe ? recipe.embeddedSoup.steps : undefined;
+    else if ('proteinOptions' in recipe) steps = recipe.proteinOptions.find((p) => `protein:${p.id}` === fix.part)?.steps;
+    const target = steps?.[fix.step - 1];
+    if (!steps || !target) throw new Error(`Step fix ${fix.recipeId} ${fix.part} #${String(fix.step)} does not match a step`);
+    const set = Object.fromEntries(Object.entries(fix.set).filter(([, value]) => value !== undefined)) as Partial<RawStep>;
+    steps[fix.step - 1] = { ...target, ...set };
+  }
+  return copy;
 }
 
 export function normalizeRecetario(raw: RawRecetario, rawVariants: RawVariants): NormalizedRecetario {

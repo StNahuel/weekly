@@ -36,10 +36,25 @@ Dexie v3 keeps each soup's broth choice (old id `miso` → `soup_miso`; Thai leg
 
 ## "Con iChef" variants
 
-`data/ichef-variants.json` re-plans plates to use the iChef: sauces, rice/pasta/potatoes cooked in the jar, chopped aromatics, dressings and tzatziki, blanched vegetables, gentle egg cooking, cold blending for juices, precise water temperature for green tea. Searing and browning stay in the air fryer or hornalla, and the two run in parallel (`parallelGroup`). Rules the validator enforces:
+`data/ichef-variants.json` re-plans plates to use the iChef the way the manufacturer's own recipes do (see `docs/ICHEF_REFERENCE.md`, built from the public portal at recetas.ichef.com.uy):
+- rice and eggs in the **cooking basket** with plenty of water;
+- potatoes, vegetables and fish in the **vaporera** above the jar, often while rice or a sauce cooks below;
+- sauces with a 120 °C sofrito;
+- pasta with 0.3 Reversa;
+- shrimp and gently browned chicken in the jar when that suits the dish;
+- dressings, cold blending for juices, 80 °C water for green tea.
 
-- same ingredients and grams per ingredient as the original recipe (one portion); only `water`/`ice` may change (e.g. measured cooking water for rice or pasta);
-- iChef steps only use what the existing soup recipes use: no heat or 37–100 °C, speeds 0.5–5, speed ≤ 2 with heat, gradual blending, reverse "si tu modelo lo permite"; no Varoma/steaming tray, rice basket, browning or > 100 °C;
-- every hot iChef step carries a safety note; doneness checks (`verify`) are kept.
+Crisp searing stays in the air fryer, wok or sartén, running in parallel (`parallelGroup`).
 
-The settings are written for this app from the soup book's patterns and general jug-cooker practice; they are not tested on the user's iChef model. Soup + protein meals are out of scope (they already cook the soup in the iChef and the protein in parallel). Recipes where the iChef adds nothing (shaker drinks, yogurt bowls, bars, sparkling drinks, 95 °C infusions, hard-boiled eggs without a basket) are listed under `skipped` with the reason.
+The validator (`scripts/validate-ichef-variants.py`) enforces these rules:
+- same ingredients and grams per ingredient as the original recipe (one portion); only `water`/`ice` may change;
+- basket and steamer water is marked `fixed`, so it stays at the portal amount (≈ 700–1500 g) for 1–4 portions instead of scaling;
+- food in the basket or steamer carries `place`, and steamer food doesn't count toward the jar's MAX warning;
+- iChef settings stay within portal practice: 37–160 °C or steam mode; speeds 0.3 or 0.5–10; speed ≤ 3.5 with heat or steam; gradual blending only below 90 °C without heat;
+- every hot or steam step has a safety note, and doneness checks are kept.
+
+These settings follow the portal's patterns but were not tested on the user's own iChef. Soup + protein meals have no variant: they already cook the soup in the iChef and the protein in parallel. Recipes where the iChef adds nothing are listed under `skipped` with a reason.
+
+## Step fixes
+
+`data/step-fixes.json` corrects individual cooking steps of `recetario.json` found wrong in review: times, temperatures, doneness checks, unsafe or impossible iChef settings, and instructions that contradict the structured fields. Each fix names the recipe, the part (`main`, `soup`, `protein:<id>`), the 1-based step and a reason. Fixes can't change ingredients or grams. The app applies them at load and `recetario.json` stays unchanged.

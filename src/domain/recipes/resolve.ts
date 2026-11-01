@@ -38,7 +38,7 @@ export type ResolvedRecipe = {
 };
 
 const scale = (additions: readonly Addition[], factor: number): Addition[] =>
-  additions.map((a) => ({ ...a, grams: roundGrams(a.grams * factor) })).filter((a) => a.grams > 0);
+  additions.map((a) => (a.fixed ? a : { ...a, grams: roundGrams(a.grams * factor) })).filter((a) => a.grams > 0);
 
 export function sumLines(additions: readonly ResolvedLine[]): ResolvedLine[] {
   const totals = new Map<string, ResolvedLine>();

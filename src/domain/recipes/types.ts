@@ -33,13 +33,24 @@ export type CatalogItem = {
 
 export type Catalog = ReadonlyMap<string, CatalogItem>;
 
-export type Addition = { ingredientId: string; name: string; grams: number; optional: boolean };
+export type AdditionPlace = 'canasta' | 'vaporera';
+
+export type Addition = {
+  ingredientId: string;
+  name: string;
+  grams: number;
+  optional: boolean;
+  fixed?: boolean;
+  place?: AdditionPlace;
+};
 
 export type MachineSettings = {
   durationSecondsRange: readonly [number, number] | null;
   temperatureCRange: readonly [number, number] | null;
   speed: { mode: 'numeric' | 'gradual' | 'manual'; value: number | null };
   reverseIfSupported: boolean;
+  steam?: boolean | undefined;
+  accessories?: string[] | undefined;
   sourceSettingsText?: string;
 };
 

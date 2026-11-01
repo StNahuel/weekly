@@ -11,7 +11,7 @@ import { DeviceChips } from '../shared/DeviceChips';
 import { IngredientList } from '../shared/IngredientList';
 import { CATEGORY_LABELS, CATEGORY_TINTS, subtypeLabel } from '../shared/labels';
 import { NutritionDisclosure } from '../shared/NutritionDisclosure';
-import { capacityText, MACHINE_NOTICE } from './copy';
+import { capacityText, CURRY_PASTE_ID, CURRY_TURMERIC_NOTE, MACHINE_NOTICE } from './copy';
 import { RecipeOptions } from './RecipeOptions';
 import { StepOverview } from './StepOverview';
 import { recipeSearch, useRecipeView } from './useRecipeView';
@@ -141,6 +141,12 @@ export default function RecipeDetail() {
 
       <NutritionDisclosure estimate={resolved.nutritionPerPortion} />
 
+      {resolved.totals.some((l) => l.ingredientId === CURRY_PASTE_ID) && (
+        <p className={`flex gap-2 text-sm ${CALLOUT}`}>
+          <Info aria-hidden="true" size={20} className="shrink-0" />
+          {CURRY_TURMERIC_NOTE}
+        </p>
+      )}
       {usesIchef && (
         <p className={`flex gap-2 text-sm ${CALLOUT}`}>
           <Info aria-hidden="true" size={20} className="shrink-0" />

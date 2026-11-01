@@ -1,8 +1,9 @@
 import type { z } from 'zod';
+import rawFixes from '../../data/step-fixes.json';
 import rawVariants from '../../data/ichef-variants.json';
 import raw from '../../data/recetario.json';
-import { normalizeRecetario } from '../domain/recipes/normalize';
-import { rawRecetarioSchema, rawVariantsSchema } from '../domain/recipes/raw.schema';
+import { applyStepFixes, normalizeRecetario } from '../domain/recipes/normalize';
+import { rawRecetarioSchema, rawStepFixesSchema, rawVariantsSchema } from '../domain/recipes/raw.schema';
 import type { Recipe, Soup } from '../domain/recipes/types';
 
 function parseWith<S extends z.ZodType>(name: string, schema: S, value: unknown): z.infer<S> {
@@ -13,10 +14,11 @@ function parseWith<S extends z.ZodType>(name: string, schema: S, value: unknown)
 }
 
 function parse() {
-  return normalizeRecetario(
+  const book = applyStepFixes(
     parseWith('recetario.json', rawRecetarioSchema, raw),
-    parseWith('ichef-variants.json', rawVariantsSchema, rawVariants),
+    parseWith('step-fixes.json', rawStepFixesSchema, rawFixes),
   );
+  return normalizeRecetario(book, parseWith('ichef-variants.json', rawVariantsSchema, rawVariants));
 }
 
 const { catalog, recipes } = parse();
