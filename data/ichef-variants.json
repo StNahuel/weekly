@@ -4086,9 +4086,9 @@
     },
     {
       "recipeId": "lunch_24",
-      "title": "Salsa y arroz en canasta en iChef + pollo en air fryer + wok",
-      "summary": "La iChef procesa la salsa Kung Pao y cocina el arroz integral en la canasta; el pollo se dora en la air fryer mientras las verduras se saltean en el wok. El pollo no va a la jarra (método del portal a 160 °C con batidor, id 10871) porque está ocupada con el arroz y la air fryer lo dora mejor y sin tandas.",
-      "minutes": 40,
+      "title": "Salsa y arroz en la iChef + pollo y verduras en la air fryer",
+      "summary": "La iChef procesa la salsa Kung Pao y cocina el arroz integral en la canasta. La air fryer tuesta primero las verduras y después dora el pollo. Al final la salsa espesa en el vaso y se integra todo: sin wok ni hornalla.",
+      "minutes": 42,
       "steps": [
         {
           "title": "Salsa Kung Pao",
@@ -4192,31 +4192,12 @@
           ]
         },
         {
-          "title": "Dorar pollo en la air fryer",
+          "title": "Verduras en la air fryer",
           "device": "air_fryer",
           "parallelGroup": "A",
-          "minutes": 12,
-          "temperatureC": 190,
-          "instructions": "Cuando falten unos 14 min para el arroz: pollo en cubos de 2 cm mezclado con el aceite, en capa suelta; sacudir a mitad.",
-          "additions": [
-            {
-              "ingredientId": "chicken_breast",
-              "grams": 220
-            },
-            {
-              "ingredientId": "olive_oil",
-              "grams": 4
-            }
-          ],
-          "verify": "Pollo ≥ 74 °C en el centro."
-        },
-        {
-          "title": "Saltear verduras",
-          "device": "hornalla",
-          "parallelGroup": "A",
-          "minutes": 6,
-          "heat": "medio-alto",
-          "instructions": "Mientras se dora el pollo: morrón, zucchini y cebolla en cubos en el wok con el aceite, a fuego medio-alto 4–6 min.",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "Cuando falten unos 22 min para el arroz: morrón, zucchini y cebolla en cubos de 2 cm mezclados con el aceite, en capa suelta; sacudir a mitad. Pasar a un bol.",
           "additions": [
             {
               "ingredientId": "red_pepper",
@@ -4237,16 +4218,85 @@
           ]
         },
         {
-          "title": "Glasear y terminar",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio-alto",
-          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y escurrir el arroz. Sumar el pollo al wok con las verduras y la salsa revuelta; hervir 1–2 min para espesar y terminar con el maní al apagar. Servir con el arroz.",
+          "title": "Pollo en la air fryer",
+          "device": "air_fryer",
+          "parallelGroup": "A",
+          "minutes": 12,
+          "temperatureC": 200,
+          "instructions": "Enseguida, el pollo en cubos de 2 cm mezclado con el aceite, en capa suelta; sacudir a mitad. Con 3–4 porciones, en dos tandas.",
+          "additions": [
+            {
+              "ingredientId": "chicken_breast",
+              "grams": 220
+            },
+            {
+              "ingredientId": "olive_oil",
+              "grams": 4
+            }
+          ],
+          "verify": "Pollo ≥ 74 °C en el centro."
+        },
+        {
+          "title": "Espesar la salsa",
+          "device": "iChef",
+          "instructions": "Retirar la vaporera, sacar la canasta con el gancho de la espátula y escurrir el arroz. Vaciar el agua del vaso. Revolver la salsa reservada, volcarla en el vaso y programar hasta que espese.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              120
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora",
+              "Canasta de cocción arriba (antisalpicaduras)"
+            ]
+          },
+          "sourceSettingsText": "2 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Con calor, tapa sin taza medidora y la canasta arriba contra salpicaduras; seguir el manual de la iChef."
+          ]
+        },
+        {
+          "title": "Integrar con el maní",
+          "device": "iChef",
+          "instructions": "Sumar el pollo y las verduras al vaso y programar para que se glaseen. Al terminar, sumar el maní y servir con el arroz.",
           "additions": [
             {
               "ingredientId": "peanuts",
               "grams": 15
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              60,
+              60
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora",
+              "Canasta de cocción arriba (antisalpicaduras)"
+            ]
+          },
+          "sourceSettingsText": "1 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Con calor, tapa sin taza medidora y la canasta arriba contra salpicaduras; seguir el manual de la iChef."
           ]
         }
       ]
@@ -6005,9 +6055,9 @@
     },
     {
       "recipeId": "lunch_35",
-      "title": "Arroz y verduras al vapor en la iChef, tofu en la air fryer",
-      "summary": "La iChef licúa la salsa, cocina el arroz integral en la canasta y hace brócoli y zanahoria al vapor encima. El tofu se dora en la air fryer y el shiitake se saltea en el wok, que es donde toma color.",
-      "minutes": 40,
+      "title": "Arroz y verduras al vapor en la iChef, tofu y shiitake en la air fryer",
+      "summary": "La iChef licúa la salsa, cocina el arroz integral en la canasta y hace brócoli y zanahoria al vapor encima. La air fryer dora el tofu y después el shiitake. Al final la salsa calienta el edamame en el vaso y se integra todo: sin wok ni hornalla.",
+      "minutes": 42,
       "steps": [
         {
           "title": "Salsa de jengibre",
@@ -6152,11 +6202,12 @@
           ]
         },
         {
-          "title": "Saltear el shiitake",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "medio-alto",
-          "instructions": "Cuando a la vaporera le queden unos 6 min: saltear el shiitake en láminas con el aceite en el wok bien caliente hasta dorar.",
+          "title": "Shiitake en la air fryer",
+          "device": "air_fryer",
+          "parallelGroup": "B",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Cuando a la vaporera le queden unos 7 min: pasar el tofu a un bol y dorar el shiitake en láminas mezclado con el aceite, en capa suelta; sacudir a mitad.",
           "additions": [
             {
               "ingredientId": "shiitake",
@@ -6166,20 +6217,69 @@
               "ingredientId": "olive_oil",
               "grams": 4
             }
-          ],
-          "parallelGroup": "B"
+          ]
         },
         {
-          "title": "Integrar y servir",
-          "device": "hornalla",
-          "minutes": 3,
-          "heat": "medio",
-          "instructions": "Sumar el brócoli y la zanahoria al vapor, el edamame ya cocido y pelado y la salsa; saltear 2–3 min y sumar el tofu al final. Servir con el arroz.",
+          "title": "Calentar salsa y edamame",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Colocar la salsa y el edamame ya cocido y pelado y programar.",
           "additions": [
             {
               "ingredientId": "edamame",
               "grams": 130
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora",
+              "Canasta de cocción arriba (antisalpicaduras)"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Con calor, tapa sin taza medidora y la canasta arriba contra salpicaduras; seguir el manual de la iChef."
+          ]
+        },
+        {
+          "title": "Integrar y servir",
+          "device": "iChef",
+          "instructions": "Sumar el brócoli, la zanahoria, el shiitake y el tofu y programar para calentar sin romperlos. Servir con el arroz.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              60,
+              60
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora",
+              "Canasta de cocción arriba (antisalpicaduras)"
+            ]
+          },
+          "sourceSettingsText": "1 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Con calor, tapa sin taza medidora y la canasta arriba contra salpicaduras; seguir el manual de la iChef."
           ]
         }
       ]
