@@ -28,6 +28,7 @@ Vite 8, React 19, TypeScript 6 (strict), Tailwind 4, react-router-dom 7 (`create
 ## Layout
 
 - `data/recetario.json`: the recipe book (99 ingredients; 6 desayunos, 52 principales of which 17 are soup + protein, 10 meriendas, 24 jugos). Shipped unchanged.
+- `data/ichef-variants.json`: "Con iChef" step plans for plates (same grams as the original, iChef in parallel with air fryer/hornalla), plus the recipes skipped with a reason. `scripts/validate-ichef-variants.py` checks it.
 - `src/domain/recipes/`: `raw.schema.ts` (Zod for the fields the app reads), `normalize.ts` (devices, shop sections, instruction cleanup), `resolve.ts` (scaling, broth choice, optional ingredients, nutrition), `random.ts`, `search.ts`, `shopping.ts`.
 - `src/seed/`: parses and normalizes the JSON once. `src/db/`: Dexie schema and migrations, repo hooks, backup.
 - `src/features/`: `elegir` (swipe card), `recetas` (list, detail, kitchen mode), `compras`, `ajustes`, `shared`.
@@ -35,6 +36,7 @@ Vite 8, React 19, TypeScript 6 (strict), Tailwind 4, react-router-dom 7 (`create
 ## How it behaves
 
 - **Soup meals** (`caldo_con_proteina`) embed a full iChef soup (base 3 portions, scalable 1–4) and six protein options. The detail and kitchen mode show the soup for the selected portions and then the chosen protein. Broth is either water + FONDO vegetal concentrate or ready bone broth + water, each weighed separately; the choice and the optional Thai edamame are remembered per soup.
+- **Con iChef**: plates with a variant open on it by default; "Original" is one tap away. The detail shows a step plan where parallel steps are grouped, and kitchen mode tells you when to program the iChef and move on. "Solo la sopa" cooks just the soup of a soup meal (also from the Sopas filter and in Compras).
 - **Steps** come from the JSON. The "Agregar: X g; …" prefix repeated in many instructions is removed because the grams are rendered (and scaled) from the step additions.
 - **Shopping** sums grams per ingredient across meals; soup portions of the same soup are grouped into batches of up to 4.
 - **Storage**: Dexie v3/v4 migrates older installs (keeps soup broth choices and the text-size setting; drops the planner data). Backups are schema v3 JSON; backups from older app versions are rejected with a message.

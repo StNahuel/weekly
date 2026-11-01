@@ -1,11 +1,13 @@
-import type { RawCatalogItem, RawPlate, RawRecetario, RawSoupMeal, RawStep } from './raw.schema';
+import type { RawCatalogItem, RawPlate, RawRecetario, RawSoupMeal, RawStep, RawStepFixes, RawVariants } from './raw.schema';
 import type {
   Addition,
+  AdditionPlace,
   Catalog,
   CatalogItem,
   Category,
   Device,
   Plate,
+  PlateMethod,
   ProteinOption,
   Recipe,
   ShopSection,
@@ -121,14 +123,24 @@ function notesOf(notes: string[] | string | undefined): string[] {
 }
 
 function makeStepNormalizer(catalog: Catalog) {
-  const addition = (a: { ingredientId: string; grams: number; optional?: boolean | undefined }, where: string): Addition => {
+  type RawAddition = {
+    ingredientId: string;
+    grams: number;
+    optional?: boolean | undefined;
+    fixed?: boolean | undefined;
+    place?: AdditionPlace | undefined;
+  };
+  const addition = (a: RawAddition, where: string): Addition => {
     const item = catalog.get(a.ingredientId);
     if (!item) throw new Error(`Unknown ingredient "${a.ingredientId}" in ${where}`);
-    return { ingredientId: a.ingredientId, name: item.name, grams: a.grams, optional: a.optional === true };
+    const out: Addition = { ingredientId: a.ingredientId, name: item.name, grams: a.grams, optional: a.optional === true };
+    if (a.fixed) out.fixed = true;
+    if (a.place) out.place = a.place;
+    return out;
   };
 
   return (raw: RawStep, where: string): Step => {
-    const at = `${where} step ${raw.order}`;
+    const at = `${where} step ${raw.order ?? raw.title}`;
     const step: Step = {
       title: raw.title,
       device: deviceOf(raw.device, at),
@@ -168,7 +180,49 @@ export function normalizeSearch(text: string): string {
 
 export type NormalizedRecetario = { catalog: Catalog; recipes: Recipe[] };
 
-export function normalizeRecetario(raw: RawRecetario): NormalizedRecetario {
+// Water and ice are never bought and carry no macros, so a variant may weigh different amounts.
+const FREE_INGREDIENTS = new Set(['water', 'ice']);
+
+function gramsById(steps: readonly Step[]): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const step of steps) {
+    for (const a of step.additions) {
+      if (!FREE_INGREDIENTS.has(a.ingredientId)) out.set(a.ingredientId, Math.round(((out.get(a.ingredientId) ?? 0) + a.grams) * 10) / 10);
+    }
+  }
+  return out;
+}
+
+function assertSameIngredients(recipeId: string, original: readonly Step[], variant: readonly Step[]): void {
+  const want = gramsById(original);
+  const got = gramsById(variant);
+  for (const id of new Set([...want.keys(), ...got.keys()])) {
+    if (want.get(id) !== got.get(id)) {
+      throw new Error(`iChef variant for ${recipeId}: ${id} has ${got.get(id) ?? 0} g, original ${want.get(id) ?? 0} g`);
+    }
+  }
+}
+
+// Returns a copy of the recipe book with reviewed corrections applied to individual steps.
+export function applyStepFixes(raw: RawRecetario, fixes: RawStepFixes): RawRecetario {
+  const copy = structuredClone(raw);
+  const byId = new Map(Object.values(copy.categories).flat().map((r) => [r.id, r]));
+  for (const fix of fixes.fixes) {
+    const recipe = byId.get(fix.recipeId);
+    if (!recipe) throw new Error(`Step fix for unknown recipe "${fix.recipeId}"`);
+    let steps: RawStep[] | undefined;
+    if (fix.part === 'main') steps = 'embeddedSoup' in recipe ? undefined : recipe.steps;
+    else if (fix.part === 'soup') steps = 'embeddedSoup' in recipe ? recipe.embeddedSoup.steps : undefined;
+    else if ('proteinOptions' in recipe) steps = recipe.proteinOptions.find((p) => `protein:${p.id}` === fix.part)?.steps;
+    const target = steps?.[fix.step - 1];
+    if (!steps || !target) throw new Error(`Step fix ${fix.recipeId} ${fix.part} #${String(fix.step)} does not match a step`);
+    const set = Object.fromEntries(Object.entries(fix.set).filter(([, value]) => value !== undefined)) as Partial<RawStep>;
+    steps[fix.step - 1] = { ...target, ...set };
+  }
+  return copy;
+}
+
+export function normalizeRecetario(raw: RawRecetario, rawVariants: RawVariants): NormalizedRecetario {
   const catalog = new Map<string, CatalogItem>();
   for (const item of raw.ingredientCatalog) {
     if (catalog.has(item.id)) throw new Error(`Duplicate ingredient id "${item.id}"`);
@@ -177,9 +231,19 @@ export function normalizeRecetario(raw: RawRecetario): NormalizedRecetario {
     catalog.set(item.id, entry);
   }
   const step = makeStepNormalizer(catalog);
+  const variantById = new Map(rawVariants.variants.map((v) => [v.recipeId, v]));
 
   const plate = (r: RawPlate, category: Category): Plate => {
     const steps = r.steps.map((s) => step(s, r.id));
+    const original: PlateMethod = { id: 'original', title: 'Receta original', summary: null, minutes: r.totalMinutesApprox, steps };
+    const variant = variantById.get(r.id);
+    variantById.delete(r.id);
+    const methods: PlateMethod[] = [original];
+    if (variant) {
+      const variantSteps = variant.steps.map((s) => step(s, `${r.id} iChef`));
+      assertSameIngredients(r.id, steps, variantSteps);
+      methods.unshift({ id: 'ichef', title: variant.title, summary: variant.summary, minutes: variant.minutes, steps: variantSteps });
+    }
     return {
       kind: 'plate',
       id: r.id,
@@ -188,9 +252,10 @@ export function normalizeRecetario(raw: RawRecetario): NormalizedRecetario {
       subtype: r.subtype ?? null,
       baseServings: r.servings,
       minutes: r.totalMinutesApprox,
-      devices: summarizeDevices(steps),
+      devices: summarizeDevices(methods[0]?.steps ?? steps),
       notes: notesOf(r.notes),
       steps,
+      methods,
       referenceKcal: r.nutrition.kcal,
       searchText: searchable(r.title, ...r.ingredients.map((i) => catalog.get(i.id)?.name ?? i.name)),
     };
@@ -245,6 +310,7 @@ export function normalizeRecetario(raw: RawRecetario): NormalizedRecetario {
     ...meriendas.map((r) => plate(r, 'meriendas')),
     ...jugos.map((r) => plate(r, 'jugos')),
   ];
+  if (variantById.size > 0) throw new Error(`iChef variants for unknown plates: ${[...variantById.keys()].join(', ')}`);
   const ids = new Set<string>();
   for (const recipe of recipes) {
     if (ids.has(recipe.id)) throw new Error(`Duplicate recipe id "${recipe.id}"`);

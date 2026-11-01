@@ -33,13 +33,24 @@ export type CatalogItem = {
 
 export type Catalog = ReadonlyMap<string, CatalogItem>;
 
-export type Addition = { ingredientId: string; name: string; grams: number; optional: boolean };
+export type AdditionPlace = 'canasta' | 'vaporera';
+
+export type Addition = {
+  ingredientId: string;
+  name: string;
+  grams: number;
+  optional: boolean;
+  fixed?: boolean;
+  place?: AdditionPlace;
+};
 
 export type MachineSettings = {
   durationSecondsRange: readonly [number, number] | null;
   temperatureCRange: readonly [number, number] | null;
   speed: { mode: 'numeric' | 'gradual' | 'manual'; value: number | null };
   reverseIfSupported: boolean;
+  steam?: boolean | undefined;
+  accessories?: string[] | undefined;
   sourceSettingsText?: string;
 };
 
@@ -68,11 +79,18 @@ type RecipeBase = {
   searchText: string;
 };
 
+export type PlateMethodId = 'ichef' | 'original';
+
+export type PlateMethod = { id: PlateMethodId; title: string; summary: string | null; minutes: number; steps: Step[] };
+
 export type Plate = RecipeBase & {
   kind: 'plate';
   subtype: string | null;
   minutes: number;
+  // The original steps; every method adds the same ingredients and grams (water aside).
   steps: Step[];
+  // "Con iChef" first when the recipe has one, then the original.
+  methods: PlateMethod[];
   referenceKcal: number;
 };
 

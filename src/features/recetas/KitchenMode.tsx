@@ -20,16 +20,18 @@ function sectionLabel(section: Section): string {
   return section.kind === 'soup' ? section.title : `Proteína: ${section.title}`;
 }
 
-function hintFor({ step, section, indexInSection }: FlatStep, flat: readonly FlatStep[], position: number): string | null {
-  if (section.kind === 'protein' && indexInSection === 0) return 'Podés hacerla mientras se cocina la sopa.';
+const sameGroup = (a: FlatStep | undefined, b: FlatStep) =>
+  b.step.parallelGroup !== undefined && a?.section === b.section && a.step.parallelGroup === b.step.parallelGroup;
+
+function hintFor(current: FlatStep, flat: readonly FlatStep[], position: number): string | null {
+  if (current.section.kind === 'protein' && current.indexInSection === 0) return 'Podés hacerla mientras se cocina la sopa.';
   const previous = flat[position - 1];
-  if (
-    step.parallelGroup !== undefined &&
-    previous?.section === section &&
-    previous.step.parallelGroup === step.parallelGroup
-  ) {
-    return 'En paralelo con el paso anterior';
+  const next = flat[position + 1];
+  if (sameGroup(previous, current)) {
+    return previous?.step.device === current.step.device ? 'Sigue en paralelo con lo anterior' : 'Mientras tanto, en paralelo';
   }
+  // A long job that starts a parallel group: don't wait for it, move on.
+  if (next && sameGroup(current, next)) return 'Programala y seguí con el paso siguiente mientras tanto';
   return null;
 }
 
@@ -57,7 +59,7 @@ export default function KitchenMode() {
   const position = Math.min(index, total - 1);
   const current = flat[position];
   if (!current) return <Empty title="Esta receta no tiene pasos." />;
-  const recipeUrl = `/recetas/${recipe.id}${recipeSearch(resolved.servings, resolved.protein?.id)}`;
+  const recipeUrl = `/recetas/${recipe.id}${recipeSearch(resolved.servings, resolved.protein?.id, resolved.method)}`;
   const firstHotBlend = flat.findIndex((f) => f.step.machine?.speed.mode === 'gradual');
   const usesIchef = flat.some((f) => f.step.device === 'ichef');
   const last = position === total - 1;

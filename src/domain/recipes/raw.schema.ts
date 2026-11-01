@@ -23,9 +23,13 @@ const rawLineSchema = z.object({
 
 const rawAdditionSchema = z.object({
   ingredientId: z.string().min(1),
-  name: z.string().min(1),
+  name: z.string().min(1).optional(),
   grams: z.number().nonnegative(),
   optional: z.boolean().optional(),
+  // Water for the cooking basket or steamer: the same amount for any number of portions.
+  fixed: z.boolean().optional(),
+  // Where it goes when not straight into the jar.
+  place: z.enum(['canasta', 'vaporera']).optional(),
 });
 
 export const rawMachineSchema = z.object({
@@ -33,10 +37,13 @@ export const rawMachineSchema = z.object({
   temperatureCRange: range.nullable(),
   speed: z.object({ mode: z.enum(['numeric', 'gradual', 'manual']), value: z.number().nullable() }),
   reverseIfSupported: z.boolean(),
+  // "Cocinar al vapor" mode with the vaporera; temperatureCRange stays null.
+  steam: z.boolean().optional(),
+  accessories: z.array(z.string().min(1)).optional(),
 });
 
 export const rawStepSchema = z.object({
-  order: z.number(),
+  order: z.number().optional(),
   title: z.string().min(1),
   device: z.string().min(1),
   instructions: z.string(),
@@ -115,6 +122,42 @@ export const rawRecetarioSchema = z.object({
   }),
 });
 
+// data/ichef-variants.json: alternative "Con iChef" step plans for plates, same ingredients and grams.
+export const rawVariantsSchema = z.object({
+  schemaVersion: z.literal(1),
+  variants: z.array(
+    z.object({
+      recipeId: z.string().min(1),
+      title: z.string().min(1),
+      summary: z.string().min(1),
+      minutes: z.number().positive(),
+      steps: z.array(rawStepSchema).min(1),
+    }),
+  ),
+  skipped: z.array(z.object({ recipeId: z.string().min(1), reason: z.string().min(1) })),
+});
+
+export type RawVariants = z.infer<typeof rawVariantsSchema>;
+
+const fixableStepSchema = rawStepSchema
+  .omit({ additions: true, order: true, alternativeForBoneBroth: true })
+  .partial();
+
+// data/step-fixes.json: corrections to cooking steps of recetario.json found in review. Grams never change here.
+export const rawStepFixesSchema = z.object({
+  schemaVersion: z.literal(1),
+  fixes: z.array(
+    z.object({
+      recipeId: z.string().min(1),
+      part: z.union([z.literal('main'), z.literal('soup'), z.string().regex(/^protein:[a-z_]+$/)]),
+      step: z.number().int().positive(),
+      set: fixableStepSchema,
+      reason: z.string().min(1),
+    }),
+  ),
+});
+
+export type RawStepFixes = z.infer<typeof rawStepFixesSchema>;
 export type RawRecetario = z.infer<typeof rawRecetarioSchema>;
 export type RawStep = z.infer<typeof rawStepSchema>;
 export type RawPlate = z.infer<typeof rawPlateSchema>;

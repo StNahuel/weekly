@@ -2,7 +2,7 @@ import { roundGrams } from '../roundGrams';
 import { proteinOf, soupSteps, sumLines, type ResolvedLine, type SoupPrefs } from './resolve';
 import { SHOP_SECTIONS, type Catalog, type Recipe, type ShopSection, type Soup } from './types';
 
-export type ShoppingEntry = { key: string; recipeId: string; servings: number; proteinId?: string };
+export type ShoppingEntry = { key: string; recipeId: string; servings: number; proteinId?: string; soupOnly?: boolean };
 
 export type ShoppingItem = ResolvedLine & { section: ShopSection };
 
@@ -41,7 +41,7 @@ export function buildShoppingList(
       lines.push(...scaledLines(recipe.steps, entry.servings / recipe.baseServings));
       continue;
     }
-    lines.push(...scaledLines(proteinOf(recipe, entry.proteinId).steps, entry.servings / recipe.baseServings));
+    if (!entry.soupOnly) lines.push(...scaledLines(proteinOf(recipe, entry.proteinId).steps, entry.servings / recipe.baseServings));
     const current = soupPortions.get(recipe.soup.id);
     soupPortions.set(recipe.soup.id, { soup: recipe.soup, portions: (current?.portions ?? 0) + entry.servings });
   }

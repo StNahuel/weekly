@@ -7,19 +7,23 @@ import { BTN_PRIMARY, BTN_SECONDARY, CALLOUT, CARD, LINK } from '../../app/ui';
 import { addShoppingEntry } from '../../db/repo';
 import { servingsLabel } from '../../domain/format';
 import type { ResolvedRecipe } from '../../domain/recipes/resolve';
-import type { Recipe } from '../../domain/recipes/types';
 import { DeviceChips } from '../shared/DeviceChips';
 import { IngredientList } from '../shared/IngredientList';
 import { CATEGORY_LABELS, CATEGORY_TINTS, subtypeLabel } from '../shared/labels';
 import { NutritionDisclosure } from '../shared/NutritionDisclosure';
-import { capacityText, MACHINE_NOTICE } from './copy';
+import { capacityText, CURRY_PASTE_ID, CURRY_TURMERIC_NOTE, MACHINE_NOTICE } from './copy';
 import { RecipeOptions } from './RecipeOptions';
+import { StepOverview } from './StepOverview';
 import { recipeSearch, useRecipeView } from './useRecipeView';
 
-function minutesText(recipe: Recipe): string {
-  return recipe.kind === 'plate'
-    ? `≈ ${recipe.minutes} min`
-    : `≈ ${recipe.minutesMakingSoup} min haciendo la sopa · ${recipe.minutesWithPreparedSoup} min con la sopa hecha`;
+// Plates use water for boiling and blanching; a summed total is meaningless, so it shows per step.
+const COOKING_WATER = new Set(['water', 'ice']);
+
+function minutesText({ recipe, method, minutes }: ResolvedRecipe): string {
+  if (recipe.kind === 'soupMeal' && method === 'meal') {
+    return `≈ ${String(minutes)} min haciendo la sopa · ${String(recipe.minutesWithPreparedSoup)} min con la sopa hecha`;
+  }
+  return `≈ ${String(minutes)} min`;
 }
 
 function Ingredients({ resolved }: { resolved: ResolvedRecipe }) {
@@ -28,7 +32,10 @@ function Ingredients({ resolved }: { resolved: ResolvedRecipe }) {
     return (
       <section aria-labelledby="ingredients-heading" className={`space-y-3 ${CARD}`}>
         <h2 id="ingredients-heading" className="text-lg font-semibold">{`Ingredientes · ${servings}`}</h2>
-        <IngredientList lines={resolved.totals} />
+        <IngredientList lines={resolved.totals.filter((l) => !COOKING_WATER.has(l.ingredientId))} />
+        {resolved.totals.some((l) => COOKING_WATER.has(l.ingredientId)) && (
+          <p className="text-sm text-muted">El agua y el hielo se indican en cada paso.</p>
+        )}
       </section>
     );
   }
@@ -44,10 +51,12 @@ function Ingredients({ resolved }: { resolved: ResolvedRecipe }) {
           </p>
         )}
       </div>
-      <div className="space-y-1">
-        <h3 className="text-sm font-semibold tracking-wide text-muted uppercase">{`Proteína: ${resolved.protein?.title ?? ''}`}</h3>
-        <IngredientList lines={resolved.otherLines} label="Ingredientes de la proteína" />
-      </div>
+      {resolved.protein && (
+        <div className="space-y-1">
+          <h3 className="text-sm font-semibold tracking-wide text-muted uppercase">{`Proteína: ${resolved.protein.title}`}</h3>
+          <IngredientList lines={resolved.otherLines} label="Ingredientes de la proteína" />
+        </div>
+      )}
     </section>
   );
 }
@@ -55,7 +64,7 @@ function Ingredients({ resolved }: { resolved: ResolvedRecipe }) {
 export default function RecipeDetail() {
   const { recipeId = '' } = useParams();
   const navigate = useNavigate();
-  const { recipe, prefs, resolved, setServings, setProtein } = useRecipeView(recipeId);
+  const { recipe, prefs, resolved, setServings, setProtein, setMethod } = useRecipeView(recipeId);
   const [added, setAdded] = useState(false);
 
   if (!recipe) {
@@ -69,18 +78,22 @@ export default function RecipeDetail() {
   if (!prefs || !resolved) return <Loading />;
 
   const tint = CATEGORY_TINTS[recipe.category];
-  const subtype = recipe.kind === 'plate' ? subtypeLabel(recipe.subtype) : subtypeLabel('caldo_con_proteina');
+  const subtype =
+    recipe.kind === 'plate' ? subtypeLabel(recipe.subtype) : resolved.method === 'soup' ? 'Sopa' : subtypeLabel('caldo_con_proteina');
   const usesIchef = resolved.sections.some((s) => s.steps.some((step) => step.device === 'ichef'));
-  const search = recipeSearch(resolved.servings, resolved.protein?.id);
+  const search = recipeSearch(resolved.servings, resolved.protein?.id, resolved.method);
   const notes = recipe.kind === 'soupMeal' ? [...recipe.soup.notes, ...recipe.notes] : recipe.notes;
   // History index 0 means the page was opened directly; going back would leave the app.
   const historyIndex = (window.history.state as { idx?: unknown } | null)?.idx;
   const canGoBack = typeof historyIndex === 'number' && historyIndex > 0;
 
   const addToShopping = async () => {
+    const base = { recipeId: recipe.id, servings: resolved.servings };
     const entry = resolved.protein
-      ? { recipeId: recipe.id, servings: resolved.servings, proteinId: resolved.protein.id }
-      : { recipeId: recipe.id, servings: resolved.servings };
+      ? { ...base, proteinId: resolved.protein.id }
+      : resolved.method === 'soup'
+        ? { ...base, soupOnly: true }
+        : base;
     await addShoppingEntry(entry);
     setAdded(true);
   };
@@ -101,9 +114,10 @@ export default function RecipeDetail() {
         <h1 className="text-2xl font-semibold">{resolved.title}</h1>
         <p className="inline-flex items-center gap-1.5 text-muted">
           <Timer aria-hidden="true" size={18} />
-          {minutesText(recipe)}
+          {minutesText(resolved)}
         </p>
         <DeviceChips devices={resolved.devices} />
+        {resolved.summary && <p className="font-semibold text-sky-ink">{resolved.summary}</p>}
         {recipe.kind === 'soupMeal' && (
           <p>
             {recipe.soup.description}
@@ -118,12 +132,21 @@ export default function RecipeDetail() {
         prefs={prefs}
         onServingsChange={setServings}
         onProteinChange={setProtein}
+        onMethodChange={setMethod}
       />
 
       <Ingredients resolved={resolved} />
 
+      <StepOverview sections={resolved.sections} parallelSections={resolved.sections.length > 1} />
+
       <NutritionDisclosure estimate={resolved.nutritionPerPortion} />
 
+      {resolved.totals.some((l) => l.ingredientId === CURRY_PASTE_ID) && (
+        <p className={`flex gap-2 text-sm ${CALLOUT}`}>
+          <Info aria-hidden="true" size={20} className="shrink-0" />
+          {CURRY_TURMERIC_NOTE}
+        </p>
+      )}
       {usesIchef && (
         <p className={`flex gap-2 text-sm ${CALLOUT}`}>
           <Info aria-hidden="true" size={20} className="shrink-0" />

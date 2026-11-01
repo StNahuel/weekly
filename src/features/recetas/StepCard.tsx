@@ -1,14 +1,19 @@
-import { Check, ChevronDown, Flame, Gauge, Repeat, Thermometer, Timer, TriangleAlert } from 'lucide-react';
+import { Check, ChevronDown, CloudFog, Flame, Gauge, Repeat, Thermometer, Timer, TriangleAlert } from 'lucide-react';
 import { useId, useState, type ReactNode } from 'react';
 import { CALLOUT, CARD, SECTION_LABEL } from '../../app/ui';
 import { formatDuration, formatGrams } from '../../domain/format';
-import type { ResolvedStep } from '../../domain/recipes/resolve';
-import type { MachineSettings } from '../../domain/recipes/types';
+import { CAPACITY_WARNING_GRAMS, type ResolvedStep } from '../../domain/recipes/resolve';
+import type { AdditionPlace, MachineSettings } from '../../domain/recipes/types';
 import { DeviceChip } from '../shared/DeviceChips';
 import { TINTS, type Tint } from '../shared/labels';
 import { BONE_BROTH_STEP_TEXT, HOT_BLEND_TEXT, needsSafetyBanner, NO_NEW_INGREDIENTS, VAPOR_TEXT } from './copy';
 
 const speedFormat = new Intl.NumberFormat('es-UY', { maximumFractionDigits: 1 });
+
+const PLACE_LABELS: Readonly<Record<AdditionPlace, string>> = {
+  canasta: 'en la canasta de cocción',
+  vaporera: 'en la vaporera',
+};
 
 function speedText({ speed }: MachineSettings): string {
   switch (speed.mode) {
@@ -46,17 +51,23 @@ function Controls({ step }: { step: ResolvedStep }) {
             {formatDuration(machine.durationSecondsRange)}
           </Chip>
         )}
-        {machine.speed.mode !== 'manual' && (
-          <Chip icon={<Thermometer aria-hidden="true" size={20} />} tint={TINTS.peach}>
-            {temperatureText(machine)}
+        {machine.steam ? (
+          <Chip icon={<CloudFog aria-hidden="true" size={20} />} tint={TINTS.peach}>
+            Al vapor
           </Chip>
+        ) : (
+          machine.speed.mode !== 'manual' && (
+            <Chip icon={<Thermometer aria-hidden="true" size={20} />} tint={TINTS.peach}>
+              {temperatureText(machine)}
+            </Chip>
+          )
         )}
         <Chip icon={<Gauge aria-hidden="true" size={20} />} tint={TINTS.lavender}>
           {speedText(machine)}
         </Chip>
         {machine.reverseIfSupported && (
           <Chip icon={<Repeat aria-hidden="true" size={20} />} tint={TINTS.mint}>
-            Reversa si tu modelo lo permite
+            Reversa
           </Chip>
         )}
       </ul>
@@ -128,6 +139,8 @@ type StepCardProps = {
 
 export function StepCard({ step, section, position, total, hint, done, onToggleDone, safetyOpen }: StepCardProps) {
   const headingId = useId();
+  // Food in the steamer sits above the jar, so it does not count toward the jar's MAX.
+  const stepGrams = step.additions.reduce((sum, a) => (a.place === 'vaporera' ? sum : sum + a.grams), 0);
   return (
     <article aria-labelledby={headingId} className={`space-y-4 ${CARD}`}>
       <header className="flex items-center gap-4">
@@ -160,6 +173,7 @@ export function StepCard({ step, section, position, total, hint, done, onToggleD
               <li key={addition.ingredientId}>
                 {`${addition.name} — `}
                 <strong className="font-bold text-text">{formatGrams(addition.grams)}</strong>
+                {addition.place && <span className="text-base text-muted">{` · ${PLACE_LABELS[addition.place]}`}</span>}
                 {addition.optional && <span className="text-base text-muted"> (opcional)</span>}
               </li>
             ))}
@@ -171,6 +185,12 @@ export function StepCard({ step, section, position, total, hint, done, onToggleD
       {step.usesBoneBroth && <p className="text-base text-muted">{BONE_BROTH_STEP_TEXT}</p>}
 
       <Controls step={step} />
+      {step.machine?.accessories && step.machine.accessories.length > 0 && (
+        <p className="text-base">
+          <span className="font-semibold">Accesorios: </span>
+          {step.machine.accessories.join(' · ')}
+        </p>
+      )}
       {step.machine?.sourceSettingsText && (
         <p className="text-sm text-muted">{`Texto original: ${step.machine.sourceSettingsText}`}</p>
       )}
@@ -186,6 +206,12 @@ export function StepCard({ step, section, position, total, hint, done, onToggleD
             </li>
           ))}
         </ul>
+      )}
+
+      {step.device === 'ichef' && stepGrams >= CAPACITY_WARNING_GRAMS && (
+        <p className={`${CALLOUT} text-lg`}>
+          {`Este paso suma ≈ ${formatGrams(stepGrams)} en la jarra: puede superar la marca MAX. Hacelo en dos tandas o usá una olla en la hornalla.`}
+        </p>
       )}
 
       {step.machine && needsSafetyBanner(step.machine) && <SafetyBanner defaultOpen={safetyOpen} />}

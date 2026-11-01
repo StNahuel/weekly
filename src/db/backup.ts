@@ -13,7 +13,13 @@ const id = z.string().min(1).max(200);
 const isoDateTime = z.iso.datetime();
 
 const entrySchema = z
-  .object({ key: id, recipeId: id, servings: z.number().int().min(1).max(20), proteinId: id.exactOptional() })
+  .object({
+    key: id,
+    recipeId: id,
+    servings: z.number().int().min(1).max(20),
+    proteinId: id.exactOptional(),
+    soupOnly: z.boolean().exactOptional(),
+  })
   .strict();
 
 export const backupSchema = z

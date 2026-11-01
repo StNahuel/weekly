@@ -2,6 +2,7 @@ import { ChevronRight, Search, Timer } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Empty } from '../../app/states/Empty';
 import { minutesOf } from '../../domain/recipes/resolve';
+import { EXTRA_FILTERS, type RecipeFilter } from '../../domain/recipes/search';
 import { CATEGORIES, type Category, type Recipe } from '../../domain/recipes/types';
 import { DEVICE_ICONS, DEVICE_LABELS, CATEGORY_TINTS, subtypeLabel } from '../shared/labels';
 
@@ -21,13 +22,15 @@ export function SearchField({ value, onChange, label }: { value: string; onChang
   );
 }
 
+const EXTRA_LABELS: Readonly<Record<(typeof EXTRA_FILTERS)[number], string>> = { sopas: 'Sopas', ichef: 'Con iChef' };
+
 export function CategoryFilter({
   value,
   onChange,
   labels,
 }: {
-  value: Category | null;
-  onChange: (value: Category | null) => void;
+  value: RecipeFilter | null;
+  onChange: (value: RecipeFilter | null) => void;
   labels: Readonly<Record<Category, string>>;
 }) {
   const chip =
@@ -42,21 +45,26 @@ export function CategoryFilter({
           {labels[category]}
         </button>
       ))}
+      {EXTRA_FILTERS.map((filter) => (
+        <button key={filter} type="button" aria-pressed={value === filter} onClick={() => onChange(filter)} className={chip}>
+          {EXTRA_LABELS[filter]}
+        </button>
+      ))}
     </div>
   );
 }
 
-export function RecipeRowContent({ recipe }: { recipe: Recipe }) {
+export function RecipeRowContent({ recipe, soupOnly = false }: { recipe: Recipe; soupOnly?: boolean }) {
   const tint = CATEGORY_TINTS[recipe.category];
   const subtype = recipe.kind === 'plate' ? subtypeLabel(recipe.subtype) : subtypeLabel('caldo_con_proteina');
   return (
     <span className="min-w-0 flex-1">
-      <span className="block font-semibold">{recipe.kind === 'soupMeal' ? `${recipe.soup.title} + proteína` : recipe.title}</span>
+      <span className="block font-semibold">{recipe.kind === 'soupMeal' ? (soupOnly ? `Sopa ${recipe.soup.title}` : `${recipe.soup.title} + proteína`) : recipe.title}</span>
       <span className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
         {subtype && <span className={`rounded-full px-2 text-xs font-semibold ${tint.fill} ${tint.ink}`}>{subtype}</span>}
         <span className="inline-flex items-center gap-1">
           <Timer aria-hidden="true" size={14} />
-          {`${minutesOf(recipe)} min`}
+          {`${String(minutesOf(recipe, soupOnly ? 'soup' : undefined))} min`}
         </span>
         <span className="inline-flex items-center gap-1.5">
           {recipe.devices.map((device) => {
@@ -73,8 +81,10 @@ export function RecipeList({
   recipes,
   renderRow,
   emptyHint,
+  soupOnly = false,
 }: {
   recipes: readonly Recipe[];
+  soupOnly?: boolean;
   renderRow: (recipe: Recipe, content: ReactNode) => ReactNode;
   emptyHint: string;
 }) {
@@ -86,7 +96,7 @@ export function RecipeList({
           {renderRow(
             recipe,
             <>
-              <RecipeRowContent recipe={recipe} />
+              <RecipeRowContent recipe={recipe} soupOnly={soupOnly} />
               <ChevronRight aria-hidden="true" size={20} className="shrink-0 text-muted" />
             </>,
           )}

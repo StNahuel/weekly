@@ -1,0 +1,903 @@
+{
+  "schemaVersion": 1,
+  "fixes": [
+    {
+      "recipeId": "lunch_01",
+      "part": "main",
+      "step": 2,
+      "set": {
+        "instructions": "Cortar la pechuga en 2 filetes de grosor uniforme y frotarlos con el ajo y el aceite. Sumarlos a la cesta cuando a las papas les falten unos 14 min (a los 8 min de empezar), sin amontonar; seguir todo a 185 °C y cocinar el pollo 11–16 min según grosor. Si las papas se doran antes, sacarlas y mantenerlas tibias."
+      },
+      "reason": "El original mete el pollo 'cuando las papas estén casi listas' y lo cocina 11–16 min más: las papas pasaban a ~35 min y se queman, y la cesta no puede estar a 190 y 185 °C a la vez. Se coordina el ingreso para que terminen juntos."
+    },
+    {
+      "recipeId": "lunch_17",
+      "part": "main",
+      "step": 2,
+      "set": {
+        "instructions": "Cuando falten unos 12 min para las papas, bajar la air fryer a 180 °C y sumar el salmón pincelado con el aceite y el zucchini en trozos, en capa suelta junto a las papas; cocinar 9–14 min según espesor. Si no entra todo en una capa, retirar las papas listas y hacer salmón y zucchini en una segunda tanda."
+      },
+      "reason": "Steps 1–2 run in parallel in the same air fryer at 190 °C and 180 °C with no timing; 'add when the potatoes are almost done, then 9–14 min' overcooks them. Clarified when to add the salmon and that the basket drops to 180 °C."
+    },
+    {
+      "recipeId": "lunch_18",
+      "part": "main",
+      "step": 2,
+      "set": {
+        "instructions": "Cuando falten unos 12 min para el boniato, bajar la air fryer a 180 °C y sumar el salmón con una película mínima de aceite y el limón, junto al boniato; cocinar 9–14 min según espesor. Si no entra en una capa, hacer el salmón en una segunda tanda mientras el boniato reposa tapado."
+      },
+      "reason": "Boniato (190 °C, 20–27 min) and salmon (180 °C, 9–14 min) are marked parallel in the same air fryer with no instruction on how to run both; one basket cannot hold two temperatures. Added timing and the temperature drop."
+    },
+    {
+      "recipeId": "lunch_20",
+      "part": "main",
+      "step": 2,
+      "set": {
+        "instructions": "Cuando falten unos 12 min para las papas, bajar la air fryer a 180 °C y sumar el filete pincelado con el aceite junto a las papas; cocinar 9–14 min según espesor. Si la cesta no alcanza, hacer el salmón en una segunda tanda mientras las papas reposan."
+      },
+      "reason": "Potatoes (190 °C, 20–28 min) and salmon (180 °C, 9–14 min) are parallel in the same air fryer with no timing; one basket cannot hold two temperatures. Added when to add the salmon and the temperature drop."
+    },
+    {
+      "recipeId": "principal_soup_miso",
+      "part": "soup",
+      "step": 2,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            900,
+            900
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ],
+        "instructions": "Agregar los shiitake en láminas. Mantenerlos enteros con agitación suave en reversa; la base de caldo se disuelve en la propia jarra."
+      },
+      "reason": "Cocción de 15 min sin tapa/antisalpicaduras (portal: tapa sin taza medidora + canasta encima, ids 5253, 11150). Además el texto nombraba el concentrado vegetal, incoherente si se elige caldo de huesos (alternativeForBoneBroth reemplaza las adiciones pero no el texto)."
+    },
+    {
+      "recipeId": "principal_soup_papa",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1200,
+            1380
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_papa",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            20,
+            30
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "20–30 segundos · Subir gradualmente hasta Vel. 6 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 6. La textura buscada es fluida, no puré.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 100 °C sin umbral concreto. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_thai",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            720,
+            900
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_thai",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            15,
+            25
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "15–25 segundos · Subir gradualmente hasta Vel. 6 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 6. Triturar las verduras con el caldo, antes del coco, hasta una base lisa y muy fluida.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_calabaza",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1320,
+            1320
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomyum",
+      "part": "soup",
+      "step": 2,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            480,
+            480
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomyum",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            600,
+            720
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomate",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1200,
+            1200
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomate",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            20,
+            30
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "20–30 segundos · Subir gradualmente hasta Vel. 6 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 6. Triturar hasta un caldo rojo liso, no una salsa de tomate espesa.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 100 °C sin umbral concreto. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_boniato",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1320,
+            1320
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_verde",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            780,
+            900
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_verde",
+      "part": "soup",
+      "step": 5,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            20,
+            30
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "20–30 segundos · Subir gradualmente hasta Vel. 6 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 6. Procesar hasta una sopa fina y fluida.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_sesamo",
+      "part": "soup",
+      "step": 2,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            600,
+            600
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_sesamo",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            600,
+            600
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_minestrone",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1080,
+            1080
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ],
+        "sourceSettingsText": "18 minutos · 95 °C · Vel. 0.5 (reversa)"
+      },
+      "reason": "Caldo claro con zucchini y tomate en cubitos: 18 min en avance hace que las cuchillas los rompan; el portal cocina sopas con trozos en reversa (ids 5253, 11391, 11315). Faltaba además tapa sin taza medidora + canasta antisalpicaduras."
+    },
+    {
+      "recipeId": "principal_soup_tomato_basil",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1080,
+            1080
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomato_basil",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            25,
+            25
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "25 segundos · Subir gradualmente hasta Vel. 5 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 5. Triturar hasta textura de caldo, no de salsa.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto; además los ajustes decían Vel. 5 fija mientras el texto pedía subir gradualmente. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_zucchini_lemon",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            900,
+            900
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_zucchini_lemon",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            20,
+            20
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "20 segundos · Subir gradualmente hasta Vel. 5 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 5. Procesar solo hasta un caldo sedoso, no puré.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto; además los ajustes decían Vel. 5 fija, sin rampa gradual. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_avgolemono",
+      "part": "soup",
+      "step": 1,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            900,
+            1080
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ],
+        "instructions": "Agregar la zanahoria en rodajas finas (unos 3 mm) y la cebolla en un solo trozo para infusionar. Cocinar hasta que la zanahoria esté tierna.",
+        "sourceSettingsText": "15–18 minutos · 100 °C · Vel. 0.5 (reversa)"
+      },
+      "reason": "A 90 °C y 15 min, la jarra con ~1 kg de agua fría tarda ~10 min en llegar a temperatura: la zanahoria en rodajas queda cruda, y en avance las cuchillas la cortan. Portal: caldos con trozos a 95–100 °C en reversa (ids 5253, 11315), tapa sin taza medidora + canasta encima."
+    },
+    {
+      "recipeId": "principal_soup_spinach_edamame",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            720,
+            720
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_spinach_edamame",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            300,
+            300
+          ],
+          "temperatureCRange": [
+            90,
+            90
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "5 minutos · 90 °C · Vel. 0.5 (reversa)",
+        "instructions": "Agregar el kale sin el tallo, cortado en tiras finas y cortas, y el edamame ya cocido (si está congelado, cocinarlo antes según el envase). Calentar sin pasarse para que el kale quede verde y tierno.",
+        "safety": [
+          "Con calor: tapa trabada; abrir con cuidado por el vapor.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "El texto decía espinaca pero el ingrediente es kale (sustitución acordada en notes). En avance las cuchillas trituran hojas y edamame de un caldo claro; portal caldo verde (id 10780): kale en tiras finas sin tallo, 0.5 reversa."
+    },
+    {
+      "recipeId": "principal_soup_pepper_roast",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            900,
+            900
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ]
+      },
+      "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_pepper_roast",
+      "part": "soup",
+      "step": 5,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            25,
+            25
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "25 segundos · Subir gradualmente hasta Vel. 5 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 5. Triturar hasta un caldo rojo sin espesor de salsa.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto; además los ajustes decían Vel. 5 fija, sin rampa gradual. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_carrot_ginger",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1320,
+            1500
+          ],
+          "temperatureCRange": [
+            100,
+            100
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ],
+        "instructions": "Agregar la zanahoria en rodajas finas o trozos de 1 cm. Cocinar hasta que se deshaga al apretarla con la espátula; si no, sumar 5 minutos.",
+        "sourceSettingsText": "22–25 minutos · 100 °C · Vel. 0.5"
+      },
+      "reason": "230 g de zanahoria en trozos a 95 °C 18 min (incluido el calentamiento de ~1 kg de agua) quedan duros y el licuado sale granuloso. Portal: cremas con zanahoria 30–35 min a 95–100 °C (ids 2706, 1223). Faltaba tapa sin taza medidora + canasta antisalpicaduras."
+    },
+    {
+      "recipeId": "principal_soup_carrot_ginger",
+      "part": "soup",
+      "step": 4,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            25,
+            25
+          ],
+          "temperatureCRange": null,
+          "speed": {
+            "mode": "gradual",
+            "value": null
+          },
+          "reverseIfSupported": false,
+          "accessories": [
+            "Tapa con taza medidora"
+          ]
+        },
+        "sourceSettingsText": "25 segundos · Subir gradualmente hasta Vel. 5 · Sin calor",
+        "instructions": "Sin ingredientes nuevos en este paso. Esperar a que la temperatura de la jarra baje de 90 °C. Colocar la tapa con la taza medidora y subir la velocidad de a poco hasta 5. Procesar hasta un caldo sedoso; si queda espeso, aligerar con agua caliente.",
+        "safety": [
+          "Licuar solo cuando la temperatura baje de 90 °C, con la tapa trabada y la taza medidora puesta, subiendo la velocidad de a poco. Nunca por encima de la marca MAX: con 4 porciones, licuar en dos tandas."
+        ]
+      },
+      "reason": "Licuado en caliente justo después de cocinar a 100 °C sin umbral concreto; además los ajustes decían Vel. 5 fija, sin rampa gradual. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_tomato_oregano",
+      "part": "soup",
+      "step": 3,
+      "set": {
+        "machineSettingsSuggested": {
+          "durationSecondsRange": [
+            1020,
+            1020
+          ],
+          "temperatureCRange": [
+            95,
+            95
+          ],
+          "speed": {
+            "mode": "numeric",
+            "value": 0.5
+          },
+          "reverseIfSupported": true,
+          "accessories": [
+            "Tapa sin taza medidora",
+            "Canasta de cocción sobre la tapa (antisalpicaduras)"
+          ]
+        },
+        "safety": [
+          "Cocción larga con calor: tapa trabada sin la taza medidora y la canasta de cocción apoyada encima, así sale el vapor sin salpicar. Con 4 porciones, no superar la marca MAX.",
+          "Parámetros orientativos: confirmar con el manual de tu iChef."
+        ],
+        "sourceSettingsText": "17 minutos · 95 °C · Vel. 0.5 (reversa)"
+      },
+      "reason": "Caldo claro con zucchini en cubitos y tomate en trozos: 17 min en avance hace que las cuchillas los deshagan; el portal cocina sopas con trozos en reversa (ids 5253, 11391). Faltaba además tapa sin taza medidora + canasta antisalpicaduras."
+    },
+    {
+      "recipeId": "snack_10",
+      "part": "main",
+      "step": 1,
+      "set": {
+        "minutes": 16,
+        "instructions": "Usar huevos con cáscara cuyo contenido sin cáscara sume el peso indicado (aprox. dos huevos grandes). Cubrirlos con agua fría, llevar a hervor y cocinar a hervor suave 10–11 minutos; enfriar bajo agua fría y pelar."
+      },
+      "reason": "El texto pedía 120 g sin cáscara pero la adición es 110 g; y 12 min no alcanzan para llevar el agua fría a hervor más 10–11 min de cocción (≈16 min)."
+    }
+  ]
+}

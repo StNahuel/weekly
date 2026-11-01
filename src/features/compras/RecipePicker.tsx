@@ -3,8 +3,7 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import { BTN_PRIMARY } from '../../app/ui';
 import { addShoppingEntry } from '../../db/repo';
 import type { ShoppingEntry } from '../../domain/recipes/shopping';
-import type { Category } from '../../domain/recipes/types';
-import { filterRecipes } from '../../domain/recipes/search';
+import { filterRecipes, type RecipeFilter } from '../../domain/recipes/search';
 import { recipes } from '../../seed';
 import { CATEGORY_PLURALS } from '../shared/labels';
 import { CategoryFilter, RecipeList, RecipeRowContent, SearchField } from '../recetas/RecipeList';
@@ -15,8 +14,10 @@ export function RecipePicker({ entries, onClose }: { entries: readonly ShoppingE
   const titleId = useId();
   const dialog = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState<Category | null>(null);
+  const [category, setCategory] = useState<RecipeFilter | null>(null);
   const matches = filterRecipes(recipes, query, category);
+  // With the Sopas filter, meals are added as soup only (no protein).
+  const soupOnly = category === 'sopas';
 
   useEffect(() => {
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -68,19 +69,22 @@ export function RecipePicker({ entries, onClose }: { entries: readonly ShoppingE
           <RecipeList
             recipes={matches}
             emptyHint="Probá con otro nombre o categoría."
+            soupOnly={soupOnly}
             renderRow={(recipe) => {
-              const count = entries.filter((e) => e.recipeId === recipe.id).length;
+              const count = entries.filter((e) => e.recipeId === recipe.id && (e.soupOnly === true) === soupOnly).length;
               const entry =
-                recipe.kind === 'soupMeal'
-                  ? { recipeId: recipe.id, servings: 1, proteinId: recipe.defaultProteinId }
-                  : { recipeId: recipe.id, servings: 1 };
+                recipe.kind === 'plate'
+                  ? { recipeId: recipe.id, servings: 1 }
+                  : soupOnly
+                    ? { recipeId: recipe.id, servings: 1, soupOnly: true }
+                    : { recipeId: recipe.id, servings: 1, proteinId: recipe.defaultProteinId };
               return (
                 <button
                   type="button"
                   onClick={() => void addShoppingEntry(entry)}
                   className="tap flex w-full items-center gap-3 rounded-3xl border border-border bg-surface px-4 py-3 text-left transition-colors duration-150 hover:bg-surface-2"
                 >
-                  <RecipeRowContent recipe={recipe} />
+                  <RecipeRowContent recipe={recipe} soupOnly={soupOnly} />
                   {count > 0 && (
                     <span className="shrink-0 rounded-full bg-mint px-2 text-sm font-semibold text-mint-ink">{`×${count}`}</span>
                   )}

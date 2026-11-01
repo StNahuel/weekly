@@ -9,7 +9,7 @@ export const WATER_ID = 'water';
 
 export type SoupPrefs = { brothType: BrothType; includeOptional: boolean };
 
-export type RecipeOptions = SoupPrefs & { servings: number; proteinId?: string };
+export type RecipeOptions = SoupPrefs & { servings: number; proteinId?: string; method?: string | null };
 
 export type ResolvedLine = { ingredientId: string; name: string; grams: number };
 
@@ -21,7 +21,10 @@ export type Section = { kind: SectionKind; title: string; steps: ResolvedStep[] 
 
 export type ResolvedRecipe = {
   recipe: Recipe;
+  method: MethodId;
   title: string;
+  summary: string | null;
+  minutes: number;
   servings: number;
   protein: ProteinOption | null;
   devices: Device[];
@@ -35,7 +38,7 @@ export type ResolvedRecipe = {
 };
 
 const scale = (additions: readonly Addition[], factor: number): Addition[] =>
-  additions.map((a) => ({ ...a, grams: roundGrams(a.grams * factor) })).filter((a) => a.grams > 0);
+  additions.map((a) => (a.fixed ? a : { ...a, grams: roundGrams(a.grams * factor) })).filter((a) => a.grams > 0);
 
 export function sumLines(additions: readonly ResolvedLine[]): ResolvedLine[] {
   const totals = new Map<string, ResolvedLine>();
@@ -75,50 +78,83 @@ export function proteinOf(recipe: SoupMeal, proteinId: string | undefined): Prot
   return protein;
 }
 
-export function displayTitle(recipe: Recipe, protein: ProteinOption | null): string {
-  return recipe.kind === 'soupMeal' && protein ? `${recipe.soup.title} + ${protein.title}` : recipe.title;
+export type MethodId = 'ichef' | 'original' | 'meal' | 'soup';
+
+export type MethodChoice = { id: MethodId; label: string };
+
+// Plates offer "Con iChef" (when a variant exists) and the original; soup meals can be cooked as soup only.
+export function methodChoices(recipe: Recipe): MethodChoice[] {
+  if (recipe.kind === 'soupMeal') {
+    return [
+      { id: 'meal', label: 'Sopa + proteína' },
+      { id: 'soup', label: 'Solo la sopa' },
+    ];
+  }
+  return recipe.methods.map((m) => ({ id: m.id, label: m.id === 'ichef' ? 'Con iChef' : 'Original' }));
+}
+
+export function methodOf(recipe: Recipe, requested: string | null | undefined): MethodId {
+  const choices = methodChoices(recipe);
+  return (choices.find((c) => c.id === requested) ?? choices[0] ?? { id: 'original' }).id;
+}
+
+export function displayTitle(recipe: Recipe, protein: ProteinOption | null, method?: MethodId): string {
+  if (recipe.kind === 'plate') return recipe.title;
+  if (method === 'soup') return `Sopa ${recipe.soup.title}`;
+  return protein ? `${recipe.soup.title} + ${protein.title}` : recipe.title;
+}
+
+export function minutesOf(recipe: Recipe, method?: MethodId): number {
+  if (recipe.kind === 'soupMeal') return method === 'soup' ? recipe.soup.minutes : recipe.minutesMakingSoup;
+  const chosen = recipe.methods.find((m) => m.id === methodOf(recipe, method));
+  return chosen?.minutes ?? recipe.minutes;
 }
 
 export function hasOptionalSoupIngredient(recipe: Recipe): boolean {
   return recipe.kind === 'soupMeal' && recipe.soup.steps.some((s) => s.additions.some((a) => a.optional));
 }
 
+const scaledSteps = (steps: readonly Step[], factor: number): ResolvedStep[] =>
+  steps.map((step) => ({ ...step, additions: scale(step.additions, factor), usesBoneBroth: false }));
+
 export function resolveRecipe(recipe: Recipe, options: RecipeOptions, catalog: Catalog): ResolvedRecipe {
   const { servings } = options;
+  const method = methodOf(recipe, options.method);
   let sections: Section[];
   let protein: ProteinOption | null = null;
+  let summary: string | null = null;
   let soupLines: ResolvedLine[] = [];
-  let otherLines: ResolvedLine[];
+  let otherLines: ResolvedLine[] = [];
 
   if (recipe.kind === 'plate') {
-    const factor = servings / recipe.baseServings;
-    sections = [
-      {
-        kind: 'main',
-        title: 'Preparación',
-        steps: recipe.steps.map((step) => ({ ...step, additions: scale(step.additions, factor), usesBoneBroth: false })),
-      },
-    ];
+    const chosen = recipe.methods.find((m) => m.id === method) ?? recipe.methods[0];
+    summary = chosen?.summary ?? null;
+    sections = [{ kind: 'main', title: 'Preparación', steps: scaledSteps(chosen?.steps ?? recipe.steps, servings / recipe.baseServings) }];
     otherLines = linesOf(sections);
   } else {
-    protein = proteinOf(recipe, options.proteinId);
     const soupSection: Section = { kind: 'soup', title: `Sopa ${recipe.soup.title}`, steps: soupSteps(recipe.soup, servings, options) };
-    const factor = servings / recipe.baseServings;
-    const proteinSection: Section = {
-      kind: 'protein',
-      title: protein.title,
-      steps: protein.steps.map((step) => ({ ...step, additions: scale(step.additions, factor), usesBoneBroth: false })),
-    };
-    sections = [soupSection, proteinSection];
+    sections = [soupSection];
     soupLines = linesOf([soupSection]);
-    otherLines = linesOf([proteinSection]);
+    if (method === 'meal') {
+      protein = proteinOf(recipe, options.proteinId);
+      const proteinSection: Section = {
+        kind: 'protein',
+        title: protein.title,
+        steps: scaledSteps(protein.steps, servings / recipe.baseServings),
+      };
+      sections.push(proteinSection);
+      otherLines = linesOf([proteinSection]);
+    }
   }
 
   const totals = sumLines([...otherLines, ...soupLines]);
   const soupTotalGrams = recipe.kind === 'soupMeal' ? roundTenth(soupLines.reduce((s, l) => s + l.grams, 0)) : null;
   return {
     recipe,
-    title: displayTitle(recipe, protein),
+    method,
+    title: displayTitle(recipe, protein, method),
+    summary,
+    minutes: minutesOf(recipe, method),
     servings,
     protein,
     devices: summarizeDevices(sections.flatMap((s) => s.steps)),
@@ -133,8 +169,4 @@ export function resolveRecipe(recipe: Recipe, options: RecipeOptions, catalog: C
     soupTotalGrams,
     capacityWarning: soupTotalGrams !== null && soupTotalGrams >= CAPACITY_WARNING_GRAMS,
   };
-}
-
-export function minutesOf(recipe: Recipe): number {
-  return recipe.kind === 'plate' ? recipe.minutes : recipe.minutesMakingSoup;
 }
