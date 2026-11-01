@@ -1105,14 +1105,14 @@
     },
     {
       "recipeId": "lunch_07",
-      "title": "Salsa pizzaiola en la iChef + pasta y carne en la hornalla",
-      "summary": "La iChef tritura el tomate, hace el sofrito a 120 °C y deja la salsa reduciendo sola mientras la pasta hierve en la hornalla; la carne se sella en sartén (dora mejor que en el vaso) y termina en la salsa.",
-      "minutes": 28,
+      "title": "Salsa pizzaiola en la iChef + carne en la air fryer",
+      "summary": "La iChef tritura el tomate, hace el sofrito a 120 °C y reduce la salsa sola. La carne en tiras se dora en la air fryer (sin sartén ni salpicaduras) y termina 2 min en la salsa. La pasta hierve en la olla al mismo tiempo; la hornalla queda solo para el agua de la pasta.",
+      "minutes": 27,
       "steps": [
         {
           "title": "Triturar el tomate",
           "device": "iChef",
-          "instructions": "Cortar el tomate en cuartos, colocarlo en el vaso frío con la tapa y la taza medidora y triturar. Pasar a un bol y reservar; no hace falta lavar el vaso.",
+          "instructions": "Cortar el tomate en cuartos, colocarlo en el vaso frío, tapar con la taza medidora y triturar. Pasar a un bol y reservar; no hace falta lavar el vaso.",
           "additions": [
             {
               "ingredientId": "tomato",
@@ -1140,7 +1140,7 @@
         {
           "title": "Picar cebolla y ajo",
           "device": "iChef",
-          "instructions": "Colocar la cebolla en trozos y el ajo pelado en el vaso, tapa con la taza medidora, y picar. Bajar los restos con la espátula.",
+          "instructions": "Colocar la cebolla en trozos y el ajo pelado en el vaso, tapar con la taza medidora y picar. Bajar los restos con la espátula.",
           "additions": [
             {
               "ingredientId": "onion",
@@ -1172,7 +1172,7 @@
         {
           "title": "Sofreír",
           "device": "iChef",
-          "instructions": "Sumar el aceite. Tapa sin la taza medidora y la canasta arriba como antisalpicaduras; sofreír hasta que la cebolla esté transparente.",
+          "instructions": "Sumar el aceite. Tapa sin la taza medidora y la canasta arriba como antisalpicaduras; sofreír hasta que la cebolla esté transparente. Mientras tanto, poner el agua de la pasta a hervir en la olla.",
           "additions": [
             {
               "ingredientId": "olive_oil",
@@ -1244,7 +1244,7 @@
           "parallelGroup": "A",
           "minutes": 18,
           "heat": "hervor",
-          "instructions": "Apenas arranca la salsa (o antes, mientras se pica el sofrito): poner el agua a hervir en una olla y cocinar la pasta al dente según el envase. Guardar un poco del agua de cocción y escurrir.",
+          "instructions": "Cuando el agua hierva, cocinar la pasta al dente según el envase. Guardar un poco del agua de cocción y escurrir.",
           "additions": [
             {
               "ingredientId": "pasta_dry",
@@ -1257,12 +1257,12 @@
           ]
         },
         {
-          "title": "Sellar la carne",
-          "device": "hornalla",
+          "title": "Carne en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "A",
-          "minutes": 3,
-          "heat": "alto",
-          "instructions": "Cuando falten unos 3 min de salsa: secar la carne, cortarla en tiras delgadas y sellarla en sartén bien caliente con el aceite, sin amontonar, 2–3 min.",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Cuando falten unos 8 min de salsa: Precalentar la air fryer a 200 °C si tu modelo lo pide. Secar bien la carne, cortarla en tiras delgadas, mezclarla con el aceite y repartirla en la canasta en una sola capa, sin amontonar. Sacudir a mitad de cocción. Con 3–4 porciones, en dos tandas.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -1275,21 +1275,49 @@
           ]
         },
         {
-          "title": "Terminar en la salsa",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "medio-bajo",
-          "instructions": "Volcar la salsa de la iChef sobre la carne y cocinar tapado 3–4 min, hasta cocción completa. Incorporar la pasta escurrida, aligerar con agua de cocción solo si hace falta, y calentar 1 min.",
+          "title": "Terminar la carne en la salsa",
+          "device": "iChef",
+          "instructions": "Sumar las tiras de carne con su jugo a la salsa por la boca de la tapa. Tapa sin la taza medidora y la canasta arriba; calentar para que la carne tome el sabor de la salsa.",
           "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              120
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora",
+              "Canasta de cocción arriba (antisalpicaduras)"
+            ]
+          },
+          "sourceSettingsText": "2 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Salsa caliente: tapa sin taza medidora y canasta arriba contra salpicaduras; con 3–4 porciones no superar la marca MAX (si no entra, mezclar la carne con la salsa en la olla de la pasta)."
+          ],
           "verify": "Tiras de carne ≥ 63 °C; si usás carne picada, ≥ 71 °C."
+        },
+        {
+          "title": "Mezclar con la pasta",
+          "device": "sin cocción",
+          "minutes": 1,
+          "instructions": "Volver la pasta escurrida a la olla, con el fuego apagado. Volcar la salsa con la carne, mezclar y aligerar con agua de cocción solo si hace falta.",
+          "additions": []
         }
       ]
     },
     {
       "recipeId": "lunch_08",
-      "title": "Papas al vapor en la iChef + bife en la hornalla",
-      "summary": "Las papas se hacen al vapor mientras armás la ensalada; después se doran en la air fryer al mismo tiempo que sellás el bife, así todo llega caliente al plato.",
-      "minutes": 28,
+      "title": "Papas al vapor en la iChef + bife y papas en la air fryer",
+      "summary": "Las papas se hacen al vapor mientras armás la ensalada. El bife va a la air fryer y, al darlo vuelta, las papas se suman a la misma canasta para dorarse: sin sartén ni hornalla, y todo llega caliente al plato.",
+      "minutes": 30,
       "steps": [
         {
           "title": "Papas al vapor en la iChef",
@@ -1327,7 +1355,7 @@
           },
           "sourceSettingsText": "15–18 minutos · Al vapor · Vel. 1",
           "safety": [
-            "El vapor sale muy caliente: abrir la tapa transparente de la vaporera hacia el lado contrario a vos y usar agarraderas.",
+            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar agarraderas.",
             "Mantener al menos 700 g de agua en el vaso durante todo el vapor; no retirar la vaporera con la máquina en marcha."
           ]
         },
@@ -1357,26 +1385,12 @@
           ]
         },
         {
-          "title": "Dorar las papas",
+          "title": "Bife en la air fryer",
           "device": "air_fryer",
-          "parallelGroup": "B",
-          "minutes": 8,
+          "parallelGroup": "A",
+          "minutes": 5,
           "temperatureC": 200,
-          "instructions": "Retirar la vaporera, mezclar las papas con el aceite y dorar en capa suelta, sacudiendo a mitad.",
-          "additions": [
-            {
-              "ingredientId": "olive_oil",
-              "grams": 7
-            }
-          ]
-        },
-        {
-          "title": "Sellar el bife",
-          "device": "hornalla",
-          "parallelGroup": "B",
-          "minutes": 10,
-          "heat": "medio-alto",
-          "instructions": "Al mismo tiempo que se doran las papas: secar el bife, calentar bien la sartén y sellar 2–5 min por lado según grosor con el aceite. Dejar reposar 3 min.",
+          "instructions": "Cuando falten unos 5 min de vapor: Precalentar la air fryer a 200 °C si tu modelo lo pide. Secar el bife (2–3 cm), untarlo con el aceite y colocarlo en la canasta. Cocinar 5 min y darlo vuelta.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -1386,8 +1400,21 @@
               "ingredientId": "olive_oil",
               "grams": 3
             }
+          ]
+        },
+        {
+          "title": "Sumar las papas y dorar",
+          "device": "air_fryer",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Al dar vuelta el bife: retirar la vaporera, mezclar las papas con el aceite y repartirlas alrededor del bife en una sola capa. Cocinar hasta que el bife llegue a punto y las papas doren, sacudiendo las papas a mitad con cuidado. Sacar el bife y dejarlo reposar 3 min; si las papas necesitan dorar más, dejarlas esos 3 min. Con 3–4 porciones, si no entra todo en una capa, hacer primero los bifes y dorar las papas mientras reposan tapados con papel aluminio.",
+          "additions": [
+            {
+              "ingredientId": "olive_oil",
+              "grams": 7
+            }
           ],
-          "verify": "Bife entero ≥ 63 °C y 3 min de reposo."
+          "verify": "Bife entero ≥ 63 °C y 3 min de reposo; papas doradas por fuera y tiernas por dentro."
         }
       ]
     },
@@ -1806,14 +1833,14 @@
     },
     {
       "recipeId": "lunch_11",
-      "title": "Arroz y verduras al vapor en la iChef + salteado en wok",
-      "summary": "El arroz integral se cocina en la canasta y en su segunda mitad la vaporera cocina brócoli y zucchini; en el wok solo se saltean morrón, cebolla y carne, con menos tandas. La carne se sella en wok porque la iChef no la dora.",
-      "minutes": 38,
+      "title": "Arroz y verduras al vapor en la iChef + carne y morrón en la air fryer",
+      "summary": "El arroz integral se cocina en la canasta y en su segunda mitad la vaporera cocina brócoli y zucchini. Mientras tanto, la air fryer asa morrón y cebolla y después dora la carne en tiras: sin wok ni hornalla. Se reúne todo en un bol.",
+      "minutes": 40,
       "steps": [
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Lavar el arroz en la canasta de cocción bajo la canilla. Colocar el agua en el vaso, meter la canasta con el arroz dentro del vaso, poner la tapa sin la taza medidora y apoyar arriba la bandeja de la vaporera como antisalpicaduras. El agua es la misma para 1–4 porciones.",
+          "instructions": "Lavar el arroz en la canasta de cocción bajo la canilla. Colocar el agua en el vaso, meter la canasta con el arroz dentro del vaso, poner la tapa sin la taza medidora y apoyar arriba la bandeja de la vaporera como antisalpicaduras. El agua es la misma para 1–4 porciones. Mientras tanto, cortar las verduras y la carne.",
           "additions": [
             {
               "ingredientId": "water",
@@ -1848,15 +1875,15 @@
           },
           "sourceSettingsText": "20 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "Agua hirviendo: tapa sin taza medidora y bandeja de la vaporera arriba contra salpicaduras; no superar la marca MAX del vaso.",
-            "Sacar la canasta con la espátula (gancho) y agarraderas, dejándola escurrir sobre el vaso."
+            "Agua hirviendo: tapa sin taza medidora y la vaporera (o su bandeja) arriba contra salpicaduras; no superar la marca MAX del vaso.",
+            "Con 3–4 porciones, el arroz seco no debe pasar de la mitad de la canasta; si no entra, cocinar en dos tandas."
           ]
         },
         {
           "title": "Sumar la vaporera con brócoli y zucchini",
           "device": "iChef",
           "parallelGroup": "B",
-          "instructions": "Al terminar los primeros 20 min, cambiar la bandeja antisalpicaduras por la vaporera armada con el brócoli en ramitos y el zucchini en trozos parejos, en una sola capa, y la tapa transparente. Programar los minutos que faltan del arroz; quedan firmes para el salteado.",
+          "instructions": "Al terminar los primeros 20 min, cambiar la bandeja antisalpicaduras por la vaporera armada con el brócoli en ramitos y el zucchini en trozos parejos, en una sola capa, y la tapa transparente. Programar los minutos que faltan del arroz; quedan firmes.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -1891,18 +1918,17 @@
           },
           "sourceSettingsText": "15 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "El vapor sale muy caliente: abrir la tapa transparente de la vaporera hacia el lado contrario a vos y usar agarraderas.",
-            "Mantener al menos 700 g de agua en el vaso durante todo el vapor; no retirar la vaporera con la máquina en marcha.",
-            "Sacar la canasta con la espátula (gancho) y agarraderas, dejándola escurrir sobre el vaso."
+            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar agarraderas.",
+            "No retirar la vaporera con la máquina en marcha."
           ]
         },
         {
-          "title": "Saltear morrón y cebolla",
-          "device": "hornalla",
+          "title": "Morrón y cebolla en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "B",
-          "minutes": 5,
-          "heat": "alto",
-          "instructions": "Unos 5 min después de colocar la vaporera: cortar morrón y cebolla en tiras parecidas y saltear en el wok a fuego alto con el aceite, para que queden firmes. Reservar.",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "Al colocar la vaporera: Precalentar la air fryer a 200 °C si tu modelo lo pide. Cortar morrón y cebolla en tiras parecidas, mezclarlos con el aceite y repartirlos en la canasta en una sola capa. Sacudir a mitad; deben quedar tiernos y con puntas tostadas. Pasar a un bol grande.",
           "additions": [
             {
               "ingredientId": "red_pepper",
@@ -1919,12 +1945,12 @@
           ]
         },
         {
-          "title": "Sellar la carne",
-          "device": "hornalla",
+          "title": "Carne en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "B",
           "minutes": 7,
-          "heat": "alto",
-          "instructions": "Secar y cortar la carne en tiras finas. Wok bien caliente con el aceite, sin amontonar; cocinar en dos tandas de 2–4 min.",
+          "temperatureC": 200,
+          "instructions": "Secar bien la carne y cortarla en tiras finas; mezclarla con el aceite y repartirla en la canasta sin amontonar. Sacudir a mitad. En el último minuto, volver el morrón y la cebolla encima para recalentarlos. Con 3–4 porciones, en dos tandas: si el arroz termina antes, sacar la canasta para que no se pase.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -1939,19 +1965,18 @@
         },
         {
           "title": "Reunir",
-          "device": "hornalla",
-          "minutes": 1,
-          "heat": "medio",
-          "instructions": "Retirar la vaporera y sacar la canasta del arroz. Volver a juntar en el wok carne, morrón, cebolla, brócoli y zucchini 1 min y servir sobre el arroz escurrido.",
+          "device": "sin cocción",
+          "minutes": 2,
+          "instructions": "Retirar la vaporera y sacar la canasta del arroz con la espátula, dejándola escurrir. En el bol grande, mezclar la carne y el morrón y la cebolla (con el jugo que quedó en la canasta de la air fryer) con el brócoli y el zucchini. Servir sobre el arroz.",
           "additions": []
         }
       ]
     },
     {
       "recipeId": "lunch_12",
-      "title": "Boniato al vapor en la iChef + bife en la hornalla",
-      "summary": "El boniato se hace al vapor mientras armás la ensalada; después se dora con romero en la air fryer al mismo tiempo que sellás el bife.",
-      "minutes": 27,
+      "title": "Boniato al vapor en la iChef + bife y boniato en la air fryer",
+      "summary": "El boniato se hace al vapor mientras armás la ensalada. El bife va a la air fryer y, al darlo vuelta, el boniato con romero se suma a la misma canasta para dorarse: sin sartén ni hornalla.",
+      "minutes": 28,
       "steps": [
         {
           "title": "Boniato al vapor en la iChef",
@@ -1989,7 +2014,7 @@
           },
           "sourceSettingsText": "12–15 minutos · Al vapor · Vel. 1",
           "safety": [
-            "El vapor sale muy caliente: abrir la tapa transparente de la vaporera hacia el lado contrario a vos y usar agarraderas.",
+            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar agarraderas.",
             "Mantener al menos 700 g de agua en el vaso durante todo el vapor; no retirar la vaporera con la máquina en marcha."
           ]
         },
@@ -2011,30 +2036,12 @@
           ]
         },
         {
-          "title": "Dorar el boniato al romero",
+          "title": "Bife en la air fryer",
           "device": "air_fryer",
-          "parallelGroup": "B",
-          "minutes": 8,
+          "parallelGroup": "A",
+          "minutes": 5,
           "temperatureC": 200,
-          "instructions": "Retirar la vaporera, mezclar el boniato con el aceite y el romero y dorar en capa suelta, sacudiendo a mitad.",
-          "additions": [
-            {
-              "ingredientId": "olive_oil",
-              "grams": 6
-            },
-            {
-              "ingredientId": "rosemary_fresh",
-              "grams": 4
-            }
-          ]
-        },
-        {
-          "title": "Sellar el bife",
-          "device": "hornalla",
-          "parallelGroup": "B",
-          "minutes": 10,
-          "heat": "medio-alto",
-          "instructions": "Al mismo tiempo que se dora el boniato: sellar el bife en sartén bien caliente con el aceite, 3–5 min por lado según grosor. Dejar reposar 3 min.",
+          "instructions": "Cuando falten unos 5 min de vapor: Precalentar la air fryer a 200 °C si tu modelo lo pide. Secar el bife (2–3 cm), untarlo con el aceite y colocarlo en la canasta. Cocinar 5 min y darlo vuelta.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -2042,6 +2049,23 @@
             },
             {
               "ingredientId": "olive_oil",
+              "grams": 4
+            }
+          ]
+        },
+        {
+          "title": "Sumar el boniato al romero",
+          "device": "air_fryer",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Al dar vuelta el bife: retirar la vaporera, mezclar el boniato con el aceite y las hojas de romero y repartirlo alrededor del bife en una sola capa. Cocinar hasta que el bife llegue a punto y el boniato dore, sacudiendo el boniato a mitad con cuidado. Sacar el bife y dejarlo reposar 3 min; si el boniato necesita dorar más, dejarlo esos 3 min. Con 3–4 porciones, si no entra todo en una capa, hacer primero los bifes y dorar el boniato mientras reposan tapados con papel aluminio.",
+          "additions": [
+            {
+              "ingredientId": "olive_oil",
+              "grams": 6
+            },
+            {
+              "ingredientId": "rosemary_fresh",
               "grams": 4
             }
           ],
@@ -3471,14 +3495,14 @@
     },
     {
       "recipeId": "lunch_21",
-      "title": "Salsa en iChef + arroz en canasta con brócoli al vapor + wok",
-      "summary": "La iChef procesa ajo y jengibre con las salsas (sin rallar a mano), cocina el arroz integral en la canasta y, en los últimos 10 min, el brócoli y la zanahoria en la vaporera. Cebolla y carne van al wok porque necesitan fuego fuerte para sellar; la iChef dora poco.",
+      "title": "Salsa y arroz con brócoli al vapor en la iChef + carne en la air fryer",
+      "summary": "La iChef procesa ajo y jengibre con las salsas, cocina el arroz integral en la canasta y, en los últimos 10 min, el brócoli y la zanahoria en la vaporera. La carne y la cebolla se doran juntas en la air fryer. Al final la salsa espesa en el vaso y se mezcla todo en un bol: sin wok ni hornalla.",
       "minutes": 42,
       "steps": [
         {
           "title": "Salsa brillante",
           "device": "iChef",
-          "instructions": "Colocar en la jarra limpia y seca el ajo y el jengibre pelados (si lleva), las salsas, el resto de los condimentos, el almidón (si lleva) y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar la jarra.",
+          "instructions": "Colocar en el vaso limpio y seco el ajo y el jengibre pelados, las salsas, los condimentos, el almidón y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar el vaso.",
           "additions": [
             {
               "ingredientId": "garlic",
@@ -3521,14 +3545,12 @@
             ]
           },
           "sourceSettingsText": "10–15 segundos · Vel. 7",
-          "safety": [
-            "Revolver la salsa justo antes de usarla: el almidón se deposita en el fondo."
-          ]
+          "safety": []
         },
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en la jarra y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras). Mientras tanto, cortar el brócoli en floretes chicos y la zanahoria en láminas finas.",
+          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en el vaso y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras). El agua es la misma para 1–4 porciones. Mientras tanto, cortar el brócoli en floretes chicos, la zanahoria en láminas finas, la cebolla en pétalos y la carne en láminas finas contra la fibra.",
           "additions": [
             {
               "ingredientId": "water",
@@ -3563,7 +3585,7 @@
           },
           "sourceSettingsText": "25 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "Tapa sin taza medidora y la vaporera arriba: el vapor sale sin salpicar. No superar la marca MAX.",
+            "Agua hirviendo: tapa sin taza medidora y la vaporera (o su bandeja) arriba contra salpicaduras; no superar la marca MAX del vaso.",
             "Con 3–4 porciones, el arroz seco no debe pasar de la mitad de la canasta; si no entra, cocinar en dos tandas."
           ]
         },
@@ -3607,67 +3629,82 @@
           },
           "sourceSettingsText": "9–11 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar la espátula o un repasador."
+            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar agarraderas.",
+            "No retirar la vaporera con la máquina en marcha."
           ],
           "verify": "Brócoli verde brillante, tierno pero firme; arroz tierno."
         },
         {
-          "title": "Saltear la cebolla",
-          "device": "hornalla",
+          "title": "Carne y cebolla en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "A",
-          "minutes": 3,
-          "heat": "alto",
-          "instructions": "Mientras se cocinan las verduras al vapor: cebolla en pétalos en el wok bien caliente con el aceite, 2–3 min; retirar.",
-          "additions": [
-            {
-              "ingredientId": "onion",
-              "grams": 60
-            },
-            {
-              "ingredientId": "olive_oil",
-              "grams": 4
-            }
-          ]
-        },
-        {
-          "title": "Sellar carne",
-          "device": "hornalla",
-          "parallelGroup": "A",
-          "minutes": 6,
-          "heat": "alto",
-          "instructions": "Carne en láminas finas contra la fibra y bien seca; sellar 2–3 min por tanda con el wok muy caliente, sin amontonar.",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Al colocar la vaporera: Precalentar la air fryer a 200 °C si tu modelo lo pide. Secar bien la carne. Mezclar la carne y la cebolla con todo el aceite y repartirlas en la canasta en una sola capa, sin amontonar. Sacudir a mitad. Pasar a un bol grande y cubrir. Con 3–4 porciones, en dos tandas: empezar la primera cuando falten unos 18 min de arroz.",
           "additions": [
             {
               "ingredientId": "lean_beef",
               "grams": 210
             },
             {
+              "ingredientId": "onion",
+              "grams": 60
+            },
+            {
               "ingredientId": "olive_oil",
-              "grams": 4
+              "grams": 8
             }
           ],
           "verify": "Tiras de bife entero ≥ 63 °C y reposo breve."
         },
         {
-          "title": "Glasear",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio-alto",
-          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y escurrir el arroz. Volver la cebolla al wok con la carne, sumar el brócoli, la zanahoria y la salsa revuelta; mezclar a hervor 1–2 min hasta espesar. Servir sobre el arroz.",
+          "title": "Espesar la salsa",
+          "device": "iChef",
+          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y dejar escurrir el arroz. Vaciar el agua del vaso. Revolver la salsa reservada (el almidón se asienta), volcarla en el vaso, tapar con la taza medidora y cocinar hasta que hierva y espese. Raspar el fondo con la espátula.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0
+            },
+            "reverseIfSupported": false,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 1 (avance)",
+          "safety": [
+            "Vaso y agua muy calientes: sacar la canasta con la espátula (gancho) y vaciar el agua con agarraderas, lejos de la cara.",
+            "Tapa con taza medidora mientras hierve la salsa; abrir hacia el lado contrario a vos."
+          ]
+        },
+        {
+          "title": "Glasear en el bol",
+          "device": "sin cocción",
+          "minutes": 1,
+          "instructions": "Sumar al bol de la carne el brócoli y la zanahoria, volcar la salsa caliente y mezclar hasta que todo quede brillante. Servir sobre el arroz.",
           "additions": []
         }
       ]
     },
     {
       "recipeId": "lunch_22",
-      "title": "Salsa en iChef + arroz en canasta con brócoli al vapor + wok",
-      "summary": "La iChef procesa ajo, pimienta y salsas, cocina el arroz integral en la canasta y, en los últimos 10 min, el brócoli en la vaporera. Morrón, cebolla y carne van al wok: este plato los quiere tostados a fuego fuerte.",
+      "title": "Salsa de pimienta y arroz con brócoli en la iChef + carne y morrón en la air fryer",
+      "summary": "La iChef procesa ajo, pimienta y salsas, cocina el arroz integral en la canasta y, en los últimos 10 min, el brócoli en la vaporera. La air fryer tuesta morrón y cebolla a 200 °C y después la carne. Al final la salsa espesa en el vaso y se mezcla todo en un bol: sin wok ni hornalla.",
       "minutes": 42,
       "steps": [
         {
           "title": "Salsa de pimienta",
           "device": "iChef",
-          "instructions": "Colocar en la jarra limpia y seca el ajo y el jengibre pelados (si lleva), las salsas, el resto de los condimentos, el almidón (si lleva) y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar la jarra.",
+          "instructions": "Colocar en el vaso limpio y seco el ajo y el jengibre pelados, las salsas, los condimentos, la pimienta negra recién molida, el almidón y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar el vaso.",
           "additions": [
             {
               "ingredientId": "garlic",
@@ -3710,14 +3747,13 @@
             ]
           },
           "sourceSettingsText": "10–15 segundos · Vel. 7",
-          "safety": [
-            "Revolver la salsa justo antes de usarla: el almidón se deposita en el fondo."
-          ]
+          "safety": []
         },
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en la jarra y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras). Mientras tanto, cortar el brócoli en floretes chicos.",
+          "parallelGroup": "A",
+          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en el vaso y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras). El agua es la misma para 1–4 porciones. Mientras tanto, cortar el morrón en tiras, la cebolla en pétalos, el brócoli en floretes chicos y la carne fina contra la fibra.",
           "additions": [
             {
               "ingredientId": "water",
@@ -3752,14 +3788,36 @@
           },
           "sourceSettingsText": "25 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "Tapa sin taza medidora y la vaporera arriba: el vapor sale sin salpicar. No superar la marca MAX.",
+            "Agua hirviendo: tapa sin taza medidora y la vaporera (o su bandeja) arriba contra salpicaduras; no superar la marca MAX del vaso.",
             "Con 3–4 porciones, el arroz seco no debe pasar de la mitad de la canasta; si no entra, cocinar en dos tandas."
+          ]
+        },
+        {
+          "title": "Morrón y cebolla en la air fryer",
+          "device": "air_fryer",
+          "parallelGroup": "A",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "Cuando falten unos 8 min del programa del arroz: Precalentar la air fryer a 200 °C si tu modelo lo pide. Mezclar el morrón y la cebolla con el aceite y repartirlos en la canasta en una sola capa. Sacudir a mitad; deben quedar con puntas tostadas y firmes. Pasar a un bol grande.",
+          "additions": [
+            {
+              "ingredientId": "red_pepper",
+              "grams": 190
+            },
+            {
+              "ingredientId": "onion",
+              "grams": 90
+            },
+            {
+              "ingredientId": "olive_oil",
+              "grams": 4
+            }
           ]
         },
         {
           "title": "Brócoli en la vaporera",
           "device": "iChef",
-          "parallelGroup": "A",
+          "parallelGroup": "B",
           "instructions": "Cuando termine el programa, colocar el brócoli en la base de la vaporera y cerrar con la tapa transparente. Programar 10 minutos más con la misma temperatura y velocidad.",
           "additions": [
             {
@@ -3791,39 +3849,18 @@
           },
           "sourceSettingsText": "9–11 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar la espátula o un repasador."
+            "El vapor quema: abrir la tapa transparente hacia el lado contrario a vos y usar agarraderas.",
+            "No retirar la vaporera con la máquina en marcha."
           ],
           "verify": "Brócoli verde brillante, tierno pero firme; arroz tierno."
         },
         {
-          "title": "Saltear morrón y cebolla",
-          "device": "hornalla",
-          "parallelGroup": "A",
-          "minutes": 5,
-          "heat": "alto",
-          "instructions": "Mientras se cocina el brócoli: morrón en tiras y cebolla en pétalos en el wok muy caliente con el aceite, 4–5 min; retirar.",
-          "additions": [
-            {
-              "ingredientId": "red_pepper",
-              "grams": 190
-            },
-            {
-              "ingredientId": "onion",
-              "grams": 90
-            },
-            {
-              "ingredientId": "olive_oil",
-              "grams": 4
-            }
-          ]
-        },
-        {
-          "title": "Sellar carne",
-          "device": "hornalla",
-          "parallelGroup": "A",
-          "minutes": 6,
-          "heat": "alto",
-          "instructions": "Carne cortada fina contra la fibra y bien seca; sellar 2–3 min por tanda sin moverla demasiado.",
+          "title": "Carne en la air fryer",
+          "device": "air_fryer",
+          "parallelGroup": "B",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Secar bien la carne, mezclarla con el aceite y repartirla en la canasta sin amontonar. Sacudir a mitad. En el último minuto, volver el morrón y la cebolla encima para recalentarlos. Pasar todo al bol y cubrir. Con 3–4 porciones, en dos tandas.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -3837,25 +3874,53 @@
           "verify": "Tiras de bife entero ≥ 63 °C y reposo breve."
         },
         {
-          "title": "Glasear",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio-alto",
-          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y escurrir el arroz. Reunir en el wok la carne, el morrón, la cebolla y el brócoli, sumar la salsa revuelta y hervir 1–2 min hasta que recubra todo. Servir enseguida con el arroz.",
+          "title": "Espesar la salsa",
+          "device": "iChef",
+          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y dejar escurrir el arroz. Vaciar el agua del vaso. Revolver la salsa reservada (el almidón se asienta), volcarla en el vaso, tapar con la taza medidora y cocinar hasta que hierva y espese. Raspar el fondo con la espátula.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0
+            },
+            "reverseIfSupported": false,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 1 (avance)",
+          "safety": [
+            "Vaso y agua muy calientes: sacar la canasta con la espátula (gancho) y vaciar el agua con agarraderas, lejos de la cara.",
+            "Tapa con taza medidora mientras hierve la salsa; abrir hacia el lado contrario a vos."
+          ]
+        },
+        {
+          "title": "Glasear en el bol",
+          "device": "sin cocción",
+          "minutes": 1,
+          "instructions": "Sumar el brócoli al bol con la carne, el morrón y la cebolla, volcar la salsa caliente y mezclar hasta que recubra todo. Servir enseguida con el arroz.",
           "additions": []
         }
       ]
     },
     {
       "recipeId": "lunch_23",
-      "title": "Salsa y arroz en canasta en iChef + wok",
-      "summary": "La iChef procesa jengibre y ajo con la soja (sin rallar a mano) y cocina el arroz integral en la canasta, mientras hongos, morrón y carne se saltean en el wok. Aquí no se usa la vaporera: hongos y morrón tienen que perder líquido y dorarse, y al vapor quedarían aguados.",
-      "minutes": 40,
+      "title": "Salsa y arroz en canasta en la iChef + hongos y carne en la air fryer",
+      "summary": "La iChef procesa jengibre y ajo con la soja y cocina el arroz integral en la canasta. Mientras tanto, la air fryer dora hongos y morrón (pierden el líquido mejor que al vapor) y después la carne. Al final el verdeo se cocina 2 min en la salsa dentro del vaso y se mezcla todo en un bol: sin wok ni hornalla.",
+      "minutes": 42,
       "steps": [
         {
           "title": "Salsa de jengibre",
           "device": "iChef",
-          "instructions": "Colocar en la jarra limpia y seca el ajo y el jengibre pelados (si lleva), las salsas, el resto de los condimentos, el almidón (si lleva) y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar la jarra.",
+          "instructions": "Colocar en el vaso limpio y seco el ajo y el jengibre pelados, las salsas, los condimentos y el agua fría. Tapar con la taza medidora y procesar hasta que no queden trozos ni grumos. Pasar a un bol y enjuagar el vaso.",
           "additions": [
             {
               "ingredientId": "ginger",
@@ -3890,15 +3955,13 @@
             ]
           },
           "sourceSettingsText": "10–15 segundos · Vel. 7",
-          "safety": [
-            "Revolver la salsa justo antes de usarla: el almidón se deposita en el fondo."
-          ]
+          "safety": []
         },
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en la jarra y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras).",
+          "instructions": "Lavar el arroz y colocarlo en la canasta de cocción. Poner el agua en el vaso y meter la canasta con el arroz. Tapar sin la taza medidora y apoyar la vaporera vacía encima (hace de antisalpicaduras). El agua es la misma para 1–4 porciones. Mientras tanto, cortar los hongos en láminas, el morrón en tiras, la carne fina y el verdeo en diagonal.",
           "additions": [
             {
               "ingredientId": "water",
@@ -3933,17 +3996,17 @@
           },
           "sourceSettingsText": "35 minutos · 100 °C · Vel. 2 (avance)",
           "safety": [
-            "Tapa sin taza medidora y la vaporera arriba: el vapor sale sin salpicar. No superar la marca MAX.",
+            "Agua hirviendo: tapa sin taza medidora y la vaporera (o su bandeja) arriba contra salpicaduras; no superar la marca MAX del vaso.",
             "Con 3–4 porciones, el arroz seco no debe pasar de la mitad de la canasta; si no entra, cocinar en dos tandas."
           ]
         },
         {
-          "title": "Dorar hongos y morrón",
-          "device": "hornalla",
+          "title": "Hongos y morrón en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "A",
-          "minutes": 6,
-          "heat": "alto",
-          "instructions": "Cuando falten unos 14 min para el arroz: hongos y morrón en tiras en el wok a fuego alto con el aceite, hasta que pierdan líquido y doren levemente; retirar.",
+          "minutes": 11,
+          "temperatureC": 200,
+          "instructions": "Cuando falten unos 20 min de arroz: Precalentar la air fryer a 200 °C si tu modelo lo pide. Mezclar hongos y morrón con el aceite y repartirlos en la canasta en una sola capa. Sacudir 2 veces; están cuando perdieron el líquido y doraron levemente. Pasar a un bol grande.",
           "additions": [
             {
               "ingredientId": "mushrooms",
@@ -3960,12 +4023,12 @@
           ]
         },
         {
-          "title": "Saltear carne",
-          "device": "hornalla",
+          "title": "Carne en la air fryer",
+          "device": "air_fryer",
           "parallelGroup": "A",
-          "minutes": 6,
-          "heat": "alto",
-          "instructions": "Carne cortada fina, en tandas de 2–3 min, sin amontonarla.",
+          "minutes": 7,
+          "temperatureC": 200,
+          "instructions": "Secar bien la carne, mezclarla con el aceite y repartirla en la canasta sin amontonar. Sacudir a mitad. Pasar al bol con los hongos y cubrir. Con 3–4 porciones, en dos tandas.",
           "additions": [
             {
               "ingredientId": "lean_beef",
@@ -3979,17 +4042,45 @@
           "verify": "Tiras de bife entero ≥ 63 °C y reposo breve."
         },
         {
-          "title": "Terminar con verdeo",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio-alto",
-          "instructions": "Retirar la vaporera, sacar la canasta con la espátula y escurrir el arroz. Volver hongos y morrón al wok, sumar la salsa y el verdeo cortado en diagonal; hervir 1–2 min y servir con el arroz.",
+          "title": "Salsa con verdeo",
+          "device": "iChef",
+          "instructions": "Sacar la canasta con la espátula y dejar escurrir el arroz. Vaciar el agua del vaso. Volcar la salsa reservada y el verdeo, tapar con la taza medidora y cocinar en reversa hasta que el verdeo esté apenas tierno.",
           "additions": [
             {
               "ingredientId": "spring_onion",
               "grams": 80
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              120
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Vaso y agua muy calientes: sacar la canasta con la espátula (gancho) y vaciar el agua con agarraderas, lejos de la cara.",
+            "Tapa con taza medidora mientras hierve la salsa; abrir hacia el lado contrario a vos."
           ]
+        },
+        {
+          "title": "Terminar en el bol",
+          "device": "sin cocción",
+          "minutes": 1,
+          "instructions": "Volcar la salsa caliente con el verdeo sobre la carne, los hongos y el morrón y mezclar. Servir con el arroz.",
+          "additions": []
         }
       ]
     },
@@ -4162,9 +4253,9 @@
     },
     {
       "recipeId": "lunch_25",
-      "title": "Arroz y brócoli en la iChef, wok en paralelo",
-      "summary": "El arroz integral se cocina en la canasta con agua abundante y el brócoli se hace al vapor encima en los últimos 12 min. El shiitake y el pollo van al wok, porque necesitan fuego fuerte para dorar, algo que la iChef no logra.",
-      "minutes": 40,
+      "title": "Arroz y brócoli en la iChef, pollo y shiitake en la air fryer",
+      "summary": "Sin wok: la iChef licúa la salsa, cocina el arroz integral en la canasta y hace el brócoli al vapor encima, mientras la air fryer dora el pollo y, a los 4 min, el shiitake y el morrón en la misma canasta. Todo se liga con la salsa en el vaso de la iChef al final.",
+      "minutes": 42,
       "steps": [
         {
           "title": "Salsa de jengibre",
@@ -4208,7 +4299,7 @@
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar lo que va a la vaporera.",
+          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar el brócoli en floretes chicos, el pollo en cubos de 2 cm, el shiitake en láminas y el morrón en tiras.",
           "additions": [
             {
               "ingredientId": "water",
@@ -4251,7 +4342,7 @@
           "title": "Brócoli al vapor sobre el arroz",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli en floretes chicos sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo reposar 3–5 min.",
+          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Arrancar la air fryer con el pollo al mismo tiempo. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo tapado.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -4285,11 +4376,30 @@
           ]
         },
         {
-          "title": "Shiitake y morrón al wok",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "medio-alto",
-          "instructions": "Cuando al arroz le queden unos 15 min: calentar el wok a fuego fuerte con la mitad del aceite y saltear el shiitake en láminas y el morrón en tiras 4–5 min, hasta dorar. Retirar.",
+          "title": "Pollo en la air fryer",
+          "device": "air_fryer",
+          "minutes": 12,
+          "temperatureC": 200,
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Secar los cubos de pollo, mezclarlos con el aceite y acomodarlos en una sola capa. Cocinar 10–12 min en total, sacudiendo a mitad; a los 4 min sumar el shiitake y el morrón (paso siguiente).",
+          "additions": [
+            {
+              "ingredientId": "chicken_breast",
+              "grams": 220
+            },
+            {
+              "ingredientId": "olive_oil",
+              "grams": 4
+            }
+          ],
+          "parallelGroup": "A",
+          "verify": "Pollo ≥ 74 °C en el centro."
+        },
+        {
+          "title": "Sumar shiitake y morrón",
+          "device": "air_fryer",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "A los 4 min del pollo, mezclar el shiitake y el morrón con el resto del aceite y repartirlos en la canasta junto al pollo, sin amontonar. Sacudir a mitad. Con 3–4 porciones, hacer las verduras en una tanda aparte.",
           "additions": [
             {
               "ingredientId": "shiitake",
@@ -4307,39 +4417,42 @@
           "parallelGroup": "A"
         },
         {
-          "title": "Dorar el pollo",
-          "device": "hornalla",
-          "minutes": 9,
-          "heat": "medio-alto",
-          "instructions": "En el mismo wok con el resto del aceite, dorar el pollo en cubos medianos sin amontonar.",
-          "additions": [
-            {
-              "ingredientId": "chicken_breast",
-              "grams": 220
+          "title": "Ligar con la salsa",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Volver la salsa de jengibre al vaso y sumar el pollo, el shiitake, el morrón y el brócoli. Tapa con la taza medidora y mezclar en reversa hasta que la salsa hierva y abrillante. Servir con el arroz.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
             },
-            {
-              "ingredientId": "olive_oil",
-              "grams": 4
-            }
-          ],
-          "parallelGroup": "A",
-          "verify": "Pollo ≥ 74 °C en el centro."
-        },
-        {
-          "title": "Integrar y servir",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio",
-          "instructions": "Volver el shiitake y el morrón al wok, sumar el brócoli al vapor y la salsa de jengibre; saltear hasta que hierva y abrillante. Servir con el arroz.",
-          "additions": []
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
+          ]
         }
       ]
     },
     {
       "recipeId": "lunch_26",
-      "title": "Arroz y verduras al vapor en la iChef, camarones al wok",
-      "summary": "La iChef pica el ajo y el jengibre, cocina el arroz integral en la canasta y al final cuece brócoli y zucchini en la vaporera. Los camarones van al wok en paralelo: tardan 5 min y en la iChef habría que esperar a que termine el arroz.",
-      "minutes": 38,
+      "title": "Arroz y verduras al vapor en la iChef, camarones en la air fryer",
+      "summary": "Sin wok: la iChef pica el ajo y el jengibre, cocina el arroz integral en la canasta y al final cuece brócoli y zucchini en la vaporera. Los camarones se hacen en la air fryer con el ajo y el jengibre en los últimos 6 min del vapor, y todo se liga con la soja en el vaso.",
+      "minutes": 40,
       "steps": [
         {
           "title": "Picar ajo y jengibre",
@@ -4375,7 +4488,7 @@
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar lo que va a la vaporera.",
+          "instructions": "Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar el brócoli en floretes chicos y el zucchini en medias lunas, y secar bien los camarones.",
           "additions": [
             {
               "ingredientId": "water",
@@ -4418,7 +4531,7 @@
           "title": "Brócoli y zucchini al vapor sobre el arroz",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli en floretes chicos y el zucchini en medias lunas sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo reposar 3–5 min.",
+          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli y el zucchini sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Cuando a la vaporera le queden unos 6 min, poner los camarones en la air fryer. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo tapado.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -4457,11 +4570,11 @@
           ]
         },
         {
-          "title": "Camarones al ajo y jengibre",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "medio-alto",
-          "instructions": "Cuando a la vaporera le queden unos 5 min: secar los camarones y dorarlos en el wok bien caliente con el aceite, 1–2 min por lado. Sumar el ajo y el jengibre picados en el último minuto, sin quemarlos.",
+          "title": "Camarones en la air fryer",
+          "device": "air_fryer",
+          "minutes": 6,
+          "temperatureC": 200,
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Mezclar los camarones bien secos con el aceite, el ajo y el jengibre picados y acomodarlos en una sola capa. Cocinar 5–7 min, sacudiendo a mitad.",
           "additions": [
             {
               "ingredientId": "shrimp",
@@ -4473,14 +4586,12 @@
             }
           ],
           "parallelGroup": "A",
-          "verify": "Camarones opacos y firmes."
+          "verify": "Camarones opacos y firmes; no servir crudos."
         },
         {
-          "title": "Terminar",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "alto",
-          "instructions": "Sumar al wok el brócoli y el zucchini al vapor con el resto del aceite, la soja y el agua; saltear 1 min a fuego fuerte. Servir con el arroz.",
+          "title": "Ligar y servir",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Colocar la soja, el agua y el resto del aceite, y sumar el brócoli, el zucchini y los camarones. Tapa con la taza medidora y mezclar en reversa solo hasta que hierva, sin pasar los camarones. Servir con el arroz.",
           "additions": [
             {
               "ingredientId": "olive_oil",
@@ -4494,15 +4605,39 @@
               "ingredientId": "water",
               "grams": 30
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              60,
+              120
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "1–2 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
           ]
         }
       ]
     },
     {
       "recipeId": "lunch_27",
-      "title": "Salsa, arroz y brócoli en la iChef, wok en paralelo",
-      "summary": "La iChef licúa la salsa Sichuan, cocina el arroz integral en la canasta y hace el brócoli al vapor encima. Pollo, morrón y cebolla van al wok: el salteado a fuego alto da el dorado que pide el plato, y la iChef está ocupada con el arroz.",
-      "minutes": 40,
+      "title": "Salsa, arroz y brócoli en la iChef, pollo y verduras en la air fryer",
+      "summary": "Sin wok: la iChef licúa la salsa Sichuan, cocina el arroz integral en la canasta y hace el brócoli al vapor encima. La air fryer dora el pollo y, a los 4 min, el morrón y la cebolla en la misma canasta; todo se liga con la salsa en el vaso y se termina con el aceite de sésamo.",
+      "minutes": 42,
       "steps": [
         {
           "title": "Salsa Sichuan",
@@ -4558,7 +4693,7 @@
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar lo que va a la vaporera.",
+          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar el brócoli en floretes chicos, el pollo en cubos de 2 cm y el morrón y la cebolla en tiras.",
           "additions": [
             {
               "ingredientId": "water",
@@ -4601,7 +4736,7 @@
           "title": "Brócoli al vapor sobre el arroz",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli en floretes chicos sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo reposar 3–5 min.",
+          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Arrancar la air fryer con el pollo al mismo tiempo. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo tapado.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -4635,11 +4770,30 @@
           ]
         },
         {
-          "title": "Morrón y cebolla al wok",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "alto",
-          "instructions": "Cuando al arroz le queden unos 15 min: saltear el morrón y la cebolla en tiras con la mitad del aceite a fuego fuerte, 4–5 min. Retirar.",
+          "title": "Pollo en la air fryer",
+          "device": "air_fryer",
+          "minutes": 12,
+          "temperatureC": 200,
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Secar los cubos de pollo, mezclarlos con el aceite y acomodarlos en una sola capa. Cocinar 10–12 min en total, sacudiendo a mitad; a los 4 min sumar el morrón y la cebolla (paso siguiente).",
+          "additions": [
+            {
+              "ingredientId": "chicken_breast",
+              "grams": 220
+            },
+            {
+              "ingredientId": "olive_oil",
+              "grams": 4
+            }
+          ],
+          "parallelGroup": "A",
+          "verify": "Pollo ≥ 74 °C en el centro."
+        },
+        {
+          "title": "Sumar morrón y cebolla",
+          "device": "air_fryer",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "A los 4 min del pollo, mezclar el morrón y la cebolla con el resto del aceite y repartirlos en la canasta junto al pollo, sin amontonar. Sacudir a mitad. Con 3–4 porciones, hacer las verduras en una tanda aparte.",
           "additions": [
             {
               "ingredientId": "red_pepper",
@@ -4657,43 +4811,46 @@
           "parallelGroup": "A"
         },
         {
-          "title": "Saltear el pollo",
-          "device": "hornalla",
-          "minutes": 9,
-          "heat": "medio-alto",
-          "instructions": "En el mismo wok con el resto del aceite, saltear los cubos de pollo sin amontonar.",
-          "additions": [
-            {
-              "ingredientId": "chicken_breast",
-              "grams": 220
-            },
-            {
-              "ingredientId": "olive_oil",
-              "grams": 4
-            }
-          ],
-          "parallelGroup": "A",
-          "verify": "Pollo ≥ 74 °C en el centro."
-        },
-        {
-          "title": "Terminar al sésamo",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio",
-          "instructions": "Volver el morrón y la cebolla, sumar el brócoli al vapor y la salsa Sichuan; hervir 1 min y apagar. Terminar con el aceite de sésamo y servir con el arroz.",
+          "title": "Ligar y terminar al sésamo",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Volver la salsa Sichuan al vaso y sumar el pollo, el morrón, la cebolla y el brócoli. Tapa con la taza medidora y mezclar en reversa hasta que hierva. Al terminar, rociar con el aceite de sésamo y servir con el arroz.",
           "additions": [
             {
               "ingredientId": "sesame_oil",
               "grams": 2
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
           ]
         }
       ]
     },
     {
       "recipeId": "lunch_28",
-      "title": "Arroz y berenjena al vapor en la iChef, carne al wok",
-      "summary": "La iChef licúa la salsa de ajo, cocina el arroz integral en la canasta y hace la berenjena al vapor encima: es la técnica china clásica, queda sedosa y absorbe la salsa sin pedir más aceite. La carne va al wok para sellarla.",
+      "title": "Arroz y berenjena al vapor en la iChef, carne en la air fryer",
+      "summary": "Sin wok: la iChef licúa la salsa de ajo, cocina el arroz integral en la canasta y hace la berenjena al vapor encima (técnica china clásica: queda sedosa y absorbe la salsa sin más aceite). La air fryer hace el morrón y la cebolla y, a los 3 min, la carne en tiras; todo se liga con la salsa en el vaso.",
       "minutes": 40,
       "steps": [
         {
@@ -4742,7 +4899,7 @@
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar lo que va a la vaporera.",
+          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar la berenjena en bastones de 2 cm, la carne en tiras finas y el morrón y la cebolla en tiras.",
           "additions": [
             {
               "ingredientId": "water",
@@ -4785,7 +4942,7 @@
           "title": "Berenjena al vapor sobre el arroz",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con la berenjena en bastones de 2 cm sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo reposar 3–5 min.",
+          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con la berenjena sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Cuando a la vaporera le queden unos 11 min, arrancar la air fryer con el morrón y la cebolla. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo tapado.",
           "additions": [
             {
               "ingredientId": "eggplant",
@@ -4819,16 +4976,12 @@
           ]
         },
         {
-          "title": "Saltear carne y verduras",
-          "device": "hornalla",
-          "minutes": 9,
-          "heat": "alto",
-          "instructions": "Cuando a la vaporera le queden unos 9 min: dorar la carne en tiras finas por tandas en el wok bien caliente con el aceite; sumar el morrón y la cebolla en tiras 4–5 min. No dejar que hierva en su jugo.",
+          "title": "Morrón y cebolla en la air fryer",
+          "device": "air_fryer",
+          "minutes": 11,
+          "temperatureC": 200,
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Mezclar el morrón y la cebolla con la mitad del aceite y acomodarlos en una sola capa. Cocinar 10–11 min en total, sacudiendo a mitad; a los 3 min sumar la carne (paso siguiente).",
           "additions": [
-            {
-              "ingredientId": "lean_beef",
-              "grams": 210
-            },
             {
               "ingredientId": "red_pepper",
               "grams": 120
@@ -4839,23 +4992,63 @@
             },
             {
               "ingredientId": "olive_oil",
-              "grams": 4
+              "grams": 2
+            }
+          ],
+          "parallelGroup": "A"
+        },
+        {
+          "title": "Sumar la carne",
+          "device": "air_fryer",
+          "minutes": 8,
+          "temperatureC": 200,
+          "instructions": "A los 3 min de las verduras, secar bien las tiras de carne, mezclarlas con el resto del aceite y repartirlas en la canasta sin amontonar. Cocinar 6–8 min, sacudiendo a mitad. Con 3–4 porciones, hacer la carne en una tanda aparte.",
+          "additions": [
+            {
+              "ingredientId": "lean_beef",
+              "grams": 210
+            },
+            {
+              "ingredientId": "olive_oil",
+              "grams": 2
             }
           ],
           "parallelGroup": "A",
-          "verify": "Tiras de bife ≥ 63 °C y breve reposo."
+          "verify": "Tiras doradas por fuera y sin jugo rosado; si se mide un trozo grueso, 63 °C."
         },
         {
           "title": "Ligar con la berenjena",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio",
-          "instructions": "Sumar al wok la berenjena al vapor con el resto del aceite y la salsa de ajo; saltear 1–2 min hasta que la salsa espese y la berenjena la absorba. Servir con el arroz.",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Volver la salsa de ajo al vaso con el resto del aceite y sumar la berenjena, la carne, el morrón y la cebolla. Tapa con la taza medidora y mezclar en reversa hasta que hierva y la berenjena absorba la salsa. Servir con el arroz.",
           "additions": [
             {
               "ingredientId": "olive_oil",
               "grams": 5
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              120,
+              180
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "2–3 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
           ]
         }
       ]
@@ -5188,8 +5381,8 @@
     },
     {
       "recipeId": "lunch_31",
-      "title": "Arroz y verduras al vapor en la iChef, atún a la sartén",
-      "summary": "La iChef licúa el glaseado de jengibre, cocina el arroz integral en la canasta y hace brócoli y morrón al vapor encima. El atún se sella en la sartén: un steak necesita contacto directo con la plancha caliente.",
+      "title": "Arroz y verduras al vapor en la iChef, atún en la air fryer",
+      "summary": "Sin sartén: la iChef licúa el glaseado de jengibre, cocina el arroz integral en la canasta y hace brócoli y morrón al vapor encima. El steak de atún va a la air fryer mientras las verduras se cuecen al vapor, y el glaseado se calienta con las verduras en el vaso para bañar el atún.",
       "minutes": 38,
       "steps": [
         {
@@ -5238,7 +5431,7 @@
         {
           "title": "Arroz integral en la canasta",
           "device": "iChef",
-          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar lo que va a la vaporera.",
+          "instructions": "Enjuagar el vaso. Colocar el agua en el vaso, calzar la canasta de cocción adentro y poner el arroz lavado en la canasta. Tapa sin la taza medidora y la bandeja de la vaporera arriba contra salpicaduras. Mientras tanto, cortar el brócoli en floretes chicos y el morrón en tiras.",
           "additions": [
             {
               "ingredientId": "water",
@@ -5281,7 +5474,7 @@
           "title": "Brócoli y morrón al vapor sobre el arroz",
           "device": "iChef",
           "parallelGroup": "A",
-          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli en floretes chicos y el morrón en tiras sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo reposar 3–5 min.",
+          "instructions": "Sin sacar la canasta: retirar la bandeja antisalpicaduras, colocar la vaporera con el brócoli y el morrón sobre la tapa (sin taza medidora) y cerrarla con su tapa transparente. Poner el atún en la air fryer al mismo tiempo. Al terminar, retirar la vaporera, levantar la canasta con el gancho de la espátula, escurrir el arroz y dejarlo tapado.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -5320,11 +5513,11 @@
           ]
         },
         {
-          "title": "Sellar el atún",
-          "device": "hornalla",
-          "minutes": 8,
-          "heat": "medio-alto",
-          "instructions": "Al poner la vaporera: secar el atún y sellarlo por ambos lados con el aceite en sartén medio-alta; seguir cocinando según el espesor hasta punto seguro. No mojarlo con el glaseado antes de sellar. Retirar.",
+          "title": "Atún en la air fryer",
+          "device": "air_fryer",
+          "minutes": 9,
+          "temperatureC": 200,
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Secar bien el atún y untarlo con el aceite; no mojarlo con el glaseado. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Dejar reposar 2 min.",
           "additions": [
             {
               "ingredientId": "yellowfin_tuna",
@@ -5336,27 +5529,49 @@
             }
           ],
           "parallelGroup": "A",
-          "verify": "Pescado ≥ 63 °C; no asumir que el tataki semicrudo es inocuo."
+          "verify": "Centro a 63 °C: es la referencia conservadora para pescado y deja el atún bien cocido; no asumir que el tataki semicrudo es inocuo."
         },
         {
           "title": "Glasear y servir",
-          "device": "hornalla",
-          "minutes": 2,
-          "heat": "medio",
-          "instructions": "En la misma sartén con el resto del aceite, saltear el brócoli y el morrón al vapor 1 min, sumar el glaseado 30–60 segundos y servir con el atún y el arroz.",
+          "device": "iChef",
+          "instructions": "Vaciar el agua del vaso. Colocar el glaseado y el resto del aceite, y sumar el brócoli y el morrón. Tapa con la taza medidora y calentar en reversa. Servir las verduras con el atún y el arroz, y bañar el atún con el glaseado que queda en el vaso.",
           "additions": [
             {
               "ingredientId": "olive_oil",
               "grams": 4
             }
+          ],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              60,
+              60
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "1 minuto · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
           ]
         }
       ]
     },
     {
       "recipeId": "lunch_32",
-      "title": "Papas y brócoli al vapor en la iChef, atún al wok",
-      "summary": "La iChef licúa la salsa de pimienta y cuece al vapor las papas y después el brócoli. Las papas se doran en la air fryer mientras el wok saltea morrón, cebolla y atún: tres equipos a la vez.",
+      "title": "Papas y brócoli al vapor en la iChef, papas y atún en la air fryer",
+      "summary": "Sin wok: la iChef licúa la salsa de pimienta y cuece al vapor las papas, con el brócoli en la bandeja intermedia los últimos 8 min. La air fryer dora las papas y, a los 3 min, el atún en la misma canasta. Mientras tanto, el morrón y la cebolla se sofríen en el vaso (quedan más tiernos que en el wok, sin tostado) y se ligan con la salsa y el brócoli.",
       "minutes": 32,
       "steps": [
         {
@@ -5401,7 +5616,7 @@
         {
           "title": "Papas al vapor",
           "device": "iChef",
-          "instructions": "Colocar el agua en el vaso, tapa sin la taza medidora y la vaporera encima con las papas en cubos de 2 cm en la parte inferior. Cerrar con la tapa transparente.",
+          "instructions": "Colocar el agua en el vaso, tapa sin la taza medidora y la vaporera encima con las papas en cubos de 2 cm en la parte inferior. Cerrar con la tapa transparente. Mientras tanto, cortar el brócoli en floretes chicos y el morrón y la cebolla en tiras.",
           "additions": [
             {
               "ingredientId": "water",
@@ -5416,8 +5631,8 @@
           ],
           "machineSettingsSuggested": {
             "durationSecondsRange": [
-              900,
-              900
+              420,
+              420
             ],
             "temperatureCRange": null,
             "speed": {
@@ -5431,16 +5646,16 @@
               "Tapa sin taza medidora"
             ]
           },
-          "sourceSettingsText": "15 minutos · Al vapor · Vel. 1 (avance)",
+          "sourceSettingsText": "7 minutos · Al vapor · Vel. 1 (avance)",
           "safety": [
             "El vapor quema: abrir la tapa de la vaporera hacia el lado contrario a la cara y retirarla con agarraderas.",
             "Siempre al menos 700 g de agua en el vaso para cocinar al vapor."
           ]
         },
         {
-          "title": "Brócoli al vapor",
+          "title": "Sumar el brócoli al vapor",
           "device": "iChef",
-          "instructions": "Pasar las papas a la air fryer (paso siguiente) y colocar el brócoli en floretes chicos en la vaporera. Tapar.",
+          "instructions": "Pausar, colocar la bandeja intermedia de la vaporera con el brócoli sobre las papas, cerrar con la tapa transparente y seguir. Al terminar, retirar la vaporera.",
           "additions": [
             {
               "ingredientId": "broccoli",
@@ -5461,37 +5676,51 @@
             "reverseIfSupported": false,
             "steam": true,
             "accessories": [
-              "Vaporera",
+              "Vaporera con bandeja intermedia",
               "Tapa sin taza medidora"
             ]
           },
           "sourceSettingsText": "8 minutos · Al vapor · Vel. 1 (avance)",
+          "verify": "Papas tiernas al pincharlas con un cuchillo.",
           "safety": [
             "El vapor quema: abrir la tapa de la vaporera hacia el lado contrario a la cara y retirarla con agarraderas.",
             "Siempre al menos 700 g de agua en el vaso para cocinar al vapor."
-          ],
-          "parallelGroup": "A"
+          ]
         },
         {
           "title": "Dorar las papas",
           "device": "air_fryer",
-          "minutes": 10,
+          "minutes": 12,
           "temperatureC": 200,
-          "instructions": "Mezclar las papas al vapor con el aceite y dorarlas en capa suelta, agitando a mitad de tiempo.",
+          "instructions": "Precalentar la air fryer a 200 °C si el modelo lo pide. Mezclar las papas al vapor con el aceite en un bol y acomodarlas en una capa, dejando un lugar libre para el atún. Cocinar 10–12 min, sacudiendo a mitad; a los 3 min sumar el atún (paso siguiente).",
           "additions": [
             {
               "ingredientId": "olive_oil",
               "grams": 5
             }
           ],
-          "parallelGroup": "A"
+          "parallelGroup": "B"
         },
         {
-          "title": "Saltear morrón y cebolla",
-          "device": "hornalla",
-          "minutes": 5,
-          "heat": "alto",
-          "instructions": "Mientras tanto: saltear el morrón y la cebolla en tiras con el aceite en el wok bien caliente 3–4 min; sumar el brócoli al vapor apenas esté, 1 min, y retirar.",
+          "title": "Sumar el atún",
+          "device": "air_fryer",
+          "minutes": 9,
+          "temperatureC": 200,
+          "instructions": "A los 3 min de las papas, secar el atún, pasarlo por el aceite que quedó en el bol y ponerlo en el lugar libre de la canasta. Cocinar 6–9 min según el espesor, dando vuelta a mitad.",
+          "additions": [
+            {
+              "ingredientId": "yellowfin_tuna",
+              "grams": 210
+            }
+          ],
+          "parallelGroup": "B",
+          "verify": "Centro a 63 °C (referencia conservadora para pescado); no dejarlo crudo en el centro."
+        },
+        {
+          "title": "Sofreír morrón y cebolla",
+          "device": "iChef",
+          "parallelGroup": "B",
+          "instructions": "Mientras trabaja la air fryer: vaciar el agua del vaso y secarlo. Colocar el aceite, el morrón y la cebolla. Tapa sin la taza medidora y sofreír en reversa.",
           "additions": [
             {
               "ingredientId": "red_pepper",
@@ -5506,30 +5735,59 @@
               "grams": 4
             }
           ],
-          "parallelGroup": "A"
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              300,
+              360
+            ],
+            "temperatureCRange": [
+              120,
+              120
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 1.0
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa sin taza medidora"
+            ]
+          },
+          "sourceSettingsText": "5–6 minutos · 120 °C · Vel. 1 (reversa)",
+          "safety": [
+            "El vaso y el agua están muy calientes: vaciarlo tomándolo del mango, lejos del cuerpo.",
+            "El aceite caliente salpica: tapa sin taza medidora y abrir con cuidado, sin acercar la cara.",
+            "Con 3–4 porciones, sofreír en dos tandas para que las verduras no se cuezan en su jugo."
+          ]
         },
         {
-          "title": "Cocinar el atún",
-          "device": "hornalla",
-          "minutes": 8,
-          "heat": "medio-alto",
-          "instructions": "En el mismo wok caliente, cocinar el atún por cada lado y verificar la temperatura interna; no dejarlo crudo en el centro.",
-          "additions": [
-            {
-              "ingredientId": "yellowfin_tuna",
-              "grams": 210
-            }
-          ],
-          "parallelGroup": "A",
-          "verify": "Pescado ≥ 63 °C."
-        },
-        {
-          "title": "Terminar",
-          "device": "hornalla",
-          "minutes": 1,
-          "heat": "medio",
-          "instructions": "Volver las verduras, sumar la salsa 1 min y servir con las papas.",
-          "additions": []
+          "title": "Ligar y servir",
+          "device": "iChef",
+          "instructions": "Sumar al vaso la salsa de pimienta y el brócoli al vapor. Tapa con la taza medidora y mezclar en reversa hasta que hierva. Servir con las papas y el atún encima.",
+          "additions": [],
+          "machineSettingsSuggested": {
+            "durationSecondsRange": [
+              60,
+              120
+            ],
+            "temperatureCRange": [
+              100,
+              100
+            ],
+            "speed": {
+              "mode": "numeric",
+              "value": 0.3
+            },
+            "reverseIfSupported": true,
+            "accessories": [
+              "Tapa con taza medidora"
+            ]
+          },
+          "sourceSettingsText": "1–2 minutos · 100 °C · Vel. 0.3 (reversa)",
+          "safety": [
+            "Abrir la tapa hacia el lado contrario a la cara: sale vapor.",
+            "Con 3–4 porciones, no pasar la marca MAX: si no entra, ligar en dos tandas."
+          ]
         }
       ]
     },

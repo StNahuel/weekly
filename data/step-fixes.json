@@ -39,6 +39,45 @@
     },
     {
       "recipeId": "principal_soup_miso",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_miso",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_miso",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_miso",
       "part": "soup",
       "step": 2,
       "set": {
@@ -68,6 +107,45 @@
         "instructions": "Agregar los shiitake en láminas. Mantenerlos enteros con agitación suave en reversa; la base de caldo se disuelve en la propia jarra."
       },
       "reason": "Cocción de 15 min sin tapa/antisalpicaduras (portal: tapa sin taza medidora + canasta encima, ids 5253, 11150). Además el texto nombraba el concentrado vegetal, incoherente si se elige caldo de huesos (alternativeForBoneBroth reemplaza las adiciones pero no el texto)."
+    },
+    {
+      "recipeId": "principal_soup_papa",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_papa",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_papa",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_papa",
@@ -130,6 +208,45 @@
     },
     {
       "recipeId": "principal_soup_thai",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_thai",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_thai",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_thai",
       "part": "soup",
       "step": 3,
       "set": {
@@ -189,6 +306,45 @@
     },
     {
       "recipeId": "principal_soup_calabaza",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_calabaza",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_calabaza",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_calabaza",
       "part": "soup",
       "step": 3,
       "set": {
@@ -217,6 +373,45 @@
         ]
       },
       "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_tomyum",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomyum",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomyum",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_tomyum",
@@ -282,6 +477,45 @@
     },
     {
       "recipeId": "principal_soup_tomate",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomate",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomate",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomate",
       "part": "soup",
       "step": 3,
       "set": {
@@ -341,6 +575,45 @@
     },
     {
       "recipeId": "principal_soup_boniato",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_boniato",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_boniato",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_boniato",
       "part": "soup",
       "step": 3,
       "set": {
@@ -369,6 +642,45 @@
         ]
       },
       "reason": "Cocción larga (≥ 8 min) sin indicar tapa ni antisalpicaduras; la nota genérica decía no asumir accesorios. El portal hace todas sus sopas con tapa sin taza medidora y la canasta encima (ids 57, 2706, 5253, 11150, 1223)."
+    },
+    {
+      "recipeId": "principal_soup_verde",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_verde",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_verde",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_verde",
@@ -428,6 +740,45 @@
         ]
       },
       "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_sesamo",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_sesamo",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_sesamo",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_sesamo",
@@ -493,6 +844,45 @@
     },
     {
       "recipeId": "principal_soup_minestrone",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_minestrone",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_minestrone",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_minestrone",
       "part": "soup",
       "step": 3,
       "set": {
@@ -522,6 +912,45 @@
         "sourceSettingsText": "18 minutos · 95 °C · Vel. 0.5 (reversa)"
       },
       "reason": "Caldo claro con zucchini y tomate en cubitos: 18 min en avance hace que las cuchillas los rompan; el portal cocina sopas con trozos en reversa (ids 5253, 11391, 11315). Faltaba además tapa sin taza medidora + canasta antisalpicaduras."
+    },
+    {
+      "recipeId": "principal_soup_tomato_basil",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomato_basil",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomato_basil",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_tomato_basil",
@@ -584,6 +1013,45 @@
     },
     {
       "recipeId": "principal_soup_zucchini_lemon",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_zucchini_lemon",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_zucchini_lemon",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_zucchini_lemon",
       "part": "soup",
       "step": 3,
       "set": {
@@ -643,6 +1111,45 @@
     },
     {
       "recipeId": "principal_soup_avgolemono",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_avgolemono",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_avgolemono",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_avgolemono",
       "part": "soup",
       "step": 1,
       "set": {
@@ -673,6 +1180,45 @@
         "sourceSettingsText": "15–18 minutos · 100 °C · Vel. 0.5 (reversa)"
       },
       "reason": "A 90 °C y 15 min, la jarra con ~1 kg de agua fría tarda ~10 min en llegar a temperatura: la zanahoria en rodajas queda cruda, y en avance las cuchillas la cortan. Portal: caldos con trozos a 95–100 °C en reversa (ids 5253, 11315), tapa sin taza medidora + canasta encima."
+    },
+    {
+      "recipeId": "principal_soup_spinach_edamame",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_spinach_edamame",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_spinach_edamame",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_spinach_edamame",
@@ -739,6 +1285,45 @@
     },
     {
       "recipeId": "principal_soup_pepper_roast",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_pepper_roast",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_pepper_roast",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_pepper_roast",
       "part": "soup",
       "step": 4,
       "set": {
@@ -795,6 +1380,45 @@
         ]
       },
       "reason": "Licuado en caliente justo después de cocinar a 95 °C sin umbral concreto; además los ajustes decían Vel. 5 fija, sin rampa gradual. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_carrot_ginger",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_carrot_ginger",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_carrot_ginger",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_carrot_ginger",
@@ -856,6 +1480,45 @@
         ]
       },
       "reason": "Licuado en caliente justo después de cocinar a 100 °C sin umbral concreto; además los ajustes decían Vel. 5 fija, sin rampa gradual. Portal (ids 57, 2186, 1223): esperar < 90 °C, tapa con taza medidora y subir gradualmente."
+    },
+    {
+      "recipeId": "principal_soup_tomato_oregano",
+      "part": "protein:lean_beef",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 12,
+        "temperatureC": 200,
+        "instructions": "Secar la carne (bife de 2–3 cm) y untarla con el aceite y la pimienta. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 8–12 min según el espesor, dando vuelta a mitad; al dar vuelta, repartir el ajo picado por encima para que no se queme. Dejar reposar 3 min antes de cortar.",
+        "verify": "Bife: 63 °C en el centro y reposo de 3 min; si es carne picada (en hamburguesa), 71 °C."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomato_oregano",
+      "part": "protein:shrimp",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 7,
+        "temperatureC": 200,
+        "instructions": "Secar bien los camarones descongelados y mezclarlos con el aceite y el ajo picado. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar en una sola capa 5–7 min, sacudiendo la canasta a mitad. Rociar con el limón al sacarlos.",
+        "verify": "Camarones opacos y firmes; no servir crudos."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
+    },
+    {
+      "recipeId": "principal_soup_tomato_oregano",
+      "part": "protein:yellowfin_tuna",
+      "step": 1,
+      "set": {
+        "device": "air_fryer",
+        "minutes": 9,
+        "temperatureC": 200,
+        "instructions": "Secar el lomo de atún y untarlo con el aceite. Precalentar la air fryer a 200 °C si el modelo lo pide. Cocinar 6–9 min según el espesor, dando vuelta a mitad. Sumar el jengibre rallado y el limón al sacarlo. El tataki de centro crudo no es la opción predeterminada.",
+        "verify": "63 °C en el centro como referencia conservadora para pescado (queda bien cocido); el atún es ocasional por contenido potencial de mercurio."
+      },
+      "reason": "Preferencia del usuario: air fryer en lugar de sartén por simplicidad"
     },
     {
       "recipeId": "principal_soup_tomato_oregano",
