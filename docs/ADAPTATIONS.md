@@ -1,38 +1,35 @@
-# Adaptations and data notes
+# Data notes
 
-What differs from `source/original_ichef_recetario.html` and the seed JSON, and why. Each claim names the test that pins it.
+How `data/recetario.json` is read, and what the app changes on the way in. The JSON itself ships unchanged.
 
-## Recipe content
+## Categories and the "Ligero" filter
 
-**Calabaza: cúrcuma → comino.** The original book lists 1 g of turmeric (cúrcuma) in the calabaza soup. The user avoids it because of ceramic braces, so `data/soups.json` replaces it with 1 g of cumin (comino) and records it in `provenance.adaptations`:
+The four JSON categories map one to one to the four choices on Elegir (`principales` is shown as "Almuerzo / Cena"). "Ligero" keeps soup + protein meals (`caldo_con_proteina`, roughly 300–440 kcal) and any plate whose reference kcal is ≤ 450. No plate in the current JSON is that light (the lightest is ~625 kcal), so in practice Ligero means the 17 soup meals.
 
-> "Omitted turmeric (1 g) and used cumin (1 g) due to explicit user preference."
+## Devices
 
-The recipe page shows it in Spanish ("Adaptación: se quitó la cúrcuma (1 g) y se usa comino (1 g) por preferencia tuya."). No recipe, step or catalog entry contains turmeric (`src/domain/soups/calabaza.test.ts`, `src/features/cocinar/RecipeDetail.test.tsx`). Curry pastes can contain turmeric, so the `curry_paste` catalog note asks the user to check the label instead of claiming it is turmeric-free (`calabaza.test.ts`).
+Steps use 13 device names. The app groups them into four: `iChef` → iChef; `air_fryer` → Air fryer; `hornalla`, `hornalla_sarten`, `hornalla_o_pava` → Hornalla; `sin cocción`, `bol`, `mesa`, `tabla`, `shaker`, `vaso_*`, `jarra_o_vaso` → Sin cocción. An unknown device name fails seed loading. Recipe cards list "Sin cocción" only when nothing in the recipe is cooked. The JSON also allows `horno_electrico` (in `batchOption` notes) but no step uses it.
 
-**Thai legume is one choice, not two.** `options.thaiLegume` offers `none` (default), `chickpeas` or `edamame`, with `gramsFor3IfSelected: 45`. One step adds the selected legume at 45 g per 3 servings, scaled like any ingredient; its controls come from `controlsByLegume` (chickpeas 2–3 min at 90 °C, edamame 5–7 min at 95 °C). With `none` that step is dropped and neither legume appears in steps, totals, shopping or nutrition (`src/domain/soups/thaiLegume.test.ts`, `src/features/cocinar/KitchenMode.test.tsx`).
+## Instructions
 
-**Coconut is fixed** in thai, calabaza and boniato, added in one step each, and is not a soup option (`src/domain/soups/coconut.test.ts`).
+149 of 260 top-level steps (and most soup steps) start with "Agregar: Papa pelada 330 g; Romero fresco 3 g; …" before the actual instruction. The segments are exactly the step additions, so `cleanInstructions` drops them and the UI renders the additions (scaled) as the ingredient list. Grams mentioned later in free text (e.g. "pesar 220 g de pulpa asada", "60 g para 3 porciones") are left as written and do not scale.
 
-## Broth
+## Soup meals
 
-**Type names.** `broth.defaultType` uses `"vegetal"` / `"huesos"` while `broth.types` uses the long form. The seed loader maps `vegetal → vegetable_concentrate` and `huesos → bone_ready`; the app uses only the long form (`src/seed/seed.test.ts`).
+- Steps: the JSON's three top-level steps for these meals only point to `embeddedSoup.steps` and `proteinOptions[].steps`; the app renders the soup steps followed by the chosen protein's steps instead.
+- Portions: the soup's base is 3 portions; for N plates the soup is scaled to N portions (`roundGrams(grams × N / 3)`) and the protein to N × its grams.
+- Broth: a step's `alternativeForBoneBroth.additions` replace the ingredients listed in `replaces` when bone broth is chosen. The alternative's free-text instructions (written for 3 portions) are not shown; a generic bone-broth note is.
+- Optional ingredients (only Thai edamame) are excluded unless chosen; a step that only adds an optional ingredient is skipped.
+- Random protein: options whose `occasion` is not `habitual` (beef: "limitar frecuencia semanal"; tuna: "ocasional") are never drawn, but can be chosen.
 
-**Liquid formula.** The spec's `brothLiquid = roundGrams(baseBrothComponentGramsFor3 × factor)` gives the same grams as the source `amounts()` (`roundedGram((broth + coconutNative) × factor) − roundedGram(coconutNative × factor)`) for all nine recipes at 1–4 servings, and the concentrate ratio matches the source `brothStrength` (`src/domain/soups/parity.test.ts`). Vegetable broth becomes two gram lines (water, frozen concentrate); bone broth becomes ready bone broth plus water, with the water line dropped when bone broth fills all the liquid; there is no diluted-broth unit in ml (`src/domain/soups/broth.test.ts`).
+## Nutrition
 
-**Per-recipe overrides** follow the source's `state.boneBase[id]` / `state.concentrateBase[id]`. Both are stored per recipe as grams **for 3 servings** and scaled by `servings / 3`. Bone broth is clamped to `[0, brothLiquid]`, so the water line never goes negative; concentrate is clamped to `[0.1, 100]` g for 3, as in the source `broth-adjust` handler (`src/domain/soups/resolveSoup.test.ts`, `src/features/cocinar/SoupOptions.test.tsx`).
+Per-portion estimates are recomputed from the catalog (`macrosPer100g × grams / 100`) for the resolved ingredients, so they follow the selected protein, broth, optional ingredient and portions. They can differ slightly from the JSON's precomputed `nutrition` values. Items with `macrosPer100g: null` (FONDO concentrate, ready bone broth) are listed as missing, never counted as zero.
 
-## Totals
+## Shop sections
 
-`resolveSoup` derives ingredient totals from the resolved step additions, not from `recipe.ingredients[]`, so preview, steps and shopping show the same grams (`src/domain/soups/resolveSoup.test.ts`, `src/test/misoTwoServings.test.tsx`). Per ingredient, the step grams equal `recipe.ingredients[]` for every recipe with one exception: `thai/chickpeas_cooked` (45 g) is listed in `ingredients[]` but only reachable through the selected-legume step (`src/seed/integrity.test.ts`, `src/domain/soups/scales.test.ts`).
+Catalog categories are normalized into nine sections (Verdulería, Frutería, Carnicería, Pescadería, Lácteos y huevos, Almacén, Condimentos, Congelados, Suplementos). 31 ingredients whose category is just "Ingrediente" are assigned by id in `normalize.ts` (e.g. corvina → Pescadería, shiitake → Verdulería, curry paste → Almacén). Water and ice are never listed.
 
-## Not ported from the HTML
+## Migration from earlier versions
 
-- Copy-to-clipboard and print buttons.
-- The extra sentences the HTML appends for 1 serving on chopping steps ("bajá ingredientes con la espátula…") and for 4 servings on cooking steps ("verificá que lleguen a temperatura…"). The HTML keys them on a step `kind` (`picar` / `cocer`), and `soups.json` steps have no `kind`.
-
-## Day and seed text
-
-**Saturday.** `defaults.json` sets Saturday to `"flexible"`, which is not one of the five day types. Hoy preselects `rest` and shows "Sábado flexible: elegí lo que venga"; any day type can still be chosen (`src/domain/day/today.test.ts`, `src/features/hoy/DayTypePrompt.test.tsx`).
-
-**English seed strings.** Some seed text is in English (safety notes, provenance, supplement notes, activity effects). The seed files stay unchanged; the UI renders Spanish text from maps in `src/features/cocinar/copy.ts`, `src/features/hoy/labels.ts` and `src/features/ajustes/copy.ts`.
+Dexie v3 keeps each soup's broth choice (old id `miso` → `soup_miso`; Thai legume `edamame` → optional edamame on) and the text-size setting; v4 drops the planner tables (profile, days). Daily plans, favorites and the old shopping plan are discarded. Backups from earlier versions are rejected on import.

@@ -4,10 +4,6 @@ export function formatGrams(grams: number): string {
   return `${gramsFormat.format(grams)} g`;
 }
 
-export function formatTime(hhmm: string): string {
-  return hhmm;
-}
-
 export function formatDuration([min, max]: readonly [number, number]): string {
   const [unit, divisor] = max < 60 ? ['s', 1] : ['min', 60];
   const low = Math.round(min / divisor);
@@ -15,16 +11,8 @@ export function formatDuration([min, max]: readonly [number, number]): string {
   return low === high ? `${low} ${unit}` : `${low}–${high} ${unit}`;
 }
 
-const dateKeyFormat = new Intl.DateTimeFormat('es-UY', {
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long',
-  timeZone: 'UTC',
-});
-
-// Noon UTC keeps the calendar day stable whatever the device zone.
-export function formatDateKey(dateKey: string): string {
-  return dateKeyFormat.format(new Date(`${dateKey}T12:00:00Z`));
+export function servingsLabel(servings: number): string {
+  return `${servings} ${servings === 1 ? 'porción' : 'porciones'}`;
 }
 
 const dateTimeFormat = new Intl.DateTimeFormat('es-UY', {

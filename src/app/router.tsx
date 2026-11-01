@@ -1,19 +1,21 @@
-import { createHashRouter, type RouteObject } from 'react-router-dom';
+import { createHashRouter, Navigate, type RouteObject } from 'react-router-dom';
 import { AppShell } from './AppShell';
-import { AjustesPage, CocinarPage, ComprarPage, HoyPage, KitchenMode, QueComoPage, RecipeDetail } from './pages';
+import { AjustesPage, ComprasPage, ElegirPage, KitchenMode, RecetasPage, RecipeDetail } from './pages';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <HoyPage /> },
-      { path: 'que-como', element: <QueComoPage /> },
-      { path: 'cocinar', element: <CocinarPage /> },
-      { path: 'cocinar/:recipeId', element: <RecipeDetail /> },
-      { path: 'cocinar/:recipeId/cocina', element: <KitchenMode /> },
-      { path: 'comprar', element: <ComprarPage /> },
+      { index: true, element: <ElegirPage /> },
+      { path: 'recetas', element: <RecetasPage /> },
+      { path: 'recetas/:recipeId', element: <RecipeDetail /> },
+      { path: 'recetas/:recipeId/cocina', element: <KitchenMode /> },
+      { path: 'compras', element: <ComprasPage /> },
       { path: 'ajustes', element: <AjustesPage /> },
+      // Old bookmarks from the soup-only version.
+      { path: 'sopas/*', element: <Navigate to="/recetas" replace /> },
+      { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
 ];

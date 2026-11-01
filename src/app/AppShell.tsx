@@ -5,12 +5,12 @@ import { useDb } from './dbContext';
 import { ErrorBoundary } from './ErrorBoundary';
 import { ErrorState } from './states/ErrorState';
 import { Loading } from './states/Loading';
-import { useProfile } from './useProfile';
+import { useSettings } from '../db/repo';
 
 export function AppShell() {
   const { ready, error, retry } = useDb();
   const { pathname } = useLocation();
-  const largeText = useProfile()?.device.largeText === true;
+  const largeText = useSettings()?.largeText === true;
 
   useEffect(() => {
     document.documentElement.classList.toggle('large-text', largeText);

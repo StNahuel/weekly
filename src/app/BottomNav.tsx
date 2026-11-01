@@ -1,12 +1,10 @@
-import { ChefHat, Settings, ShoppingBasket, Shuffle, Sun, type LucideIcon } from 'lucide-react';
+import { BookOpen, Shuffle, ShoppingBasket, type LucideIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const LINKS: readonly { to: string; label: string; Icon: LucideIcon }[] = [
-  { to: '/', label: 'Hoy', Icon: Sun },
-  { to: '/que-como', label: '¿Qué como?', Icon: Shuffle },
-  { to: '/cocinar', label: 'Cocinar', Icon: ChefHat },
-  { to: '/comprar', label: 'Comprar', Icon: ShoppingBasket },
-  { to: '/ajustes', label: 'Ajustes', Icon: Settings },
+  { to: '/', label: 'Elegir', Icon: Shuffle },
+  { to: '/recetas', label: 'Recetas', Icon: BookOpen },
+  { to: '/compras', label: 'Compras', Icon: ShoppingBasket },
 ];
 
 export function BottomNav() {
@@ -15,7 +13,7 @@ export function BottomNav() {
       aria-label="Navegación principal"
       className="fixed inset-x-0 bottom-0 z-10 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]"
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-5 gap-1 rounded-full border border-border bg-surface/95 p-1 shadow-soft backdrop-blur">
+      <ul className="mx-auto grid max-w-xl grid-cols-3 gap-1 rounded-full border border-border bg-surface/95 p-1 shadow-soft backdrop-blur">
         {LINKS.map(({ to, label, Icon }) => (
           <li key={to}>
             <NavLink

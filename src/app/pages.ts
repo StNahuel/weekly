@@ -1,9 +1,8 @@
 import { lazy } from 'react';
 
-export const HoyPage = lazy(() => import('../features/hoy/HoyPage'));
-export const QueComoPage = lazy(() => import('../features/quecomo/QueComoPage'));
-export const CocinarPage = lazy(() => import('../features/cocinar/CocinarPage'));
-export const RecipeDetail = lazy(() => import('../features/cocinar/RecipeDetail'));
-export const KitchenMode = lazy(() => import('../features/cocinar/KitchenMode'));
-export const ComprarPage = lazy(() => import('../features/comprar/ComprarPage'));
+export const ElegirPage = lazy(() => import('../features/elegir/ElegirPage'));
+export const RecetasPage = lazy(() => import('../features/recetas/RecetasPage'));
+export const RecipeDetail = lazy(() => import('../features/recetas/RecipeDetail'));
+export const KitchenMode = lazy(() => import('../features/recetas/KitchenMode'));
+export const ComprasPage = lazy(() => import('../features/compras/ComprasPage'));
 export const AjustesPage = lazy(() => import('../features/ajustes/AjustesPage'));

@@ -1,11 +1,9 @@
 import { Download, Upload } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type ChangeEvent } from 'react';
-import { BTN_DANGER } from '../../app/ui';
+import { BTN_DANGER, BTN_PRIMARY, BTN_SECONDARY, CALLOUT, CARD } from '../../app/ui';
 import { db } from '../../db';
-import { buildExport, downloadExport } from '../../db/export';
-import { applyImport, IMPORT_TOO_LARGE, MAX_IMPORT_CHARS, parseImport, type ParsedImport } from '../../db/import';
+import { applyImport, buildBackup, downloadBackup, IMPORT_TOO_LARGE, MAX_IMPORT_CHARS, parseImport, type ParsedImport } from '../../db/backup';
 import { formatDateTime } from '../../domain/format';
-import { ALERT, CARD, PRIMARY, SECONDARY } from './copy';
 
 type Pending = Extract<ParsedImport, { ok: true }>;
 
@@ -31,7 +29,7 @@ export function DataTransfer() {
   const exportNow = async () => {
     setError(null);
     try {
-      downloadExport(await buildExport(db));
+      downloadBackup(await buildBackup(db));
       setStatus('Respaldo descargado.');
     } catch {
       setStatus(null);
@@ -81,14 +79,14 @@ export function DataTransfer() {
         <h2 id={headingId} className="text-lg font-semibold">
           Respaldo
         </h2>
-        <p className="text-sm text-muted">Guardá una copia en un archivo y recuperala cuando la necesites.</p>
+        <p className="text-sm text-muted">Guarda la lista de compras, tus caldos elegidos y la configuración.</p>
       </header>
-      <button type="button" onClick={() => void exportNow()} className={PRIMARY}>
+      <button type="button" onClick={() => void exportNow()} className={`${BTN_PRIMARY} w-full`}>
         <Download aria-hidden="true" size={20} />
         Exportar respaldo (JSON)
       </button>
-      <div className="space-y-1">
-        <label htmlFor={inputId} className={`${SECONDARY} w-full cursor-pointer`}>
+      <div>
+        <label htmlFor={inputId} className={`${BTN_SECONDARY} w-full cursor-pointer`}>
           <Upload aria-hidden="true" size={20} />
           Importar respaldo
         </label>
@@ -102,36 +100,29 @@ export function DataTransfer() {
         />
       </div>
       {error && (
-        <p role="alert" className={ALERT}>
+        <p role="alert" className={CALLOUT}>
           {error}
         </p>
       )}
       {pending && (
-        <div role="dialog" aria-labelledby={dialogTitleId} className={`space-y-3 ${ALERT}`}>
+        <div role="dialog" aria-labelledby={dialogTitleId} className={`space-y-3 ${CALLOUT}`}>
           <h3 id={dialogTitleId} className="font-semibold">
             ¿Reemplazar los datos de este dispositivo?
           </h3>
           <p>
-            {`Se reemplazarán: ${pending.summary.days} días, ${pending.summary.favorites} favoritos, perfil ${
-              pending.summary.hasProfile ? 'sí' : 'no'
-            }. Exportado el ${formatDateTime(pending.summary.exportedAt)}.`}
+            {`Se reemplazarán: ${pending.summary.shoppingEntries} comidas en compras y ${pending.summary.soupPrefs} preferencias de caldo. Exportado el ${formatDateTime(pending.summary.exportedAt)}.`}
           </p>
           <div className="grid grid-cols-2 gap-2">
-            <button ref={cancelButton} type="button" onClick={cancel} className={SECONDARY}>
+            <button ref={cancelButton} type="button" onClick={cancel} className={BTN_SECONDARY}>
               Cancelar
             </button>
-            <button
-              type="button"
-              disabled={busy}
-              onClick={() => void replace(pending)}
-              className={BTN_DANGER}
-            >
+            <button type="button" disabled={busy} onClick={() => void replace(pending)} className={BTN_DANGER}>
               Reemplazar datos
             </button>
           </div>
         </div>
       )}
-      <p role="status" className="text-sm font-semibold text-mint-ink">
+      <p role="status" className="text-sm font-semibold text-mint-ink empty:hidden">
         {status}
       </p>
     </section>

@@ -10,17 +10,15 @@ export function DbProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
-    // Seeds load lazily so a seed parse error surfaces as an error state instead of a blank page.
-    Promise.all([import('../db/hydrate'), import('../seed')])
-      .then(([{ hydrate }, { seeds }]) => hydrate(db, seeds))
-      .then(
-        () => {
-          if (active) setState({ ready: true });
-        },
-        (error: unknown) => {
-          if (active) setState({ ready: false, error: error instanceof Error ? error : new Error(String(error)) });
-        },
-      );
+    // The recipe book loads lazily so a parse error surfaces as an error state instead of a blank page.
+    Promise.all([import('../seed'), db.open()]).then(
+      () => {
+        if (active) setState({ ready: true });
+      },
+      (error: unknown) => {
+        if (active) setState({ ready: false, error: error instanceof Error ? error : new Error(String(error)) });
+      },
+    );
     return () => {
       active = false;
     };

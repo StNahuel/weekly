@@ -3,8 +3,8 @@ import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 
 const BUDGET_BYTES = 250 * 1024;
-// Dynamic imports the first screen always waits for: DbProvider's hydrate + seeds, then the Hoy route.
-const FIRST_ROUTE_DYNAMIC = /^(hydrate|seed|HoyPage)-[\w-]+\.js$/;
+// Dynamic imports the first screen always waits for: DbProvider's recipe book, then the Elegir route.
+const FIRST_ROUTE_DYNAMIC = /^(index|seed|ElegirPage)-[\w-]+\.js$/;
 const STATIC_IMPORT = /(?:\bfrom|\bimport)\s*["']\.\/([\w.-]+\.js)["']/g;
 const DYNAMIC_IMPORT = /\bimport\(\s*["'`]\.\/([\w.-]+\.js)["'`]\s*\)/g;
 const HTML_ENTRY = /<(?:script[^>]*\bsrc|link[^>]*\brel="modulepreload"[^>]*\bhref)="\.\/assets\/([\w.-]+\.js)"/g;

@@ -36,6 +36,8 @@ export default defineConfig({
   ],
   build: {
     target: 'es2022',
+    // The recipe book JSON alone is ~900 kB raw (47 kB gzip); the gzip budget lives in scripts/check-bundle.mjs.
+    chunkSizeWarningLimit: 1200,
     rolldownOptions: {
       output: {
         codeSplitting: {
