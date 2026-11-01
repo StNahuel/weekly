@@ -5,7 +5,7 @@ import { Empty } from '../../app/states/Empty';
 import { BTN_PRIMARY, BTN_SECONDARY, CARD, SEGMENTS, TOGGLE } from '../../app/ui';
 import { formatGrams } from '../../domain/format';
 import { candidates, pickProtein, pickRecipe } from '../../domain/recipes/random';
-import { displayTitle, minutesOf, resolveRecipe } from '../../domain/recipes/resolve';
+import { displayTitle, resolveRecipe } from '../../domain/recipes/resolve';
 import { CATEGORIES, type Category, type Recipe } from '../../domain/recipes/types';
 import { catalog, recipes } from '../../seed';
 import { DeviceChips } from '../shared/DeviceChips';
@@ -67,12 +67,14 @@ function CardBody({ pick }: { pick: Pick }) {
     <article className={`${CARD} min-h-80 overflow-hidden`}>
       <header className={`-mx-4 -mt-4 flex items-center justify-between gap-3 px-4 py-3 ${tint.fill} ${tint.ink}`}>
         <span className="font-semibold">{CATEGORY_LABELS[recipe.category]}</span>
-        {subtype && <span className="text-sm font-semibold">{subtype}</span>}
+        <span className="text-sm font-semibold">
+          {[subtype, resolved.method === 'ichef' ? 'Con iChef' : null].filter(Boolean).join(' · ')}
+        </span>
       </header>
       <h2 className="mt-4 text-2xl leading-tight font-semibold">{displayTitle(recipe, resolved.protein)}</h2>
       <p className="mt-2 inline-flex items-center gap-1.5 text-muted">
         <Timer aria-hidden="true" size={18} />
-        {`≈ ${minutesOf(recipe)} min`}
+        {`≈ ${String(resolved.minutes)} min`}
       </p>
       <div className="mt-2">
         <DeviceChips devices={resolved.devices} />

@@ -2,7 +2,7 @@ import { Check, ChevronDown, Flame, Gauge, Repeat, Thermometer, Timer, TriangleA
 import { useId, useState, type ReactNode } from 'react';
 import { CALLOUT, CARD, SECTION_LABEL } from '../../app/ui';
 import { formatDuration, formatGrams } from '../../domain/format';
-import type { ResolvedStep } from '../../domain/recipes/resolve';
+import { CAPACITY_WARNING_GRAMS, type ResolvedStep } from '../../domain/recipes/resolve';
 import type { MachineSettings } from '../../domain/recipes/types';
 import { DeviceChip } from '../shared/DeviceChips';
 import { TINTS, type Tint } from '../shared/labels';
@@ -128,6 +128,7 @@ type StepCardProps = {
 
 export function StepCard({ step, section, position, total, hint, done, onToggleDone, safetyOpen }: StepCardProps) {
   const headingId = useId();
+  const stepGrams = step.additions.reduce((sum, a) => sum + a.grams, 0);
   return (
     <article aria-labelledby={headingId} className={`space-y-4 ${CARD}`}>
       <header className="flex items-center gap-4">
@@ -186,6 +187,12 @@ export function StepCard({ step, section, position, total, hint, done, onToggleD
             </li>
           ))}
         </ul>
+      )}
+
+      {step.device === 'ichef' && stepGrams >= CAPACITY_WARNING_GRAMS && (
+        <p className={`${CALLOUT} text-lg`}>
+          {`Este paso suma ≈ ${formatGrams(stepGrams)} en la jarra: puede superar la marca MAX. Hacelo en dos tandas o usá una olla en la hornalla.`}
+        </p>
       )}
 
       {step.machine && needsSafetyBanner(step.machine) && <SafetyBanner defaultOpen={safetyOpen} />}

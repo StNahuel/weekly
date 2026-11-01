@@ -29,17 +29,19 @@ function EntryRow({ entry }: { entry: ShoppingEntry }) {
   const selectId = useId();
   const recipe = recipeById.get(entry.recipeId);
   if (!recipe) return null;
-  const protein = recipe.kind === 'soupMeal' ? proteinOf(recipe, entry.proteinId) : null;
+  const protein = recipe.kind === 'soupMeal' && !entry.soupOnly ? proteinOf(recipe, entry.proteinId) : null;
+  const method = entry.soupOnly ? 'soup' : undefined;
+  const title = displayTitle(recipe, protein, method);
 
   return (
     <li className="space-y-2 rounded-2xl border border-border bg-bg p-3">
       <div className="flex items-start justify-between gap-2">
-        <Link to={`/recetas/${recipe.id}${recipeSearch(Math.min(entry.servings, 4), protein?.id)}`} className="font-semibold underline-offset-4 hover:underline">
-          {displayTitle(recipe, protein)}
+        <Link to={`/recetas/${recipe.id}${recipeSearch(Math.min(entry.servings, 4), protein?.id, method)}`} className="font-semibold underline-offset-4 hover:underline">
+          {title}
         </Link>
         <button
           type="button"
-          aria-label={`Quitar ${displayTitle(recipe, protein)}`}
+          aria-label={`Quitar ${title}`}
           onClick={() => void removeShoppingEntry(entry.key)}
           className={`${STEPPER} shrink-0 border-transparent text-muted`}
         >

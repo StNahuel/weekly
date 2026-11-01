@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { CARD, SEGMENTS } from '../../app/ui';
 import { saveSoupPrefs } from '../../db/repo';
-import { SERVING_CHOICES, type ResolvedRecipe, type SoupPrefs } from '../../domain/recipes/resolve';
+import { methodChoices, SERVING_CHOICES, type ResolvedRecipe, type SoupPrefs } from '../../domain/recipes/resolve';
 import { BROTH_TYPES, type Recipe } from '../../domain/recipes/types';
 import { BROTH_HINTS, BROTH_LABELS } from '../shared/labels';
 
@@ -14,15 +14,36 @@ type RecipeOptionsProps = {
   prefs: SoupPrefs;
   onServingsChange: (servings: number) => void;
   onProteinChange: (proteinId: string) => void;
+  onMethodChange: (method: string) => void;
 };
 
-export function RecipeOptions({ recipe, resolved, prefs, onServingsChange, onProteinChange }: RecipeOptionsProps) {
+export function RecipeOptions({ recipe, resolved, prefs, onServingsChange, onProteinChange, onMethodChange }: RecipeOptionsProps) {
   const name = useId();
+  const methods = methodChoices(recipe);
   const optional =
     recipe.kind === 'soupMeal' ? recipe.soup.steps.flatMap((s) => s.additions).find((a) => a.optional) : undefined;
 
   return (
     <section aria-label="Opciones" className={`space-y-4 ${CARD}`}>
+      {methods.length > 1 && (
+        <div>
+          <p className="text-sm font-semibold">Cómo prepararla</p>
+          <div role="group" aria-label="Cómo prepararla" className={`${SEGMENTS} mt-1 grid-cols-2`}>
+            {methods.map((choice) => (
+              <button
+                key={choice.id}
+                type="button"
+                aria-pressed={choice.id === resolved.method}
+                onClick={() => onMethodChange(choice.id)}
+                className="tap rounded-full font-semibold text-muted transition-colors duration-150 aria-pressed:bg-sky aria-pressed:text-sky-ink"
+              >
+                {choice.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div>
         <p className="text-sm font-semibold">Porciones</p>
         <div role="group" aria-label="Porciones" className={`${SEGMENTS} mt-1 grid-cols-4`}>
@@ -42,6 +63,7 @@ export function RecipeOptions({ recipe, resolved, prefs, onServingsChange, onPro
 
       {recipe.kind === 'soupMeal' && (
         <>
+          {resolved.method === 'meal' && (
           <fieldset className="space-y-2">
             <legend className="text-sm font-semibold">Proteína</legend>
             <div className="grid grid-cols-2 gap-2">
@@ -59,6 +81,7 @@ export function RecipeOptions({ recipe, resolved, prefs, onServingsChange, onPro
               ))}
             </div>
           </fieldset>
+          )}
 
           <fieldset className="space-y-2">
             <legend className="text-sm font-semibold">Caldo</legend>

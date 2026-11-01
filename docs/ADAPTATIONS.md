@@ -33,3 +33,13 @@ Catalog categories are normalized into nine sections (Verdulería, Frutería, Ca
 ## Migration from earlier versions
 
 Dexie v3 keeps each soup's broth choice (old id `miso` → `soup_miso`; Thai legume `edamame` → optional edamame on) and the text-size setting; v4 drops the planner tables (profile, days). Daily plans, favorites and the old shopping plan are discarded. Backups from earlier versions are rejected on import.
+
+## "Con iChef" variants
+
+`data/ichef-variants.json` re-plans plates to use the iChef: sauces, rice/pasta/potatoes cooked in the jar, chopped aromatics, dressings and tzatziki, blanched vegetables, gentle egg cooking, cold blending for juices, precise water temperature for green tea. Searing and browning stay in the air fryer or hornalla, and the two run in parallel (`parallelGroup`). Rules the validator enforces:
+
+- same ingredients and grams per ingredient as the original recipe (one portion); only `water`/`ice` may change (e.g. measured cooking water for rice or pasta);
+- iChef steps only use what the existing soup recipes use: no heat or 37–100 °C, speeds 0.5–5, speed ≤ 2 with heat, gradual blending, reverse "si tu modelo lo permite"; no Varoma/steaming tray, rice basket, browning or > 100 °C;
+- every hot iChef step carries a safety note; doneness checks (`verify`) are kept.
+
+The settings are written for this app from the soup book's patterns and general jug-cooker practice; they are not tested on the user's iChef model. Soup + protein meals are out of scope (they already cook the soup in the iChef and the protein in parallel). Recipes where the iChef adds nothing (shaker drinks, yogurt bowls, bars, sparkling drinks, 95 °C infusions, hard-boiled eggs without a basket) are listed under `skipped` with the reason.

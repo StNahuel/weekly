@@ -1,15 +1,22 @@
+import type { z } from 'zod';
+import rawVariants from '../../data/ichef-variants.json';
 import raw from '../../data/recetario.json';
 import { normalizeRecetario } from '../domain/recipes/normalize';
-import { rawRecetarioSchema } from '../domain/recipes/raw.schema';
+import { rawRecetarioSchema, rawVariantsSchema } from '../domain/recipes/raw.schema';
 import type { Recipe, Soup } from '../domain/recipes/types';
 
+function parseWith<S extends z.ZodType>(name: string, schema: S, value: unknown): z.infer<S> {
+  const result = schema.safeParse(value);
+  if (result.success) return result.data;
+  const issue = result.error.issues[0];
+  throw new Error(`${name} is invalid at "${issue?.path.map(String).join('.') ?? ''}": ${issue?.message ?? 'unknown'}`);
+}
+
 function parse() {
-  const result = rawRecetarioSchema.safeParse(raw);
-  if (!result.success) {
-    const issue = result.error.issues[0];
-    throw new Error(`recetario.json is invalid at "${issue?.path.map(String).join('.') ?? ''}": ${issue?.message ?? 'unknown'}`);
-  }
-  return normalizeRecetario(result.data);
+  return normalizeRecetario(
+    parseWith('recetario.json', rawRecetarioSchema, raw),
+    parseWith('ichef-variants.json', rawVariantsSchema, rawVariants),
+  );
 }
 
 const { catalog, recipes } = parse();

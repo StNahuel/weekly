@@ -23,7 +23,7 @@ const rawLineSchema = z.object({
 
 const rawAdditionSchema = z.object({
   ingredientId: z.string().min(1),
-  name: z.string().min(1),
+  name: z.string().min(1).optional(),
   grams: z.number().nonnegative(),
   optional: z.boolean().optional(),
 });
@@ -36,7 +36,7 @@ export const rawMachineSchema = z.object({
 });
 
 export const rawStepSchema = z.object({
-  order: z.number(),
+  order: z.number().optional(),
   title: z.string().min(1),
   device: z.string().min(1),
   instructions: z.string(),
@@ -115,6 +115,22 @@ export const rawRecetarioSchema = z.object({
   }),
 });
 
+// data/ichef-variants.json: alternative "Con iChef" step plans for plates, same ingredients and grams.
+export const rawVariantsSchema = z.object({
+  schemaVersion: z.literal(1),
+  variants: z.array(
+    z.object({
+      recipeId: z.string().min(1),
+      title: z.string().min(1),
+      summary: z.string().min(1),
+      minutes: z.number().positive(),
+      steps: z.array(rawStepSchema).min(1),
+    }),
+  ),
+  skipped: z.array(z.object({ recipeId: z.string().min(1), reason: z.string().min(1) })),
+});
+
+export type RawVariants = z.infer<typeof rawVariantsSchema>;
 export type RawRecetario = z.infer<typeof rawRecetarioSchema>;
 export type RawStep = z.infer<typeof rawStepSchema>;
 export type RawPlate = z.infer<typeof rawPlateSchema>;

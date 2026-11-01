@@ -68,11 +68,18 @@ type RecipeBase = {
   searchText: string;
 };
 
+export type PlateMethodId = 'ichef' | 'original';
+
+export type PlateMethod = { id: PlateMethodId; title: string; summary: string | null; minutes: number; steps: Step[] };
+
 export type Plate = RecipeBase & {
   kind: 'plate';
   subtype: string | null;
   minutes: number;
+  // The original steps; every method adds the same ingredients and grams (water aside).
   steps: Step[];
+  // "Con iChef" first when the recipe has one, then the original.
+  methods: PlateMethod[];
   referenceKcal: number;
 };
 
